@@ -3,36 +3,39 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.5'
 
+#REQUIRED
 gem 'rails'
 gem 'sqlite3'
 gem 'puma'
-gem 'sass-rails'
-gem 'uglifier'
-
-gem 'coffee-rails'
-gem 'turbolinks'
-gem 'jbuilder'
-
 gem 'bootsnap'
-
 group :development do
-  gem 'byebug'
+   gem 'listen'
 end
 
-group :development do
-  gem 'web-console'
-  gem 'listen'
-  gem 'spring'
-  gem 'spring-watcher-listen'
-end
-
-group :test do
-  gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
-end
-
-gem 'tzinfo-data'
+#HID: gem 'sass-rails'
+#HID: gem 'uglifier'
+#HID:
+#HID: gem 'coffee-rails'
+#HID: gem 'turbolinks'
+#HID: gem 'jbuilder'
+#HID:
+#HID: group :development do
+#HID:   gem 'byebug'
+#HID: end
+#HID:
+#HID: group :development do
+#HID:   gem 'web-console'
+#HID:   gem 'spring'
+#HID:   gem 'spring-watcher-listen'
+#HID: end
+#HID:
+#HID: group :test do
+#HID:   gem 'capybara'
+#HID:  gem 'selenium-webdriver'
+#HID:  gem 'chromedriver-helper'
+#HID:end
+#HID:
+#HID: gem 'tzinfo-data'
 
 gem 'sorbet', :group => :development
 gem 'sorbet-runtime'
