@@ -4,7 +4,7 @@
 
 * Rails version: 5.2.x
 
-## How to create this repo.
+## How to create this repo
 
  1. Run "gem install rails" if needed.
  2. Run "rails _5.2.3_ new rails_5.2_new".
