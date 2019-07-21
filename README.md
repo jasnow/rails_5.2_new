@@ -11,7 +11,8 @@
  3. Run [cd rails_5.2_new; echo 'rvm use 2.5.1@ruby2.5-rails5.2 --create' > .rvmrc]
  4. Run "git init" to set up Git.
  5. Add .travis.yml file such as:
-```language: ruby
+```
+language: ruby
 rvm:
   - 2.5.1
 before_install: gem install bundler
