@@ -33,3 +33,7 @@ group :test do
 end
 
 gem 'tzinfo-data'
+
+gem 'sorbet', :group => :development
+gem 'sorbet-runtime'
+gem 'sorbet-rails'
