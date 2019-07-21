@@ -22,6 +22,10 @@ cache: bundler
     For now, keep gem numbers.
  7. Optionally, add a LICENSE file.
  8. Add 3 sorbet gems. 
+```gem 'sorbet', :group => :development
+gem 'sorbet-runtime'
+gem 'sorbet-rails'
+```
  9. Add 'dalli' and 'redis' gem to Gemfile to avoid sorbet error messages. 
  10. Run "rails db:migrate" to avoid sorbet error messages.
  11. Then to push to GitHub.
