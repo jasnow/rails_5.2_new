@@ -20,7 +20,8 @@ cache: bundler
 ```
  6. Remove Gemfile comments. (egrep -v "^#|^  #" Gemfile |uniq)
     For now, keep gem numbers.
- 7. Add 3 sorbet gems. Then to push to GitHub.
+ 7. Optionally, add a LICENSE file.
+ 8. Add 3 sorbet gems. Then to push to GitHub.
 
 ## How to know if you have a sane repo
  1. Run "bundle" with no errors.
