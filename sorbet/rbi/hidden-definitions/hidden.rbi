@@ -458,10 +458,152 @@ module ActionCable
 end
 
 class ActionController::API
+  include ::ActionView::ViewPaths
+  include ::AbstractController::Rendering
+  include ::ActionDispatch::Routing::UrlFor
+  include ::ActionDispatch::Routing::PolymorphicRoutes
+  include ::AbstractController::UrlFor
+  include ::ActionController::UrlFor
+  include ::AbstractController::Logger
+  include ::ActiveSupport::Benchmarkable
+  include ::ActionController::Redirecting
+  include ::ActionController::ApiRendering
+  include ::ActionController::Rendering
+  include ::ActionController::Renderers
+  include ::ActionController::Renderers::All
+  include ::ActionController::ConditionalGet
+  include ::ActionController::Head
+  include ::ActionController::BasicImplicitRender
+  include ::ActiveSupport::Rescuable
+  include ::ActionController::StrongParameters
+  include ::ActiveSupport::Callbacks
+  include ::AbstractController::Callbacks
+  include ::ActionController::ForceSSL
+  include ::ActionController::DataStreaming
+  include ::ActionController::Rescue
+  include ::ActionController::Instrumentation
+  include ::ActionController::ParamsWrapper
+  include ::ActionDispatch::Routing::RouteSet::MountedHelpers
+  include ::ActiveRecord::Railties::ControllerRuntime
+  def __callbacks(); end
+
+  def __callbacks?(); end
+
+  def _process_action_callbacks(); end
+
+  def _renderers(); end
+
+  def _renderers=(val); end
+
+  def _renderers?(); end
+
+  def _run_process_action_callbacks(&block); end
+
+  def _view_paths(); end
+
+  def _view_paths=(val); end
+
+  def _view_paths?(); end
+
+  def _wrapper_options(); end
+
+  def _wrapper_options=(val); end
+
+  def _wrapper_options?(); end
+
+  def default_url_options(); end
+
+  def default_url_options=(val); end
+
+  def default_url_options?(); end
+
+  def etaggers(); end
+
+  def etaggers=(val); end
+
+  def etaggers?(); end
+
+  def logger(); end
+
+  def logger=(value); end
+
+  def rescue_handlers(); end
+
+  def rescue_handlers=(val); end
+
+  def rescue_handlers?(); end
   MODULES = ::T.let(nil, ::T.untyped)
 end
 
+class ActionController::API
+  extend ::AbstractController::UrlFor::ClassMethods
+  extend ::ActionController::Rendering::ClassMethods
+  extend ::ActionController::Renderers::ClassMethods
+  extend ::ActionController::ConditionalGet::ClassMethods
+  extend ::AbstractController::Callbacks::ClassMethods
+  extend ::ActionController::ForceSSL::ClassMethods
+  extend ::ActionController::Instrumentation::ClassMethods
+  extend ::ActionController::ParamsWrapper::ClassMethods
+  extend ::ActionController::Railties::Helpers
+  def self.__callbacks(); end
+
+  def self.__callbacks=(val); end
+
+  def self.__callbacks?(); end
+
+  def self._process_action_callbacks(); end
+
+  def self._process_action_callbacks=(value); end
+
+  def self._renderers(); end
+
+  def self._renderers=(val); end
+
+  def self._renderers?(); end
+
+  def self._view_paths(); end
+
+  def self._view_paths=(val); end
+
+  def self._view_paths?(); end
+
+  def self._wrapper_options(); end
+
+  def self._wrapper_options=(val); end
+
+  def self._wrapper_options?(); end
+
+  def self.default_url_options(); end
+
+  def self.default_url_options=(val); end
+
+  def self.default_url_options?(); end
+
+  def self.etaggers(); end
+
+  def self.etaggers=(val); end
+
+  def self.etaggers?(); end
+
+  def self.logger(); end
+
+  def self.logger=(value); end
+
+  def self.rescue_handlers(); end
+
+  def self.rescue_handlers=(val); end
+
+  def self.rescue_handlers?(); end
+
+  def self.without_modules(*modules); end
+end
+
 module ActionController::ApiRendering
+  def render_to_body(options=T.unsafe(nil)); end
+end
+
+module ActionController::ApiRendering
+  extend ::ActiveSupport::Concern
   extend ::T::Sig
 end
 
@@ -1007,7 +1149,6 @@ class ActionDispatch::Integration::Session
   include ::ActionDispatch::Assertions
   include ::ActionDispatch::Assertions::ResponseAssertions
   include ::ActionDispatch::Assertions::RoutingAssertions
-  include ::Turbolinks::Assertions
   include ::ActionDispatch::Integration::RequestHelpers
   DEFAULT_HOST = ::T.let(nil, ::T.untyped)
 end
@@ -1365,58 +1506,6 @@ class ActionDispatch::ShowExceptions
   FAILSAFE_RESPONSE = ::T.let(nil, ::T.untyped)
 end
 
-class ActionDispatch::SystemTestCase
-  include ::Capybara::DSL
-  include ::Capybara::Minitest::Assertions
-  include ::ActionDispatch::SystemTesting::TestHelpers::SetupAndTeardown
-  include ::ActionDispatch::SystemTesting::TestHelpers::ScreenshotHelper
-  include ::ActionDispatch::SystemTesting::TestHelpers::UndefMethods
-end
-
-class ActionDispatch::SystemTestCase
-  def self.driven_by(driver, using: T.unsafe(nil), screen_size: T.unsafe(nil), options: T.unsafe(nil)); end
-
-  def self.driver(); end
-
-  def self.driver=(val); end
-
-  def self.driver?(); end
-
-  def self.start_application(); end
-end
-
-module ActionDispatch::SystemTesting::TestHelpers::ScreenshotHelper
-  def take_failed_screenshot(); end
-
-  def take_screenshot(); end
-end
-
-module ActionDispatch::SystemTesting::TestHelpers::ScreenshotHelper
-  extend ::T::Sig
-end
-
-module ActionDispatch::SystemTesting::TestHelpers::SetupAndTeardown
-  def after_teardown(); end
-
-  def before_setup(); end
-
-  def host!(host); end
-  DEFAULT_HOST = ::T.let(nil, ::T.untyped)
-end
-
-module ActionDispatch::SystemTesting::TestHelpers::SetupAndTeardown
-  extend ::T::Sig
-end
-
-module ActionDispatch::SystemTesting::TestHelpers::UndefMethods
-  METHODS = ::T.let(nil, ::T.untyped)
-end
-
-module ActionDispatch::SystemTesting::TestHelpers::UndefMethods
-  extend ::ActiveSupport::Concern
-  extend ::T::Sig
-end
-
 module ActionDispatch::TestProcess::FixtureFile
   extend ::T::Sig
 end
@@ -1563,7 +1652,6 @@ class ActionView::Base
   include ::ActionView::Context
   include ::ActionView::CompiledTemplates
   include ::ERB::Util
-  include ::ActionCable::Helpers::ActionCableHelper
   include ::Sprockets::Rails::Helper
   include ::Sprockets::Rails::Utils
   def assets_environment(); end
@@ -2117,7 +2205,6 @@ class ActionView::TestCase
   include ::ActionDispatch::Assertions
   include ::ActionDispatch::Assertions::ResponseAssertions
   include ::ActionDispatch::Assertions::RoutingAssertions
-  include ::Turbolinks::Assertions
   include ::AbstractController::Helpers
   include ::ActionView::Helpers::AssetTagHelper
   include ::ActionView::Helpers::UrlHelper
@@ -5104,6 +5191,13 @@ module ActiveSupport::PerThreadRegistry
   extend ::T::Sig
 end
 
+class ActiveSupport::ProxyObject
+  def raise(*args); end
+end
+
+class ActiveSupport::ProxyObject
+end
+
 module ActiveSupport::RangeWithFormat
   RANGE_FORMATS = ::T.let(nil, ::T.untyped)
 end
@@ -5266,96 +5360,6 @@ module ActiveSupport
   extend ::T::Sig
 end
 
-module Addressable::IDNA
-  ACE_MAX_LENGTH = ::T.let(nil, ::T.untyped)
-  ACE_PREFIX = ::T.let(nil, ::T.untyped)
-  COMPOSITION_TABLE = ::T.let(nil, ::T.untyped)
-  HANGUL_LBASE = ::T.let(nil, ::T.untyped)
-  HANGUL_LCOUNT = ::T.let(nil, ::T.untyped)
-  HANGUL_NCOUNT = ::T.let(nil, ::T.untyped)
-  HANGUL_SBASE = ::T.let(nil, ::T.untyped)
-  HANGUL_SCOUNT = ::T.let(nil, ::T.untyped)
-  HANGUL_TBASE = ::T.let(nil, ::T.untyped)
-  HANGUL_TCOUNT = ::T.let(nil, ::T.untyped)
-  HANGUL_VBASE = ::T.let(nil, ::T.untyped)
-  HANGUL_VCOUNT = ::T.let(nil, ::T.untyped)
-  PUNYCODE_BASE = ::T.let(nil, ::T.untyped)
-  PUNYCODE_DAMP = ::T.let(nil, ::T.untyped)
-  PUNYCODE_DELIMITER = ::T.let(nil, ::T.untyped)
-  PUNYCODE_INITIAL_BIAS = ::T.let(nil, ::T.untyped)
-  PUNYCODE_INITIAL_N = ::T.let(nil, ::T.untyped)
-  PUNYCODE_MAXINT = ::T.let(nil, ::T.untyped)
-  PUNYCODE_PRINT_ASCII = ::T.let(nil, ::T.untyped)
-  PUNYCODE_SKEW = ::T.let(nil, ::T.untyped)
-  PUNYCODE_TMAX = ::T.let(nil, ::T.untyped)
-  PUNYCODE_TMIN = ::T.let(nil, ::T.untyped)
-  UNICODE_DATA = ::T.let(nil, ::T.untyped)
-  UNICODE_DATA_CANONICAL = ::T.let(nil, ::T.untyped)
-  UNICODE_DATA_COMBINING_CLASS = ::T.let(nil, ::T.untyped)
-  UNICODE_DATA_COMPATIBILITY = ::T.let(nil, ::T.untyped)
-  UNICODE_DATA_EXCLUSION = ::T.let(nil, ::T.untyped)
-  UNICODE_DATA_LOWERCASE = ::T.let(nil, ::T.untyped)
-  UNICODE_DATA_TITLECASE = ::T.let(nil, ::T.untyped)
-  UNICODE_DATA_UPPERCASE = ::T.let(nil, ::T.untyped)
-  UNICODE_MAX_LENGTH = ::T.let(nil, ::T.untyped)
-  UNICODE_TABLE = ::T.let(nil, ::T.untyped)
-  UTF8_REGEX = ::T.let(nil, ::T.untyped)
-  UTF8_REGEX_MULTIBYTE = ::T.let(nil, ::T.untyped)
-end
-
-module Addressable::IDNA
-  extend ::T::Sig
-end
-
-class Addressable::URI
-  EMPTY_STR = ::T.let(nil, ::T.untyped)
-  NORMPATH = ::T.let(nil, ::T.untyped)
-  PARENT = ::T.let(nil, ::T.untyped)
-  PORT_MAPPING = ::T.let(nil, ::T.untyped)
-  RULE_2A = ::T.let(nil, ::T.untyped)
-  RULE_2B_2C = ::T.let(nil, ::T.untyped)
-  RULE_2D = ::T.let(nil, ::T.untyped)
-  RULE_PREFIXED_PARENT = ::T.let(nil, ::T.untyped)
-  SELF_REF = ::T.let(nil, ::T.untyped)
-  SLASH = ::T.let(nil, ::T.untyped)
-  URIREGEX = ::T.let(nil, ::T.untyped)
-end
-
-module Addressable::URI::CharacterClasses
-  ALPHA = ::T.let(nil, ::T.untyped)
-  AUTHORITY = ::T.let(nil, ::T.untyped)
-  DIGIT = ::T.let(nil, ::T.untyped)
-  FRAGMENT = ::T.let(nil, ::T.untyped)
-  GEN_DELIMS = ::T.let(nil, ::T.untyped)
-  HOST = ::T.let(nil, ::T.untyped)
-  PATH = ::T.let(nil, ::T.untyped)
-  PCHAR = ::T.let(nil, ::T.untyped)
-  QUERY = ::T.let(nil, ::T.untyped)
-  RESERVED = ::T.let(nil, ::T.untyped)
-  SCHEME = ::T.let(nil, ::T.untyped)
-  SUB_DELIMS = ::T.let(nil, ::T.untyped)
-  UNRESERVED = ::T.let(nil, ::T.untyped)
-end
-
-module Addressable::URI::CharacterClasses
-  extend ::T::Sig
-end
-
-module Addressable::VERSION
-  MAJOR = ::T.let(nil, ::T.untyped)
-  MINOR = ::T.let(nil, ::T.untyped)
-  STRING = ::T.let(nil, ::T.untyped)
-  TINY = ::T.let(nil, ::T.untyped)
-end
-
-module Addressable::VERSION
-  extend ::T::Sig
-end
-
-module Addressable
-  extend ::T::Sig
-end
-
 class Addrinfo
   extend ::T::Sig
 end
@@ -5376,66 +5380,6 @@ module ApplicationRecord::GeneratedAssociationMethods
 end
 
 module ApplicationRecord::GeneratedAssociationMethods
-  extend ::T::Sig
-end
-
-class Archive::Zip
-  CFH_SIGNATURE = ::T.let(nil, ::T.untyped)
-  DD_SIGNATURE = ::T.let(nil, ::T.untyped)
-  DS_SIGNATURE = ::T.let(nil, ::T.untyped)
-  EOCD_SIGNATURE = ::T.let(nil, ::T.untyped)
-  LFH_SIGNATURE = ::T.let(nil, ::T.untyped)
-  Z64EOCDL_SIGNATURE = ::T.let(nil, ::T.untyped)
-  Z64EOCD_SIGNATURE = ::T.let(nil, ::T.untyped)
-end
-
-module Archive::Zip::Codec
-  COMPRESSION_CODECS = ::T.let(nil, ::T.untyped)
-  ENCRYPTION_CODECS = ::T.let(nil, ::T.untyped)
-end
-
-class Archive::Zip::Codec::Deflate
-  FAST = ::T.let(nil, ::T.untyped)
-  ID = ::T.let(nil, ::T.untyped)
-  MAXIMUM = ::T.let(nil, ::T.untyped)
-  NORMAL = ::T.let(nil, ::T.untyped)
-  SUPER_FAST = ::T.let(nil, ::T.untyped)
-end
-
-class Archive::Zip::Codec::Store
-  ID = ::T.let(nil, ::T.untyped)
-end
-
-module Archive::Zip::Codec
-  extend ::T::Sig
-end
-
-module Archive::Zip::Entry
-  FLAG_DATA_DESCRIPTOR_FOLLOWS = ::T.let(nil, ::T.untyped)
-  FLAG_ENCRYPTED = ::T.let(nil, ::T.untyped)
-end
-
-module Archive::Zip::Entry
-  extend ::T::Sig
-end
-
-module Archive::Zip::ExtraField
-  EXTRA_FIELDS = ::T.let(nil, ::T.untyped)
-end
-
-class Archive::Zip::ExtraField::ExtendedTimestamp
-  ID = ::T.let(nil, ::T.untyped)
-end
-
-class Archive::Zip::ExtraField::Unix
-  ID = ::T.let(nil, ::T.untyped)
-end
-
-module Archive::Zip::ExtraField
-  extend ::T::Sig
-end
-
-module Archive
   extend ::T::Sig
 end
 
@@ -5560,8 +5504,6 @@ class Array
 
   def shelljoin(); end
 
-  def to_csv(**options); end
-
   def to_h(); end
 
 end
@@ -5683,8 +5625,6 @@ end
 module BigMath
   extend ::T::Sig
 end
-
-Bindex = Skiptrace
 
 class Binding
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
@@ -6646,148 +6586,6 @@ module Bundler
   extend ::T::Sig
 end
 
-module Byebug
-  PORT = ::T.let(nil, ::T.untyped)
-end
-
-class Byebug::AutoirbSetting
-  DEFAULT = ::T.let(nil, ::T.untyped)
-end
-
-class Byebug::AutolistSetting
-  DEFAULT = ::T.let(nil, ::T.untyped)
-end
-
-class Byebug::AutoprySetting
-  DEFAULT = ::T.let(nil, ::T.untyped)
-end
-
-class Byebug::AutosaveSetting
-  DEFAULT = ::T.let(nil, ::T.untyped)
-end
-
-class Byebug::CallstyleSetting
-  DEFAULT = ::T.let(nil, ::T.untyped)
-end
-
-class Byebug::Command
-  extend ::Byebug::Helpers::StringHelper
-end
-
-class Byebug::Context
-  extend ::Byebug::Helpers::PathHelper
-end
-
-class Byebug::FullpathSetting
-  DEFAULT = ::T.let(nil, ::T.untyped)
-end
-
-module Byebug::Helpers::BinHelper
-  extend ::T::Sig
-end
-
-module Byebug::Helpers::EvalHelper
-  extend ::T::Sig
-end
-
-module Byebug::Helpers::FileHelper
-  extend ::T::Sig
-end
-
-module Byebug::Helpers::FrameHelper
-  extend ::T::Sig
-end
-
-module Byebug::Helpers::ParseHelper
-  extend ::T::Sig
-end
-
-module Byebug::Helpers::PathHelper
-  extend ::T::Sig
-end
-
-module Byebug::Helpers::ReflectionHelper
-  extend ::T::Sig
-end
-
-module Byebug::Helpers::StringHelper
-  extend ::T::Sig
-end
-
-module Byebug::Helpers::ThreadHelper
-  extend ::T::Sig
-end
-
-module Byebug::Helpers::ToggleHelper
-  extend ::T::Sig
-end
-
-module Byebug::Helpers::VarHelper
-  extend ::T::Sig
-end
-
-module Byebug::Helpers
-  extend ::T::Sig
-end
-
-class Byebug::HistfileSetting
-  DEFAULT = ::T.let(nil, ::T.untyped)
-end
-
-class Byebug::HistsizeSetting
-  DEFAULT = ::T.let(nil, ::T.untyped)
-end
-
-class Byebug::ListsizeSetting
-  DEFAULT = ::T.let(nil, ::T.untyped)
-end
-
-class Byebug::LocalInterface
-  EOF_ALIAS = ::T.let(nil, ::T.untyped)
-end
-
-class Byebug::Printers::Base
-  SEPARATOR = ::T.let(nil, ::T.untyped)
-end
-
-module Byebug::Printers
-  extend ::T::Sig
-end
-
-module Byebug::Remote
-  extend ::T::Sig
-end
-
-class Byebug::SavefileSetting
-  DEFAULT = ::T.let(nil, ::T.untyped)
-end
-
-class Byebug::Setting
-  DEFAULT = ::T.let(nil, ::T.untyped)
-end
-
-module Byebug::Subcommands::ClassMethods
-  extend ::T::Sig
-end
-
-module Byebug::Subcommands
-  extend ::T::Sig
-end
-
-class Byebug::ThreadsTable
-end
-
-class Byebug::ThreadsTable
-end
-
-class Byebug::WidthSetting
-  DEFAULT = ::T.let(nil, ::T.untyped)
-end
-
-module Byebug
-  extend ::T::Sig
-end
-
 class CGI
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
 end
@@ -6870,582 +6668,6 @@ class CGI
   extend ::T::Sig
 end
 
-module Capybara
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class Capybara::Config
-  OPTIONS = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara::DSL
-  def accept_alert(*args, &block); end
-
-  def accept_confirm(*args, &block); end
-
-  def accept_prompt(*args, &block); end
-
-  def all(*args, &block); end
-
-  def assert_all_of_selectors(*args, &block); end
-
-  def assert_any_of_selectors(*args, &block); end
-
-  def assert_current_path(*args, &block); end
-
-  def assert_no_current_path(*args, &block); end
-
-  def assert_no_selector(*args, &block); end
-
-  def assert_no_text(*args, &block); end
-
-  def assert_no_title(*args, &block); end
-
-  def assert_none_of_selectors(*args, &block); end
-
-  def assert_selector(*args, &block); end
-
-  def assert_text(*args, &block); end
-
-  def assert_title(*args, &block); end
-
-  def attach_file(*args, &block); end
-
-  def body(*args, &block); end
-
-  def check(*args, &block); end
-
-  def choose(*args, &block); end
-
-  def click_button(*args, &block); end
-
-  def click_link(*args, &block); end
-
-  def click_link_or_button(*args, &block); end
-
-  def click_on(*args, &block); end
-
-  def current_host(*args, &block); end
-
-  def current_path(*args, &block); end
-
-  def current_scope(*args, &block); end
-
-  def current_url(*args, &block); end
-
-  def current_window(*args, &block); end
-
-  def dismiss_confirm(*args, &block); end
-
-  def dismiss_prompt(*args, &block); end
-
-  def evaluate_script(*args, &block); end
-
-  def execute_script(*args, &block); end
-
-  def fill_in(*args, &block); end
-
-  def find(*args, &block); end
-
-  def find_all(*args, &block); end
-
-  def find_button(*args, &block); end
-
-  def find_by_id(*args, &block); end
-
-  def find_field(*args, &block); end
-
-  def find_link(*args, &block); end
-
-  def first(*args, &block); end
-
-  def go_back(*args, &block); end
-
-  def go_forward(*args, &block); end
-
-  def has_button?(*args, &block); end
-
-  def has_checked_field?(*args, &block); end
-
-  def has_content?(*args, &block); end
-
-  def has_css?(*args, &block); end
-
-  def has_current_path?(*args, &block); end
-
-  def has_field?(*args, &block); end
-
-  def has_link?(*args, &block); end
-
-  def has_no_button?(*args, &block); end
-
-  def has_no_checked_field?(*args, &block); end
-
-  def has_no_content?(*args, &block); end
-
-  def has_no_css?(*args, &block); end
-
-  def has_no_current_path?(*args, &block); end
-
-  def has_no_field?(*args, &block); end
-
-  def has_no_link?(*args, &block); end
-
-  def has_no_select?(*args, &block); end
-
-  def has_no_selector?(*args, &block); end
-
-  def has_no_table?(*args, &block); end
-
-  def has_no_text?(*args, &block); end
-
-  def has_no_title?(*args, &block); end
-
-  def has_no_unchecked_field?(*args, &block); end
-
-  def has_no_xpath?(*args, &block); end
-
-  def has_select?(*args, &block); end
-
-  def has_selector?(*args, &block); end
-
-  def has_table?(*args, &block); end
-
-  def has_text?(*args, &block); end
-
-  def has_title?(*args, &block); end
-
-  def has_unchecked_field?(*args, &block); end
-
-  def has_xpath?(*args, &block); end
-
-  def html(*args, &block); end
-
-  def open_new_window(*args, &block); end
-
-  def page(); end
-
-  def query(*args, &block); end
-
-  def refresh(*args, &block); end
-
-  def refute_selector(*args, &block); end
-
-  def reset_session!(*args, &block); end
-
-  def response_headers(*args, &block); end
-
-  def save_and_open_page(*args, &block); end
-
-  def save_and_open_screenshot(*args, &block); end
-
-  def save_page(*args, &block); end
-
-  def save_screenshot(*args, &block); end
-
-  def scroll_by(*args, &block); end
-
-  def scroll_to(*args, &block); end
-
-  def select(*args, &block); end
-
-  def source(*args, &block); end
-
-  def status_code(*args, &block); end
-
-  def switch_to_frame(*args, &block); end
-
-  def switch_to_window(*args, &block); end
-
-  def text(*args, &block); end
-
-  def title(*args, &block); end
-
-  def uncheck(*args, &block); end
-
-  def unselect(*args, &block); end
-
-  def using_session(name_or_session, &block); end
-
-  def using_wait_time(seconds, &block); end
-
-  def visit(*args, &block); end
-
-  def window_opened_by(*args, &block); end
-
-  def windows(*args, &block); end
-
-  def within(*args, &block); end
-
-  def within_element(*args, &block); end
-
-  def within_fieldset(*args, &block); end
-
-  def within_frame(*args, &block); end
-
-  def within_table(*args, &block); end
-
-  def within_window(*args, &block); end
-end
-
-module Capybara::DSL
-  extend ::T::Sig
-  def self.extended(base); end
-
-  def self.included(base); end
-end
-
-module Capybara::Driver
-  extend ::T::Sig
-end
-
-module Capybara::Helpers
-  extend ::T::Sig
-end
-
-module Capybara::Minitest
-end
-
-module Capybara::Minitest::Assertions
-  def assert_all_of_selectors(*args, &optional_filter_block); end
-
-  def assert_ancestor(*args, &optional_filter_block); end
-
-  def assert_any_of_selectors(*args, &optional_filter_block); end
-
-  def assert_button(*args, &optional_filter_block); end
-
-  def assert_checked_field(*args, &optional_filter_block); end
-
-  def assert_content(*args); end
-
-  def assert_css(*args, &optional_filter_block); end
-
-  def assert_current_path(*args); end
-
-  def assert_field(*args, &optional_filter_block); end
-
-  def assert_link(*args, &optional_filter_block); end
-
-  def assert_matches_css(*args, &optional_filter_block); end
-
-  def assert_matches_selector(*args, &optional_filter_block); end
-
-  def assert_matches_style(*args, &optional_filter_block); end
-
-  def assert_matches_xpath(*args, &optional_filter_block); end
-
-  def assert_no_ancestor(*args, &optional_filter_block); end
-
-  def assert_no_button(*args, &optional_filter_block); end
-
-  def assert_no_checked_field(*args, &optional_filter_block); end
-
-  def assert_no_content(*args); end
-
-  def assert_no_css(*args, &optional_filter_block); end
-
-  def assert_no_current_path(*args); end
-
-  def assert_no_field(*args, &optional_filter_block); end
-
-  def assert_no_link(*args, &optional_filter_block); end
-
-  def assert_no_select(*args, &optional_filter_block); end
-
-  def assert_no_selector(*args, &optional_filter_block); end
-
-  def assert_no_sibling(*args, &optional_filter_block); end
-
-  def assert_no_table(*args, &optional_filter_block); end
-
-  def assert_no_text(*args); end
-
-  def assert_no_title(*args); end
-
-  def assert_no_unchecked_field(*args, &optional_filter_block); end
-
-  def assert_no_xpath(*args, &optional_filter_block); end
-
-  def assert_none_of_selectors(*args, &optional_filter_block); end
-
-  def assert_not_matches_css(*args, &optional_filter_block); end
-
-  def assert_not_matches_selector(*args, &optional_filter_block); end
-
-  def assert_not_matches_xpath(*args, &optional_filter_block); end
-
-  def assert_select(*args, &optional_filter_block); end
-
-  def assert_selector(*args, &optional_filter_block); end
-
-  def assert_sibling(*args, &optional_filter_block); end
-
-  def assert_table(*args, &optional_filter_block); end
-
-  def assert_text(*args); end
-
-  def assert_title(*args); end
-
-  def assert_unchecked_field(*args, &optional_filter_block); end
-
-  def assert_xpath(*args, &optional_filter_block); end
-
-  def refute_ancestor(*args, &optional_filter_block); end
-
-  def refute_button(*args, &optional_filter_block); end
-
-  def refute_checked_field(*args, &optional_filter_block); end
-
-  def refute_content(*args); end
-
-  def refute_css(*args, &optional_filter_block); end
-
-  def refute_current_path(*args); end
-
-  def refute_field(*args, &optional_filter_block); end
-
-  def refute_link(*args, &optional_filter_block); end
-
-  def refute_matches_css(*args, &optional_filter_block); end
-
-  def refute_matches_selector(*args, &optional_filter_block); end
-
-  def refute_matches_xpath(*args, &optional_filter_block); end
-
-  def refute_select(*args, &optional_filter_block); end
-
-  def refute_selector(*args, &optional_filter_block); end
-
-  def refute_sibling(*args, &optional_filter_block); end
-
-  def refute_table(*args, &optional_filter_block); end
-
-  def refute_text(*args); end
-
-  def refute_title(*args); end
-
-  def refute_unchecked_field(*args, &optional_filter_block); end
-
-  def refute_xpath(*args, &optional_filter_block); end
-end
-
-module Capybara::Minitest::Assertions
-  extend ::T::Sig
-end
-
-module Capybara::Minitest
-  extend ::T::Sig
-end
-
-module Capybara::Node::Actions
-  CAPTURE_FILE_ELEMENT_SCRIPT = ::T.let(nil, ::T.untyped)
-  DATALIST_OPTIONS_SCRIPT = ::T.let(nil, ::T.untyped)
-  RESET_STYLE_SCRIPT = ::T.let(nil, ::T.untyped)
-  UPDATE_STYLE_SCRIPT = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara::Node::Actions
-  extend ::T::Sig
-end
-
-module Capybara::Node::DocumentMatchers
-  extend ::T::Sig
-end
-
-class Capybara::Node::Element
-  STYLE_SCRIPT = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara::Node::Finders
-  extend ::T::Sig
-end
-
-module Capybara::Node::Matchers
-  extend ::T::Sig
-end
-
-class Capybara::Node::Simple
-  VISIBILITY_XPATH = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara::Node
-  extend ::T::Sig
-end
-
-class Capybara::Queries::BaseQuery
-  COUNT_KEYS = ::T.let(nil, ::T.untyped)
-end
-
-class Capybara::Queries::SelectorQuery
-  VALID_KEYS = ::T.let(nil, ::T.untyped)
-  VALID_MATCH = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara::Queries
-  extend ::T::Sig
-end
-
-class Capybara::RackTest::Driver
-  DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara::RackTest::Errors
-  extend ::T::Sig
-end
-
-class Capybara::RackTest::Node
-  BLOCK_ELEMENTS = ::T.let(nil, ::T.untyped)
-  DISABLED_BY_FIELDSET_XPATH = ::T.let(nil, ::T.untyped)
-  OPTION_OWNER_XPATH = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara::RackTest
-  extend ::T::Sig
-end
-
-class Capybara::Selector::CSS
-  ESCAPE = ::T.let(nil, ::T.untyped)
-  H = ::T.let(nil, ::T.untyped)
-  NMSTART = ::T.let(nil, ::T.untyped)
-  NONASCII = ::T.let(nil, ::T.untyped)
-  S = ::T.let(nil, ::T.untyped)
-  UNICODE = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara::Selector::Filters
-  extend ::T::Sig
-end
-
-module Capybara::Selenium::ChromeLogs
-  COMMANDS = ::T.let(nil, ::T.untyped)
-  LOG_MSG = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara::Selenium::ChromeLogs
-  extend ::T::Sig
-end
-
-class Capybara::Selenium::Driver
-  DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
-  SPECIAL_OPTIONS = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara::Selenium::Driver::ChromeDriver
-  extend ::T::Sig
-end
-
-module Capybara::Selenium::Driver::EdgeDriver
-  extend ::T::Sig
-end
-
-module Capybara::Selenium::Driver::FirefoxDriver
-  extend ::T::Sig
-end
-
-module Capybara::Selenium::Driver::InternetExplorerDriver
-  extend ::T::Sig
-end
-
-module Capybara::Selenium::Driver::SafariDriver
-  extend ::T::Sig
-end
-
-module Capybara::Selenium::Driver::W3CFirefoxDriver
-  extend ::T::Sig
-end
-
-module Capybara::Selenium::Find
-  extend ::T::Sig
-end
-
-class Capybara::Selenium::Node
-  GET_XPATH_SCRIPT = ::T.let(nil, ::T.untyped)
-  OBSCURED_OR_OFFSET_SCRIPT = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara::Selenium::Node::Html5Drag
-  ATTACH_FILE = ::T.let(nil, ::T.untyped)
-  DROP_FILE = ::T.let(nil, ::T.untyped)
-  DROP_STRING = ::T.let(nil, ::T.untyped)
-  HTML5_DRAG_DROP_SCRIPT = ::T.let(nil, ::T.untyped)
-  LEGACY_DRAG_CHECK = ::T.let(nil, ::T.untyped)
-  MOUSEDOWN_TRACKER = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara::Selenium::Node::Html5Drag
-  extend ::T::Sig
-end
-
-class Capybara::Selenium::SafariNode
-  MODIFIER_KEYS = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara::Selenium::Scroll
-  extend ::T::Sig
-end
-
-module Capybara::Selenium
-  extend ::T::Sig
-end
-
-class Capybara::Server::AnimationDisabler
-  DISABLE_MARKUP_TEMPLATE = ::T.let(nil, ::T.untyped)
-end
-
-class Capybara::Server::Checker
-  TRY_HTTPS_ERRORS = ::T.let(nil, ::T.untyped)
-end
-
-class Capybara::Session
-  DOCUMENT_METHODS = ::T.let(nil, ::T.untyped)
-  DSL_METHODS = ::T.let(nil, ::T.untyped)
-  MODAL_METHODS = ::T.let(nil, ::T.untyped)
-  NODE_METHODS = ::T.let(nil, ::T.untyped)
-  SESSION_METHODS = ::T.let(nil, ::T.untyped)
-end
-
-class Capybara::SessionConfig
-  OPTIONS = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara::SessionMatchers
-  extend ::T::Sig
-end
-
-module Capybara
-  extend ::Capybara::DSL
-  extend ::T::Sig
-end
-
-module ChildProcess
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class ChildProcess::AbstractProcess
-  POLL_INTERVAL = ::T.let(nil, ::T.untyped)
-end
-
-module ChildProcess::Unix
-  extend ::T::Sig
-end
-
-module ChildProcess
-  extend ::T::Sig
-end
-
-class Chromedriver::Helper
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class Chromedriver::Helper::GoogleCodeParser
-  BUCKET_URL = ::T.let(nil, ::T.untyped)
-end
-
-module Chromedriver
-  extend ::T::Sig
-end
-
 class Class
   def json_creatable?(); end
 end
@@ -7455,40 +6677,6 @@ class Class
 end
 
 class ClosedQueueError
-  extend ::T::Sig
-end
-
-module Coffee::Rails
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-module Coffee::Rails::JsHook
-  extend ::T::Sig
-end
-
-module Coffee::Rails
-  extend ::T::Sig
-end
-
-module Coffee
-  extend ::T::Sig
-end
-
-CoffeeScript::CompilationError = ExecJS::ProgramError
-
-CoffeeScript::EngineError = ExecJS::RuntimeError
-
-CoffeeScript::Error = ExecJS::Error
-
-module CoffeeScript::Source
-  COMPILE_FUNCTION_SOURCE = ::T.let(nil, ::T.untyped)
-end
-
-module CoffeeScript::Source
-  extend ::T::Sig
-end
-
-module CoffeeScript
   extend ::T::Sig
 end
 
@@ -8952,65 +8140,6 @@ class Exception
   def self.to_tty?(); end
 end
 
-module Exception2MessageMapper
-  def bind(cl); end
-end
-
-Exception2MessageMapper::E2MM = Exception2MessageMapper
-
-class Exception2MessageMapper::ErrNotRegisteredException
-end
-
-class Exception2MessageMapper::ErrNotRegisteredException
-end
-
-module Exception2MessageMapper
-  extend ::T::Sig
-  def self.Fail(klass=T.unsafe(nil), err=T.unsafe(nil), *rest); end
-
-  def self.Raise(klass=T.unsafe(nil), err=T.unsafe(nil), *rest); end
-
-  def self.def_e2message(k, c, m); end
-
-  def self.def_exception(k, n, m, s=T.unsafe(nil)); end
-
-  def self.e2mm_message(klass, exp); end
-
-  def self.extend_object(cl); end
-
-  def self.message(klass, exp); end
-end
-
-module ExecJS
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-module ExecJS::Encoding
-  extend ::T::Sig
-end
-
-module ExecJS::Runtimes
-  Disabled = ::T.let(nil, ::T.untyped)
-  Duktape = ::T.let(nil, ::T.untyped)
-  JScript = ::T.let(nil, ::T.untyped)
-  JavaScriptCore = ::T.let(nil, ::T.untyped)
-  MiniRacer = ::T.let(nil, ::T.untyped)
-  Node = ::T.let(nil, ::T.untyped)
-  RubyRacer = ::T.let(nil, ::T.untyped)
-  RubyRhino = ::T.let(nil, ::T.untyped)
-  SpiderMonkey = ::T.let(nil, ::T.untyped)
-  Spidermonkey = ::T.let(nil, ::T.untyped)
-  V8 = ::T.let(nil, ::T.untyped)
-end
-
-module ExecJS::Runtimes
-  extend ::T::Sig
-end
-
-module ExecJS
-  extend ::T::Sig
-end
-
 class ExitCalledError
 end
 
@@ -9028,36 +8157,6 @@ class FalseClass
 end
 
 class FalseClass
-  extend ::T::Sig
-end
-
-module Fcntl
-  FD_CLOEXEC = ::T.let(nil, ::T.untyped)
-  F_DUPFD = ::T.let(nil, ::T.untyped)
-  F_GETFD = ::T.let(nil, ::T.untyped)
-  F_GETFL = ::T.let(nil, ::T.untyped)
-  F_GETLK = ::T.let(nil, ::T.untyped)
-  F_RDLCK = ::T.let(nil, ::T.untyped)
-  F_SETFD = ::T.let(nil, ::T.untyped)
-  F_SETFL = ::T.let(nil, ::T.untyped)
-  F_SETLK = ::T.let(nil, ::T.untyped)
-  F_SETLKW = ::T.let(nil, ::T.untyped)
-  F_UNLCK = ::T.let(nil, ::T.untyped)
-  F_WRLCK = ::T.let(nil, ::T.untyped)
-  O_ACCMODE = ::T.let(nil, ::T.untyped)
-  O_APPEND = ::T.let(nil, ::T.untyped)
-  O_CREAT = ::T.let(nil, ::T.untyped)
-  O_EXCL = ::T.let(nil, ::T.untyped)
-  O_NDELAY = ::T.let(nil, ::T.untyped)
-  O_NOCTTY = ::T.let(nil, ::T.untyped)
-  O_NONBLOCK = ::T.let(nil, ::T.untyped)
-  O_RDONLY = ::T.let(nil, ::T.untyped)
-  O_RDWR = ::T.let(nil, ::T.untyped)
-  O_TRUNC = ::T.let(nil, ::T.untyped)
-  O_WRONLY = ::T.let(nil, ::T.untyped)
-end
-
-module Fcntl
   extend ::T::Sig
 end
 
@@ -9387,16 +8486,6 @@ module FileUtils
   def self.symlink(src, dest, force: T.unsafe(nil), noop: T.unsafe(nil), verbose: T.unsafe(nil)); end
 
   def self.uptodate?(new, old_list); end
-end
-
-module Find
-end
-
-module Find
-  extend ::T::Sig
-  def self.find(*paths, ignore_error: T.unsafe(nil)); end
-
-  def self.prune(); end
 end
 
 class Float
@@ -14212,14 +13301,6 @@ IO::EWOULDBLOCKWaitReadable = IO::EAGAINWaitReadable
 
 IO::EWOULDBLOCKWaitWritable = IO::EAGAINWaitWritable
 
-module IO::Like
-  include ::ActiveSupport::ToJsonWithActiveSupportEncoder
-end
-
-module IO::Like
-  extend ::T::Sig
-end
-
 module IO::WaitReadable
   extend ::T::Sig
 end
@@ -14232,17 +13313,11 @@ class IO
   extend ::T::Sig
   def self.foreach(*_); end
 
-  def self.open(*_); end
-
   def self.pipe(*_); end
 
 end
 
 class IOError
-  extend ::T::Sig
-end
-
-module IOExtensions
   extend ::T::Sig
 end
 
@@ -14355,639 +13430,6 @@ end
 
 class IPSocket
   extend ::T::Sig
-end
-
-module IRB
-  IRBRC_EXT = ::T.let(nil, ::T.untyped)
-  MagicFile = ::T.let(nil, ::T.untyped)
-  STDIN_FILE_NAME = ::T.let(nil, ::T.untyped)
-end
-
-class IRB::Abort
-end
-
-class IRB::Abort
-end
-
-class IRB::Context
-  def __exit__(*_); end
-
-  def __inspect__(); end
-
-  def __to_s__(); end
-
-  def ap_name(); end
-
-  def ap_name=(ap_name); end
-
-  def auto_indent_mode(); end
-
-  def auto_indent_mode=(auto_indent_mode); end
-
-  def back_trace_limit(); end
-
-  def back_trace_limit=(back_trace_limit); end
-
-  def debug?(); end
-
-  def debug_level(); end
-
-  def debug_level=(value); end
-
-  def echo(); end
-
-  def echo=(echo); end
-
-  def echo?(); end
-
-  def eval_history=(*opts, &b); end
-
-  def evaluate(line, line_no); end
-
-  def exit(ret=T.unsafe(nil)); end
-
-  def file_input?(); end
-
-  def ignore_eof(); end
-
-  def ignore_eof=(ignore_eof); end
-
-  def ignore_eof?(); end
-
-  def ignore_sigint(); end
-
-  def ignore_sigint=(ignore_sigint); end
-
-  def ignore_sigint?(); end
-
-  def initialize(irb, workspace=T.unsafe(nil), input_method=T.unsafe(nil), output_method=T.unsafe(nil)); end
-
-  def inspect?(); end
-
-  def inspect_last_value(); end
-
-  def inspect_mode(); end
-
-  def inspect_mode=(opt); end
-
-  def io(); end
-
-  def io=(io); end
-
-  def irb(); end
-
-  def irb=(irb); end
-
-  def irb_name(); end
-
-  def irb_name=(irb_name); end
-
-  def irb_path(); end
-
-  def irb_path=(irb_path); end
-
-  def last_value(); end
-
-  def load_modules(); end
-
-  def load_modules=(load_modules); end
-
-  def main(); end
-
-  def prompt_c(); end
-
-  def prompt_c=(prompt_c); end
-
-  def prompt_i(); end
-
-  def prompt_i=(prompt_i); end
-
-  def prompt_mode(); end
-
-  def prompt_mode=(mode); end
-
-  def prompt_n(); end
-
-  def prompt_n=(prompt_n); end
-
-  def prompt_s(); end
-
-  def prompt_s=(prompt_s); end
-
-  def prompting?(); end
-
-  def rc(); end
-
-  def rc=(rc); end
-
-  def rc?(); end
-
-  def return_format(); end
-
-  def return_format=(return_format); end
-
-  def save_history=(*opts, &b); end
-
-  def set_last_value(value); end
-
-  def thread(); end
-
-  def use_loader=(*opts, &b); end
-
-  def use_readline(); end
-
-  def use_readline=(opt); end
-
-  def use_readline?(); end
-
-  def use_tracer=(*opts, &b); end
-
-  def verbose(); end
-
-  def verbose=(verbose); end
-
-  def verbose?(); end
-
-  def workspace(); end
-
-  def workspace=(workspace); end
-
-  def workspace_home(); end
-  IDNAME_IVARS = ::T.let(nil, ::T.untyped)
-  NOPRINTING_IVARS = ::T.let(nil, ::T.untyped)
-  NO_INSPECTING_IVARS = ::T.let(nil, ::T.untyped)
-end
-
-class IRB::Context
-end
-
-module IRB::ContextExtender
-end
-
-IRB::ContextExtender::CE = IRB::ContextExtender
-
-module IRB::ContextExtender
-  extend ::T::Sig
-  def self.def_extend_command(cmd_name, load_file, *aliases); end
-
-  def self.install_extend_commands(); end
-end
-
-class IRB::DefaultEncodings
-  def external(); end
-
-  def external=(_); end
-
-  def internal(); end
-
-  def internal=(_); end
-end
-
-class IRB::DefaultEncodings
-  def self.[](*_); end
-
-  def self.members(); end
-end
-
-module IRB::ExtendCommandBundle
-  def install_alias_method(to, from, override=T.unsafe(nil)); end
-
-  def irb(*opts, &b); end
-
-  def irb_change_workspace(*opts, &b); end
-
-  def irb_context(); end
-
-  def irb_current_working_workspace(*opts, &b); end
-
-  def irb_exit(ret=T.unsafe(nil)); end
-
-  def irb_fg(*opts, &b); end
-
-  def irb_help(*opts, &b); end
-
-  def irb_jobs(*opts, &b); end
-
-  def irb_kill(*opts, &b); end
-
-  def irb_load(*opts, &b); end
-
-  def irb_pop_workspace(*opts, &b); end
-
-  def irb_push_workspace(*opts, &b); end
-
-  def irb_require(*opts, &b); end
-
-  def irb_source(*opts, &b); end
-
-  def irb_workspaces(*opts, &b); end
-  NO_OVERRIDE = ::T.let(nil, ::T.untyped)
-  OVERRIDE_ALL = ::T.let(nil, ::T.untyped)
-  OVERRIDE_PRIVATE_ONLY = ::T.let(nil, ::T.untyped)
-end
-
-IRB::ExtendCommandBundle::EXCB = IRB::ExtendCommandBundle
-
-module IRB::ExtendCommandBundle
-  extend ::T::Sig
-  def self.def_extend_command(cmd_name, cmd_class, load_file=T.unsafe(nil), *aliases); end
-
-  def self.extend_object(obj); end
-
-  def self.install_extend_commands(); end
-
-  def self.irb_original_method_name(method_name); end
-end
-
-class IRB::FileInputMethod
-  def encoding(); end
-
-  def eof?(); end
-
-  def initialize(file); end
-end
-
-class IRB::FileInputMethod
-end
-
-class IRB::InputMethod
-  def file_name(); end
-
-  def gets(); end
-
-  def initialize(file=T.unsafe(nil)); end
-
-  def prompt(); end
-
-  def prompt=(prompt); end
-
-  def readable_after_eof?(); end
-end
-
-class IRB::InputMethod
-end
-
-class IRB::Inspector
-  def init(); end
-
-  def initialize(inspect_proc, init_proc=T.unsafe(nil)); end
-
-  def inspect_value(v); end
-  INSPECTORS = ::T.let(nil, ::T.untyped)
-end
-
-class IRB::Inspector
-  def self.def_inspector(key, arg=T.unsafe(nil), &block); end
-
-  def self.keys_with_inspector(inspector); end
-end
-
-class IRB::Irb
-  def context(); end
-
-  def eval_input(); end
-
-  def initialize(workspace=T.unsafe(nil), input_method=T.unsafe(nil), output_method=T.unsafe(nil)); end
-
-  def output_value(); end
-
-  def prompt(prompt, ltype, indent, line_no); end
-
-  def run(conf=T.unsafe(nil)); end
-
-  def scanner(); end
-
-  def scanner=(scanner); end
-
-  def signal_handle(); end
-
-  def signal_status(status); end
-
-  def suspend_context(context); end
-
-  def suspend_input_method(input_method); end
-
-  def suspend_name(path=T.unsafe(nil), name=T.unsafe(nil)); end
-
-  def suspend_workspace(workspace); end
-  ATTR_PLAIN = ::T.let(nil, ::T.untyped)
-  ATTR_TTY = ::T.let(nil, ::T.untyped)
-end
-
-class IRB::Irb
-end
-
-class IRB::Locale
-  def String(mes); end
-
-  def encoding(); end
-
-  def find(file, paths=T.unsafe(nil)); end
-
-  def format(*opts); end
-
-  def gets(*rs); end
-
-  def initialize(locale=T.unsafe(nil)); end
-
-  def lang(); end
-
-  def load(file, priv=T.unsafe(nil)); end
-
-  def modifier(); end
-
-  def print(*opts); end
-
-  def printf(*opts); end
-
-  def puts(*opts); end
-
-  def readline(*rs); end
-
-  def require(file, priv=T.unsafe(nil)); end
-
-  def territory(); end
-  LOCALE_DIR = ::T.let(nil, ::T.untyped)
-  LOCALE_NAME_RE = ::T.let(nil, ::T.untyped)
-end
-
-class IRB::Locale
-end
-
-module IRB::MethodExtender
-  def def_post_proc(base_method, extend_method); end
-
-  def def_pre_proc(base_method, extend_method); end
-
-  def new_alias_name(name, prefix=T.unsafe(nil), postfix=T.unsafe(nil)); end
-end
-
-module IRB::MethodExtender
-  extend ::T::Sig
-end
-
-module IRB::Notifier
-  def Fail(err=T.unsafe(nil), *rest); end
-
-  def Raise(err=T.unsafe(nil), *rest); end
-  D_NOMSG = ::T.let(nil, ::T.untyped)
-end
-
-class IRB::Notifier::AbstractNotifier
-  def exec_if(); end
-
-  def initialize(prefix, base_notifier); end
-
-  def notify?(); end
-
-  def ppx(prefix, *objs); end
-
-  def prefix(); end
-
-  def print(*opts); end
-
-  def printf(format, *opts); end
-
-  def printn(*opts); end
-
-  def puts(*objs); end
-end
-
-class IRB::Notifier::AbstractNotifier
-end
-
-class IRB::Notifier::CompositeNotifier
-  def def_notifier(level, prefix=T.unsafe(nil)); end
-
-  def level(); end
-
-  def level=(value); end
-
-  def level_notifier(); end
-
-  def level_notifier=(value); end
-
-  def notifiers(); end
-end
-
-class IRB::Notifier::CompositeNotifier
-end
-
-class IRB::Notifier::ErrUndefinedNotifier
-end
-
-class IRB::Notifier::ErrUndefinedNotifier
-end
-
-class IRB::Notifier::ErrUnrecognizedLevel
-end
-
-class IRB::Notifier::ErrUnrecognizedLevel
-end
-
-class IRB::Notifier::LeveledNotifier
-  include ::Comparable
-  def initialize(base, level, prefix); end
-
-  def level(); end
-end
-
-class IRB::Notifier::LeveledNotifier
-end
-
-class IRB::Notifier::NoMsgNotifier
-  def initialize(); end
-end
-
-class IRB::Notifier::NoMsgNotifier
-end
-
-module IRB::Notifier
-  extend ::Exception2MessageMapper
-  extend ::T::Sig
-  def self.def_notifier(prefix=T.unsafe(nil), output_method=T.unsafe(nil)); end
-
-  def self.included(mod); end
-end
-
-class IRB::OutputMethod
-  def Fail(err=T.unsafe(nil), *rest); end
-
-  def Raise(err=T.unsafe(nil), *rest); end
-
-  def parse_printf_format(format, opts); end
-
-  def ppx(prefix, *objs); end
-
-  def print(*opts); end
-
-  def printf(format, *opts); end
-
-  def printn(*opts); end
-
-  def puts(*objs); end
-end
-
-class IRB::OutputMethod::NotImplementedError
-end
-
-class IRB::OutputMethod::NotImplementedError
-end
-
-class IRB::OutputMethod
-  extend ::Exception2MessageMapper
-  def self.included(mod); end
-end
-
-class IRB::ReadlineInputMethod
-  include ::Readline
-  def encoding(); end
-
-  def eof?(); end
-
-  def initialize(); end
-
-  def line(line_no); end
-end
-
-class IRB::ReadlineInputMethod
-end
-
-class IRB::SLex
-  def Fail(err=T.unsafe(nil), *rest); end
-
-  def Raise(err=T.unsafe(nil), *rest); end
-
-  def create(token, preproc=T.unsafe(nil), postproc=T.unsafe(nil)); end
-
-  def def_rule(token, preproc=T.unsafe(nil), postproc=T.unsafe(nil), &block); end
-
-  def def_rules(*tokens, &block); end
-
-  def match(token); end
-
-  def postproc(token); end
-
-  def preproc(token, proc); end
-
-  def search(token); end
-  DOUT = ::T.let(nil, ::T.untyped)
-  D_DEBUG = ::T.let(nil, ::T.untyped)
-  D_DETAIL = ::T.let(nil, ::T.untyped)
-  D_WARN = ::T.let(nil, ::T.untyped)
-end
-
-class IRB::SLex::ErrNodeAlreadyExists
-end
-
-class IRB::SLex::ErrNodeAlreadyExists
-end
-
-class IRB::SLex::ErrNodeNothing
-end
-
-class IRB::SLex::ErrNodeNothing
-end
-
-class IRB::SLex::Node
-  def create_subnode(chrs, preproc=T.unsafe(nil), postproc=T.unsafe(nil)); end
-
-  def initialize(preproc=T.unsafe(nil), postproc=T.unsafe(nil)); end
-
-  def match(chrs, op=T.unsafe(nil)); end
-
-  def match_io(io, op=T.unsafe(nil)); end
-
-  def postproc(); end
-
-  def postproc=(postproc); end
-
-  def preproc(); end
-
-  def preproc=(preproc); end
-
-  def search(chrs, opt=T.unsafe(nil)); end
-end
-
-class IRB::SLex::Node
-end
-
-class IRB::SLex
-  extend ::Exception2MessageMapper
-  def self.included(mod); end
-end
-
-class IRB::StdioInputMethod
-  def encoding(); end
-
-  def eof?(); end
-
-  def initialize(); end
-
-  def line(line_no); end
-end
-
-class IRB::StdioInputMethod
-end
-
-class IRB::StdioOutputMethod
-end
-
-class IRB::StdioOutputMethod
-end
-
-class IRB::WorkSpace
-  def code_around_binding(); end
-
-  def evaluate(context, statements, file=T.unsafe(nil), line=T.unsafe(nil)); end
-
-  def filter_backtrace(bt); end
-
-  def initialize(*main); end
-
-  def main(); end
-end
-
-class IRB::WorkSpace
-end
-
-module IRB
-  extend ::T::Sig
-  def self.CurrentContext(); end
-
-  def self.Inspector(inspect, init=T.unsafe(nil)); end
-
-  def self.conf(); end
-
-  def self.default_src_encoding(); end
-
-  def self.delete_caller(); end
-
-  def self.init_config(ap_path); end
-
-  def self.init_error(); end
-
-  def self.irb_abort(irb, exception=T.unsafe(nil)); end
-
-  def self.irb_at_exit(); end
-
-  def self.irb_exit(irb, ret); end
-
-  def self.load_modules(); end
-
-  def self.parse_opts(argv: T.unsafe(nil)); end
-
-  def self.rc_file(ext=T.unsafe(nil)); end
-
-  def self.rc_file_generators(); end
-
-  def self.run_config(); end
-
-  def self.setup(ap_path, argv: T.unsafe(nil)); end
-
-  def self.start(ap_path=T.unsafe(nil)); end
-
-  def self.version(); end
 end
 
 class IndexError
@@ -15128,20 +13570,6 @@ module JSON
 end
 
 JSONTree = Psych::Visitors::JSONTree
-
-class Jbuilder
-  BLANK = ::T.let(nil, ::T.untyped)
-  NON_ENUMERABLES = ::T.let(nil, ::T.untyped)
-end
-
-module Jbuilder::DependencyTrackerMethods
-  DIRECT_RENDERS = ::T.let(nil, ::T.untyped)
-  INDIRECT_RENDERS = ::T.let(nil, ::T.untyped)
-end
-
-module Jbuilder::DependencyTrackerMethods
-  extend ::T::Sig
-end
 
 module Kernel
   def gem(dep, *reqs); end
@@ -16872,21 +15300,7 @@ module MiniMime
   extend ::T::Sig
 end
 
-module Minitest
-end
-
-MiniTest::Assertions = Minitest::Assertions
-
-MiniTest::Guard = Minitest::Guard
-
-MiniTest::Reportable = Minitest::Reportable
-
-MiniTest::Runnable = Minitest::Runnable
-
-MiniTest::Test = Minitest::Test
-
-module Minitest
-end
+MiniTest = Minitest
 
 module Minitest
   ENCS = ::T.let(nil, ::T.untyped)
@@ -17160,6 +15574,8 @@ module Net::HTTP::ProxyDelta
   extend ::T::Sig
 end
 
+Net::HTTP::ProxyMod = Net::HTTP::ProxyDelta
+
 class Net::HTTP::Put
   extend ::T::Sig
 end
@@ -17285,17 +15701,13 @@ class Net::HTTPIMUsed
   extend ::T::Sig
 end
 
+Net::HTTPInformation::EXCEPTION_TYPE = Net::HTTPError
+
 class Net::HTTPInformation
   extend ::T::Sig
 end
 
-class Net::HTTPInformation
-end
-
-Net::HTTPInformationCode::EXCEPTION_TYPE = Net::HTTPError
-
-class Net::HTTPInformation
-end
+Net::HTTPInformationCode = Net::HTTPInformation
 
 class Net::HTTPInsufficientStorage
   extend ::T::Sig
@@ -17499,15 +15911,7 @@ class Net::HTTPServiceUnavailable
   extend ::T::Sig
 end
 
-class Net::HTTP
-end
-
-Net::HTTPSession::ProxyDelta = Net::HTTP::ProxyDelta
-
-Net::HTTPSession::ProxyMod = Net::HTTP::ProxyDelta
-
-class Net::HTTP
-end
+Net::HTTPSession = Net::HTTP
 
 Net::HTTPSuccess::EXCEPTION_TYPE = Net::HTTPError
 
@@ -18467,8 +16871,6 @@ class Object
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
   include ::PP::ObjectMixin
   include ::JSON::Ext::Generator::GeneratorMethods::Object
-  def dclone(); end
-
   def to_yaml(options=T.unsafe(nil)); end
   ARGF = ::T.let(nil, ::T.untyped)
   ARGV = ::T.let(nil, ::T.untyped)
@@ -19181,104 +17583,6 @@ end
 
 class OpenStruct
   extend ::T::Sig
-end
-
-module OpenURI
-  Options = ::T.let(nil, ::T.untyped)
-end
-
-class OpenURI::Buffer
-  def <<(str); end
-
-  def io(); end
-
-  def size(); end
-  StringMax = ::T.let(nil, ::T.untyped)
-end
-
-class OpenURI::Buffer
-end
-
-class OpenURI::HTTPError
-  def initialize(message, io); end
-
-  def io(); end
-end
-
-class OpenURI::HTTPError
-end
-
-class OpenURI::HTTPRedirect
-  def initialize(message, io, uri); end
-
-  def uri(); end
-end
-
-class OpenURI::HTTPRedirect
-end
-
-module OpenURI::Meta
-  def base_uri(); end
-
-  def base_uri=(base_uri); end
-
-  def charset(); end
-
-  def content_encoding(); end
-
-  def content_type(); end
-
-  def content_type_parse(); end
-
-  def last_modified(); end
-
-  def meta(); end
-
-  def meta_add_field(name, value); end
-
-  def meta_add_field2(name, values); end
-
-  def meta_setup_encoding(); end
-
-  def metas(); end
-
-  def status(); end
-
-  def status=(status); end
-  RE_LWS = ::T.let(nil, ::T.untyped)
-  RE_PARAMETERS = ::T.let(nil, ::T.untyped)
-  RE_QUOTED_STRING = ::T.let(nil, ::T.untyped)
-  RE_TOKEN = ::T.let(nil, ::T.untyped)
-end
-
-module OpenURI::Meta
-  extend ::T::Sig
-  def self.init(obj, src=T.unsafe(nil)); end
-end
-
-module OpenURI::OpenRead
-  def open(*rest, &block); end
-
-  def read(options=T.unsafe(nil)); end
-end
-
-module OpenURI::OpenRead
-  extend ::T::Sig
-end
-
-module OpenURI
-  extend ::T::Sig
-  def self.check_options(options); end
-
-  def self.open_http(buf, target, proxy, options); end
-
-  def self.open_loop(uri, options); end
-
-  def self.open_uri(name, *rest); end
-
-  def self.redirectable?(uri1, uri2); end
-
-  def self.scan_open_optional_arguments(*rest); end
 end
 
 OptParse = OptionParser
@@ -20612,25 +18916,6 @@ module Psych
   def self.to_json(object); end
 end
 
-module PublicSuffix
-  BANG = ::T.let(nil, ::T.untyped)
-  DOT = ::T.let(nil, ::T.untyped)
-  STAR = ::T.let(nil, ::T.untyped)
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class PublicSuffix::List
-  DEFAULT_LIST_PATH = ::T.let(nil, ::T.untyped)
-end
-
-module PublicSuffix::Rule
-  extend ::T::Sig
-end
-
-module PublicSuffix
-  extend ::T::Sig
-end
-
 module Puma
   HTTP_STATUS_CODES = ::T.let(nil, ::T.untyped)
   IS_JRUBY = ::T.let(nil, ::T.untyped)
@@ -21934,6 +20219,44 @@ module Rails::Generators
   DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
 end
 
+module Rails::Generators::Actions
+  def add_source(source, options=T.unsafe(nil), &block); end
+
+  def after_bundle(&block); end
+
+  def application(data=T.unsafe(nil), options=T.unsafe(nil)); end
+
+  def capify!(); end
+
+  def environment(data=T.unsafe(nil), options=T.unsafe(nil)); end
+
+  def gem(*args); end
+
+  def gem_group(*names, &block); end
+
+  def generate(what, *args); end
+
+  def git(commands=T.unsafe(nil)); end
+
+  def initialize(*_); end
+
+  def initializer(filename, data=T.unsafe(nil)); end
+
+  def lib(filename, data=T.unsafe(nil)); end
+
+  def rails_command(command, options=T.unsafe(nil)); end
+
+  def rake(command, options=T.unsafe(nil)); end
+
+  def rakefile(filename, data=T.unsafe(nil)); end
+
+  def readme(path); end
+
+  def route(routing_code); end
+
+  def vendor(filename, data=T.unsafe(nil)); end
+end
+
 class Rails::Generators::Actions::CreateMigration
   def existing_migration(); end
 
@@ -21973,9 +20296,43 @@ class Rails::Generators::ActiveModel
   def self.find(klass, params=T.unsafe(nil)); end
 end
 
-class Rails::Generators::GeneratedAttribute
-  INDEX_OPTIONS = ::T.let(nil, ::T.untyped)
-  UNIQ_INDEX_OPTIONS = ::T.let(nil, ::T.untyped)
+class Rails::Generators::Base
+  include ::Thor::Actions
+  include ::Rails::Generators::Actions
+end
+
+class Rails::Generators::Base
+  def self.add_shebang_option!(); end
+
+  def self.base_name(); end
+
+  def self.base_root(); end
+
+  def self.default_aliases_for_option(name, options); end
+
+  def self.default_for_option(config, name, options, default); end
+
+  def self.default_generator_root(); end
+
+  def self.default_source_root(); end
+
+  def self.default_value_for_option(name, options); end
+
+  def self.generator_name(); end
+
+  def self.hide!(); end
+
+  def self.hook_for(*names, &block); end
+
+  def self.hooks(); end
+
+  def self.inherited(base); end
+
+  def self.prepare_for_invocation(name, value); end
+
+  def self.remove_hook_for(*names); end
+
+  def self.usage_path(); end
 end
 
 module Rails::Generators::Migration
@@ -22012,7 +20369,6 @@ module Rails::Generators::Migration
 end
 
 class Rails::Generators::NamedBase
-  include ::Coffee::Rails::JsHook
   def file_name(); end
 
   def initialize(args, *options); end
@@ -22022,6 +20378,10 @@ class Rails::Generators::NamedBase
   def name(); end
 
   def name=(name); end
+end
+
+class Rails::Generators::NamedBase
+  def self.check_class_collision(options=T.unsafe(nil)); end
 end
 
 module Rails::Generators::ResourceHelpers
@@ -22817,386 +21177,6 @@ end
 class Regexp
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
   def match?(*_); end
-  TOKEN_KEYS = ::T.let(nil, ::T.untyped)
-end
-
-Regexp::Expression::Alternation::OPERAND = Regexp::Expression::Alternative
-
-Regexp::Expression::Anchor::BOL = Regexp::Expression::Anchor::BeginningOfLine
-
-Regexp::Expression::Anchor::BOS = Regexp::Expression::Anchor::BeginningOfString
-
-Regexp::Expression::Anchor::EOL = Regexp::Expression::Anchor::EndOfLine
-
-Regexp::Expression::Anchor::EOS = Regexp::Expression::Anchor::EndOfString
-
-Regexp::Expression::Anchor::EOSobEOL = Regexp::Expression::Anchor::EndOfStringOrBeforeEndOfLine
-
-module Regexp::Expression::Anchor
-  extend ::T::Sig
-end
-
-module Regexp::Expression::Assertion
-  extend ::T::Sig
-end
-
-module Regexp::Expression::Backreference
-  extend ::T::Sig
-end
-
-Regexp::Expression::CharacterSet::Intersection::OPERAND = Regexp::Expression::CharacterSet::IntersectedSequence
-
-module Regexp::Expression::CharacterType
-  extend ::T::Sig
-end
-
-module Regexp::Expression::Conditional
-  extend ::T::Sig
-end
-
-module Regexp::Expression::EscapeSequence
-  extend ::T::Sig
-end
-
-module Regexp::Expression::Group
-  extend ::T::Sig
-end
-
-module Regexp::Expression::Keep
-  extend ::T::Sig
-end
-
-Regexp::Expression::MatchLength = Regexp::MatchLength
-
-class Regexp::Expression::Quantifier
-  MODES = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Expression::UnicodeProperty::Codepoint
-  extend ::T::Sig
-end
-
-module Regexp::Expression::UnicodeProperty::Letter
-  extend ::T::Sig
-end
-
-module Regexp::Expression::UnicodeProperty::Mark
-  extend ::T::Sig
-end
-
-module Regexp::Expression::UnicodeProperty::Number
-  extend ::T::Sig
-end
-
-module Regexp::Expression::UnicodeProperty::Punctuation
-  extend ::T::Sig
-end
-
-module Regexp::Expression::UnicodeProperty::Separator
-  extend ::T::Sig
-end
-
-module Regexp::Expression::UnicodeProperty::Symbol
-  extend ::T::Sig
-end
-
-module Regexp::Expression::UnicodeProperty
-  extend ::T::Sig
-end
-
-module Regexp::Expression
-  extend ::T::Sig
-end
-
-class Regexp::Lexer
-  CLOSING_TOKENS = ::T.let(nil, ::T.untyped)
-  OPENING_TOKENS = ::T.let(nil, ::T.untyped)
-end
-
-class Regexp::Parser
-  ENC_FLAGS = ::T.let(nil, ::T.untyped)
-  MOD_FLAGS = ::T.let(nil, ::T.untyped)
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class Regexp::Scanner
-  PROP_MAPS_DIR = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax
-  VERSION_CONST_REGEXP = ::T.let(nil, ::T.untyped)
-  VERSION_FORMAT = ::T.let(nil, ::T.untyped)
-  VERSION_REGEXP = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token
-  All = ::T.let(nil, ::T.untyped)
-  Map = ::T.let(nil, ::T.untyped)
-  Types = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::Anchor
-  All = ::T.let(nil, ::T.untyped)
-  Basic = ::T.let(nil, ::T.untyped)
-  Extended = ::T.let(nil, ::T.untyped)
-  MatchStart = ::T.let(nil, ::T.untyped)
-  String = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::Anchor
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::Assertion
-  All = ::T.let(nil, ::T.untyped)
-  Lookahead = ::T.let(nil, ::T.untyped)
-  Lookbehind = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::Assertion
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::Backreference
-  All = ::T.let(nil, ::T.untyped)
-  Name = ::T.let(nil, ::T.untyped)
-  Number = ::T.let(nil, ::T.untyped)
-  RecursionLevel = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::Backreference
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::CharacterSet
-  All = ::T.let(nil, ::T.untyped)
-  Basic = ::T.let(nil, ::T.untyped)
-  Extended = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::CharacterSet
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::CharacterType
-  All = ::T.let(nil, ::T.untyped)
-  Basic = ::T.let(nil, ::T.untyped)
-  Clustered = ::T.let(nil, ::T.untyped)
-  Extended = ::T.let(nil, ::T.untyped)
-  Hex = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::CharacterType
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::Conditional
-  All = ::T.let(nil, ::T.untyped)
-  Condition = ::T.let(nil, ::T.untyped)
-  Delimiters = ::T.let(nil, ::T.untyped)
-  Separator = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::Conditional
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::Escape
-  ASCII = ::T.let(nil, ::T.untyped)
-  All = ::T.let(nil, ::T.untyped)
-  Basic = ::T.let(nil, ::T.untyped)
-  Control = ::T.let(nil, ::T.untyped)
-  Hex = ::T.let(nil, ::T.untyped)
-  Meta = ::T.let(nil, ::T.untyped)
-  Octal = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-  Unicode = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::Escape
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::FreeSpace
-  All = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::FreeSpace
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::Group
-  All = ::T.let(nil, ::T.untyped)
-  Atomic = ::T.let(nil, ::T.untyped)
-  Basic = ::T.let(nil, ::T.untyped)
-  Comment = ::T.let(nil, ::T.untyped)
-  Extended = ::T.let(nil, ::T.untyped)
-  Named = ::T.let(nil, ::T.untyped)
-  Passive = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-  V1_8_6 = ::T.let(nil, ::T.untyped)
-  V2_4_1 = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::Group
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::Keep
-  All = ::T.let(nil, ::T.untyped)
-  Mark = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::Keep
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::Literal
-  All = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::Literal
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::Meta
-  All = ::T.let(nil, ::T.untyped)
-  Basic = ::T.let(nil, ::T.untyped)
-  Extended = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::Meta
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::PosixClass
-  All = ::T.let(nil, ::T.untyped)
-  Extensions = ::T.let(nil, ::T.untyped)
-  NonType = ::T.let(nil, ::T.untyped)
-  Standard = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::PosixClass
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::Quantifier
-  All = ::T.let(nil, ::T.untyped)
-  Greedy = ::T.let(nil, ::T.untyped)
-  Interval = ::T.let(nil, ::T.untyped)
-  IntervalAll = ::T.let(nil, ::T.untyped)
-  IntervalPossessive = ::T.let(nil, ::T.untyped)
-  IntervalReluctant = ::T.let(nil, ::T.untyped)
-  Possessive = ::T.let(nil, ::T.untyped)
-  Reluctant = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::Quantifier
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::SubexpressionCall
-  All = ::T.let(nil, ::T.untyped)
-  Name = ::T.let(nil, ::T.untyped)
-  Number = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::SubexpressionCall
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::UnicodeProperty
-  Age = ::T.let(nil, ::T.untyped)
-  Age_V1_9_3 = ::T.let(nil, ::T.untyped)
-  Age_V2_0_0 = ::T.let(nil, ::T.untyped)
-  Age_V2_2_0 = ::T.let(nil, ::T.untyped)
-  Age_V2_3_0 = ::T.let(nil, ::T.untyped)
-  Age_V2_4_0 = ::T.let(nil, ::T.untyped)
-  Age_V2_5_0 = ::T.let(nil, ::T.untyped)
-  Age_V2_6_0 = ::T.let(nil, ::T.untyped)
-  Age_V2_6_2 = ::T.let(nil, ::T.untyped)
-  Age_V2_6_3 = ::T.let(nil, ::T.untyped)
-  All = ::T.let(nil, ::T.untyped)
-  CharType_V1_9_0 = ::T.let(nil, ::T.untyped)
-  CharType_V2_5_0 = ::T.let(nil, ::T.untyped)
-  Derived = ::T.let(nil, ::T.untyped)
-  Derived_V1_9_0 = ::T.let(nil, ::T.untyped)
-  Derived_V2_0_0 = ::T.let(nil, ::T.untyped)
-  Derived_V2_4_0 = ::T.let(nil, ::T.untyped)
-  Derived_V2_5_0 = ::T.let(nil, ::T.untyped)
-  Emoji = ::T.let(nil, ::T.untyped)
-  Emoji_V2_5_0 = ::T.let(nil, ::T.untyped)
-  NonType = ::T.let(nil, ::T.untyped)
-  POSIX = ::T.let(nil, ::T.untyped)
-  Script = ::T.let(nil, ::T.untyped)
-  Script_V1_9_0 = ::T.let(nil, ::T.untyped)
-  Script_V1_9_3 = ::T.let(nil, ::T.untyped)
-  Script_V2_0_0 = ::T.let(nil, ::T.untyped)
-  Script_V2_2_0 = ::T.let(nil, ::T.untyped)
-  Script_V2_3_0 = ::T.let(nil, ::T.untyped)
-  Script_V2_4_0 = ::T.let(nil, ::T.untyped)
-  Script_V2_5_0 = ::T.let(nil, ::T.untyped)
-  Script_V2_6_0 = ::T.let(nil, ::T.untyped)
-  Script_V2_6_2 = ::T.let(nil, ::T.untyped)
-  Type = ::T.let(nil, ::T.untyped)
-  UnicodeBlock = ::T.let(nil, ::T.untyped)
-  UnicodeBlock_V1_9_0 = ::T.let(nil, ::T.untyped)
-  UnicodeBlock_V2_0_0 = ::T.let(nil, ::T.untyped)
-  UnicodeBlock_V2_2_0 = ::T.let(nil, ::T.untyped)
-  UnicodeBlock_V2_3_0 = ::T.let(nil, ::T.untyped)
-  UnicodeBlock_V2_4_0 = ::T.let(nil, ::T.untyped)
-  UnicodeBlock_V2_5_0 = ::T.let(nil, ::T.untyped)
-  UnicodeBlock_V2_6_0 = ::T.let(nil, ::T.untyped)
-  UnicodeBlock_V2_6_2 = ::T.let(nil, ::T.untyped)
-  V1_9_0 = ::T.let(nil, ::T.untyped)
-  V1_9_3 = ::T.let(nil, ::T.untyped)
-  V2_0_0 = ::T.let(nil, ::T.untyped)
-  V2_2_0 = ::T.let(nil, ::T.untyped)
-  V2_3_0 = ::T.let(nil, ::T.untyped)
-  V2_4_0 = ::T.let(nil, ::T.untyped)
-  V2_5_0 = ::T.let(nil, ::T.untyped)
-  V2_6_0 = ::T.let(nil, ::T.untyped)
-  V2_6_2 = ::T.let(nil, ::T.untyped)
-  V2_6_3 = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::UnicodeProperty::Category
-  All = ::T.let(nil, ::T.untyped)
-  Codepoint = ::T.let(nil, ::T.untyped)
-  Letter = ::T.let(nil, ::T.untyped)
-  Mark = ::T.let(nil, ::T.untyped)
-  Number = ::T.let(nil, ::T.untyped)
-  Punctuation = ::T.let(nil, ::T.untyped)
-  Separator = ::T.let(nil, ::T.untyped)
-  Symbol = ::T.let(nil, ::T.untyped)
-end
-
-module Regexp::Syntax::Token::UnicodeProperty::Category
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token::UnicodeProperty
-  extend ::T::Sig
-end
-
-module Regexp::Syntax::Token
-  extend ::T::Sig
-end
-
-module Regexp::Syntax
-  extend ::T::Sig
 end
 
 class Regexp
@@ -23232,962 +21212,6 @@ end
 
 module RubyDep
   extend ::T::Sig
-end
-
-class RubyLex
-  include ::RubyToken
-  def Fail(err=T.unsafe(nil), *rest); end
-
-  def Raise(err=T.unsafe(nil), *rest); end
-
-  def char_no(); end
-
-  def each_top_level_statement(); end
-
-  def eof?(); end
-
-  def exception_on_syntax_error(); end
-
-  def exception_on_syntax_error=(exception_on_syntax_error); end
-
-  def get_readed(); end
-
-  def getc(); end
-
-  def getc_of_rests(); end
-
-  def gets(); end
-
-  def identify_comment(); end
-
-  def identify_gvar(); end
-
-  def identify_here_document(); end
-
-  def identify_identifier(); end
-
-  def identify_number(); end
-
-  def identify_quotation(); end
-
-  def identify_string(ltype, quoted=T.unsafe(nil)); end
-
-  def identify_string_dvar(); end
-
-  def indent(); end
-
-  def initialize_input(); end
-
-  def lex(); end
-
-  def lex_init(); end
-
-  def lex_int2(); end
-
-  def line_no(); end
-
-  def peek(i=T.unsafe(nil)); end
-
-  def peek_equal?(str); end
-
-  def peek_match?(regexp); end
-
-  def prompt(); end
-
-  def read_escape(); end
-
-  def readed_auto_clean_up(); end
-
-  def readed_auto_clean_up=(readed_auto_clean_up); end
-
-  def seek(); end
-
-  def set_input(io, p=T.unsafe(nil), &block); end
-
-  def set_prompt(p=T.unsafe(nil), &block); end
-
-  def skip_space(); end
-
-  def skip_space=(skip_space); end
-
-  def token(); end
-
-  def ungetc(c=T.unsafe(nil)); end
-  DEINDENT_CLAUSE = ::T.let(nil, ::T.untyped)
-  DLtype2Token = ::T.let(nil, ::T.untyped)
-  ENINDENT_CLAUSE = ::T.let(nil, ::T.untyped)
-  Ltype2Token = ::T.let(nil, ::T.untyped)
-  PERCENT_LTYPE = ::T.let(nil, ::T.untyped)
-  PERCENT_PAREN = ::T.let(nil, ::T.untyped)
-end
-
-class RubyLex::AlreadyDefinedToken
-end
-
-class RubyLex::AlreadyDefinedToken
-end
-
-class RubyLex::SyntaxError
-end
-
-class RubyLex::SyntaxError
-end
-
-class RubyLex::TerminateLineInput
-end
-
-class RubyLex::TerminateLineInput
-end
-
-class RubyLex::TkReading2TokenDuplicateError
-end
-
-class RubyLex::TkReading2TokenDuplicateError
-end
-
-class RubyLex::TkReading2TokenNoKey
-end
-
-class RubyLex::TkReading2TokenNoKey
-end
-
-class RubyLex::TkSymbol2TokenNoKey
-end
-
-class RubyLex::TkSymbol2TokenNoKey
-end
-
-class RubyLex
-  extend ::Exception2MessageMapper
-  def self.debug?(); end
-
-  def self.debug_level(); end
-
-  def self.debug_level=(debug_level); end
-
-  def self.included(mod); end
-end
-
-module RubyToken
-  def Token(token, value=T.unsafe(nil)); end
-  EXPR_ARG = ::T.let(nil, ::T.untyped)
-  EXPR_BEG = ::T.let(nil, ::T.untyped)
-  EXPR_CLASS = ::T.let(nil, ::T.untyped)
-  EXPR_DOT = ::T.let(nil, ::T.untyped)
-  EXPR_END = ::T.let(nil, ::T.untyped)
-  EXPR_FNAME = ::T.let(nil, ::T.untyped)
-  EXPR_MID = ::T.let(nil, ::T.untyped)
-  TkReading2Token = ::T.let(nil, ::T.untyped)
-  TkSymbol2Token = ::T.let(nil, ::T.untyped)
-  TokenDefinitions = ::T.let(nil, ::T.untyped)
-end
-
-class RubyToken::TkALIAS
-end
-
-class RubyToken::TkALIAS
-end
-
-class RubyToken::TkAMPER
-end
-
-class RubyToken::TkAMPER
-end
-
-class RubyToken::TkAND
-end
-
-class RubyToken::TkAND
-end
-
-class RubyToken::TkANDOP
-end
-
-class RubyToken::TkANDOP
-end
-
-class RubyToken::TkAREF
-end
-
-class RubyToken::TkAREF
-end
-
-class RubyToken::TkASET
-end
-
-class RubyToken::TkASET
-end
-
-class RubyToken::TkASSIGN
-end
-
-class RubyToken::TkASSIGN
-end
-
-class RubyToken::TkASSOC
-end
-
-class RubyToken::TkASSOC
-end
-
-class RubyToken::TkAT
-end
-
-class RubyToken::TkAT
-end
-
-class RubyToken::TkBACKQUOTE
-end
-
-class RubyToken::TkBACKQUOTE
-end
-
-class RubyToken::TkBACKSLASH
-end
-
-class RubyToken::TkBACKSLASH
-end
-
-class RubyToken::TkBACK_REF
-end
-
-class RubyToken::TkBACK_REF
-end
-
-class RubyToken::TkBEGIN
-end
-
-class RubyToken::TkBEGIN
-end
-
-class RubyToken::TkBITAND
-end
-
-class RubyToken::TkBITAND
-end
-
-class RubyToken::TkBITNOT
-end
-
-class RubyToken::TkBITNOT
-end
-
-class RubyToken::TkBITOR
-end
-
-class RubyToken::TkBITOR
-end
-
-class RubyToken::TkBITXOR
-end
-
-class RubyToken::TkBITXOR
-end
-
-class RubyToken::TkBREAK
-end
-
-class RubyToken::TkBREAK
-end
-
-class RubyToken::TkCASE
-end
-
-class RubyToken::TkCASE
-end
-
-class RubyToken::TkCLASS
-end
-
-class RubyToken::TkCLASS
-end
-
-class RubyToken::TkCMP
-end
-
-class RubyToken::TkCMP
-end
-
-class RubyToken::TkCOLON
-end
-
-class RubyToken::TkCOLON
-end
-
-class RubyToken::TkCOLON2
-end
-
-class RubyToken::TkCOLON2
-end
-
-class RubyToken::TkCOLON3
-end
-
-class RubyToken::TkCOLON3
-end
-
-class RubyToken::TkCOMMA
-end
-
-class RubyToken::TkCOMMA
-end
-
-class RubyToken::TkCOMMENT
-end
-
-class RubyToken::TkCOMMENT
-end
-
-class RubyToken::TkCONSTANT
-end
-
-class RubyToken::TkCONSTANT
-end
-
-class RubyToken::TkCVAR
-end
-
-class RubyToken::TkCVAR
-end
-
-class RubyToken::TkDEF
-end
-
-class RubyToken::TkDEF
-end
-
-class RubyToken::TkDEFINED
-end
-
-class RubyToken::TkDEFINED
-end
-
-class RubyToken::TkDIV
-end
-
-class RubyToken::TkDIV
-end
-
-class RubyToken::TkDO
-end
-
-class RubyToken::TkDO
-end
-
-class RubyToken::TkDOLLAR
-end
-
-class RubyToken::TkDOLLAR
-end
-
-class RubyToken::TkDOT
-end
-
-class RubyToken::TkDOT
-end
-
-class RubyToken::TkDOT2
-end
-
-class RubyToken::TkDOT2
-end
-
-class RubyToken::TkDOT3
-end
-
-class RubyToken::TkDOT3
-end
-
-class RubyToken::TkDREGEXP
-end
-
-class RubyToken::TkDREGEXP
-end
-
-class RubyToken::TkDSTRING
-end
-
-class RubyToken::TkDSTRING
-end
-
-class RubyToken::TkDXSTRING
-end
-
-class RubyToken::TkDXSTRING
-end
-
-class RubyToken::TkELSE
-end
-
-class RubyToken::TkELSE
-end
-
-class RubyToken::TkELSIF
-end
-
-class RubyToken::TkELSIF
-end
-
-class RubyToken::TkEND
-end
-
-class RubyToken::TkEND
-end
-
-class RubyToken::TkEND_OF_SCRIPT
-end
-
-class RubyToken::TkEND_OF_SCRIPT
-end
-
-class RubyToken::TkENSURE
-end
-
-class RubyToken::TkENSURE
-end
-
-class RubyToken::TkEQ
-end
-
-class RubyToken::TkEQ
-end
-
-class RubyToken::TkEQQ
-end
-
-class RubyToken::TkEQQ
-end
-
-class RubyToken::TkError
-end
-
-class RubyToken::TkError
-end
-
-class RubyToken::TkFALSE
-end
-
-class RubyToken::TkFALSE
-end
-
-class RubyToken::TkFID
-end
-
-class RubyToken::TkFID
-end
-
-class RubyToken::TkFLOAT
-end
-
-class RubyToken::TkFLOAT
-end
-
-class RubyToken::TkFOR
-end
-
-class RubyToken::TkFOR
-end
-
-class RubyToken::TkGEQ
-end
-
-class RubyToken::TkGEQ
-end
-
-class RubyToken::TkGT
-end
-
-class RubyToken::TkGT
-end
-
-class RubyToken::TkGVAR
-end
-
-class RubyToken::TkGVAR
-end
-
-class RubyToken::TkIDENTIFIER
-end
-
-class RubyToken::TkIDENTIFIER
-end
-
-class RubyToken::TkIF
-end
-
-class RubyToken::TkIF
-end
-
-class RubyToken::TkIF_MOD
-end
-
-class RubyToken::TkIF_MOD
-end
-
-class RubyToken::TkIN
-end
-
-class RubyToken::TkIN
-end
-
-class RubyToken::TkINTEGER
-end
-
-class RubyToken::TkINTEGER
-end
-
-class RubyToken::TkIVAR
-end
-
-class RubyToken::TkIVAR
-end
-
-class RubyToken::TkId
-  def initialize(seek, line_no, char_no, name); end
-
-  def name(); end
-end
-
-class RubyToken::TkId
-end
-
-class RubyToken::TkLBRACE
-end
-
-class RubyToken::TkLBRACE
-end
-
-class RubyToken::TkLBRACK
-end
-
-class RubyToken::TkLBRACK
-end
-
-class RubyToken::TkLEQ
-end
-
-class RubyToken::TkLEQ
-end
-
-class RubyToken::TkLPAREN
-end
-
-class RubyToken::TkLPAREN
-end
-
-class RubyToken::TkLSHFT
-end
-
-class RubyToken::TkLSHFT
-end
-
-class RubyToken::TkLT
-end
-
-class RubyToken::TkLT
-end
-
-class RubyToken::TkMATCH
-end
-
-class RubyToken::TkMATCH
-end
-
-class RubyToken::TkMINUS
-end
-
-class RubyToken::TkMINUS
-end
-
-class RubyToken::TkMOD
-end
-
-class RubyToken::TkMOD
-end
-
-class RubyToken::TkMODULE
-end
-
-class RubyToken::TkMODULE
-end
-
-class RubyToken::TkMULT
-end
-
-class RubyToken::TkMULT
-end
-
-class RubyToken::TkNEQ
-end
-
-class RubyToken::TkNEQ
-end
-
-class RubyToken::TkNEXT
-end
-
-class RubyToken::TkNEXT
-end
-
-class RubyToken::TkNIL
-end
-
-class RubyToken::TkNIL
-end
-
-class RubyToken::TkNL
-end
-
-class RubyToken::TkNL
-end
-
-class RubyToken::TkNMATCH
-end
-
-class RubyToken::TkNMATCH
-end
-
-class RubyToken::TkNOT
-end
-
-class RubyToken::TkNOT
-end
-
-class RubyToken::TkNOTOP
-end
-
-class RubyToken::TkNOTOP
-end
-
-class RubyToken::TkNTH_REF
-end
-
-class RubyToken::TkNTH_REF
-end
-
-class RubyToken::TkNode
-  def node(); end
-end
-
-class RubyToken::TkNode
-end
-
-class RubyToken::TkOPASGN
-  def initialize(seek, line_no, char_no, op); end
-
-  def op(); end
-end
-
-class RubyToken::TkOPASGN
-end
-
-class RubyToken::TkOR
-end
-
-class RubyToken::TkOR
-end
-
-class RubyToken::TkOROP
-end
-
-class RubyToken::TkOROP
-end
-
-class RubyToken::TkOp
-  def name(); end
-
-  def name=(name); end
-end
-
-class RubyToken::TkOp
-end
-
-class RubyToken::TkPLUS
-end
-
-class RubyToken::TkPLUS
-end
-
-class RubyToken::TkPOW
-end
-
-class RubyToken::TkPOW
-end
-
-class RubyToken::TkQUESTION
-end
-
-class RubyToken::TkQUESTION
-end
-
-class RubyToken::TkRBRACE
-end
-
-class RubyToken::TkRBRACE
-end
-
-class RubyToken::TkRBRACK
-end
-
-class RubyToken::TkRBRACK
-end
-
-class RubyToken::TkRD_COMMENT
-end
-
-class RubyToken::TkRD_COMMENT
-end
-
-class RubyToken::TkREDO
-end
-
-class RubyToken::TkREDO
-end
-
-class RubyToken::TkREGEXP
-end
-
-class RubyToken::TkREGEXP
-end
-
-class RubyToken::TkRESCUE
-end
-
-class RubyToken::TkRESCUE
-end
-
-class RubyToken::TkRETRY
-end
-
-class RubyToken::TkRETRY
-end
-
-class RubyToken::TkRETURN
-end
-
-class RubyToken::TkRETURN
-end
-
-class RubyToken::TkRPAREN
-end
-
-class RubyToken::TkRPAREN
-end
-
-class RubyToken::TkRSHFT
-end
-
-class RubyToken::TkRSHFT
-end
-
-class RubyToken::TkSELF
-end
-
-class RubyToken::TkSELF
-end
-
-class RubyToken::TkSEMICOLON
-end
-
-class RubyToken::TkSEMICOLON
-end
-
-class RubyToken::TkSPACE
-end
-
-class RubyToken::TkSPACE
-end
-
-class RubyToken::TkSTAR
-end
-
-class RubyToken::TkSTAR
-end
-
-class RubyToken::TkSTRING
-end
-
-class RubyToken::TkSTRING
-end
-
-class RubyToken::TkSUPER
-end
-
-class RubyToken::TkSUPER
-end
-
-class RubyToken::TkSYMBEG
-end
-
-class RubyToken::TkSYMBEG
-end
-
-class RubyToken::TkSYMBOL
-end
-
-class RubyToken::TkSYMBOL
-end
-
-class RubyToken::TkTHEN
-end
-
-class RubyToken::TkTHEN
-end
-
-class RubyToken::TkTRUE
-end
-
-class RubyToken::TkTRUE
-end
-
-class RubyToken::TkUMINUS
-end
-
-class RubyToken::TkUMINUS
-end
-
-class RubyToken::TkUNDEF
-end
-
-class RubyToken::TkUNDEF
-end
-
-class RubyToken::TkUNLESS
-end
-
-class RubyToken::TkUNLESS
-end
-
-class RubyToken::TkUNLESS_MOD
-end
-
-class RubyToken::TkUNLESS_MOD
-end
-
-class RubyToken::TkUNTIL
-end
-
-class RubyToken::TkUNTIL
-end
-
-class RubyToken::TkUNTIL_MOD
-end
-
-class RubyToken::TkUNTIL_MOD
-end
-
-class RubyToken::TkUPLUS
-end
-
-class RubyToken::TkUPLUS
-end
-
-class RubyToken::TkUnknownChar
-  def initialize(seek, line_no, char_no, id); end
-
-  def name(); end
-end
-
-class RubyToken::TkUnknownChar
-end
-
-class RubyToken::TkVal
-  def initialize(seek, line_no, char_no, value=T.unsafe(nil)); end
-
-  def value(); end
-end
-
-class RubyToken::TkVal
-end
-
-class RubyToken::TkWHEN
-end
-
-class RubyToken::TkWHEN
-end
-
-class RubyToken::TkWHILE
-end
-
-class RubyToken::TkWHILE
-end
-
-class RubyToken::TkWHILE_MOD
-end
-
-class RubyToken::TkWHILE_MOD
-end
-
-class RubyToken::TkXSTRING
-end
-
-class RubyToken::TkXSTRING
-end
-
-class RubyToken::TkYIELD
-end
-
-class RubyToken::TkYIELD
-end
-
-class RubyToken::Tk__FILE__
-end
-
-class RubyToken::Tk__FILE__
-end
-
-class RubyToken::Tk__LINE__
-end
-
-class RubyToken::Tk__LINE__
-end
-
-class RubyToken::TkfLBRACE
-end
-
-class RubyToken::TkfLBRACE
-end
-
-class RubyToken::TkfLBRACK
-end
-
-class RubyToken::TkfLBRACK
-end
-
-class RubyToken::TkfLPAREN
-end
-
-class RubyToken::TkfLPAREN
-end
-
-class RubyToken::TklBEGIN
-end
-
-class RubyToken::TklBEGIN
-end
-
-class RubyToken::TklEND
-end
-
-class RubyToken::TklEND
-end
-
-class RubyToken::Token
-  def char_no(); end
-
-  def initialize(seek, line_no, char_no); end
-
-  def line_no(); end
-
-  def seek(); end
-end
-
-class RubyToken::Token
-end
-
-module RubyToken
-  extend ::T::Sig
-  def self.def_token(token_n, super_token=T.unsafe(nil), reading=T.unsafe(nil), *opts); end
 end
 
 class RubyVM
@@ -24387,320 +21411,6 @@ module SQLite3
   extend ::T::Sig
 end
 
-module Sass
-  ROOT_DIR = ::T.let(nil, ::T.untyped)
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::CacheStores
-  extend ::T::Sig
-end
-
-class Sass::Engine
-  COMMENT_CHAR = ::T.let(nil, ::T.untyped)
-  CONTENT_RE = ::T.let(nil, ::T.untyped)
-  CSS_COMMENT_CHAR = ::T.let(nil, ::T.untyped)
-  DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
-  DIRECTIVES = ::T.let(nil, ::T.untyped)
-  DIRECTIVE_CHAR = ::T.let(nil, ::T.untyped)
-  ESCAPE_CHAR = ::T.let(nil, ::T.untyped)
-  FUNCTION_RE = ::T.let(nil, ::T.untyped)
-  MIXIN_DEFINITION_CHAR = ::T.let(nil, ::T.untyped)
-  MIXIN_DEF_RE = ::T.let(nil, ::T.untyped)
-  MIXIN_INCLUDE_CHAR = ::T.let(nil, ::T.untyped)
-  MIXIN_INCLUDE_RE = ::T.let(nil, ::T.untyped)
-  PROPERTY_CHAR = ::T.let(nil, ::T.untyped)
-  PROPERTY_OLD = ::T.let(nil, ::T.untyped)
-  SASS_COMMENT_CHAR = ::T.let(nil, ::T.untyped)
-  SASS_LOUD_COMMENT_CHAR = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::Features
-  KNOWN_FEATURES = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::Features
-  extend ::T::Sig
-end
-
-class Sass::Importers::Filesystem
-  REDUNDANT_DIRECTORY = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::Importers
-  extend ::T::Sig
-end
-
-module Sass::Logger::LogLevel::ClassMethods
-  extend ::T::Sig
-end
-
-module Sass::Logger::LogLevel
-  extend ::T::Sig
-end
-
-module Sass::Logger
-  extend ::T::Sig
-end
-
-module Sass::Media
-  extend ::T::Sig
-end
-
-module Sass::Rails
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::Rails::SassImporter::Deprecated
-  extend ::T::Sig
-end
-
-module Sass::Rails::SassImporter::ERB
-  extend ::T::Sig
-end
-
-module Sass::Rails::SassImporter::Globbing
-  GLOB = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::Rails::SassImporter::Globbing
-  extend ::T::Sig
-end
-
-module Sass::Rails
-  extend ::T::Sig
-end
-
-class Sass::SCSS::Parser
-  DIRECTIVES = ::T.let(nil, ::T.untyped)
-  EXPR_NAMES = ::T.let(nil, ::T.untyped)
-  NEWLINE = ::T.let(nil, ::T.untyped)
-  PREFIXED_DIRECTIVES = ::T.let(nil, ::T.untyped)
-  TOK_NAMES = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::SCSS::RX
-  ANY = ::T.let(nil, ::T.untyped)
-  CDC = ::T.let(nil, ::T.untyped)
-  CDO = ::T.let(nil, ::T.untyped)
-  COMMENT = ::T.let(nil, ::T.untyped)
-  DASHMATCH = ::T.let(nil, ::T.untyped)
-  DOMAIN = ::T.let(nil, ::T.untyped)
-  ESCAPE = ::T.let(nil, ::T.untyped)
-  FUNCTION = ::T.let(nil, ::T.untyped)
-  GREATER = ::T.let(nil, ::T.untyped)
-  H = ::T.let(nil, ::T.untyped)
-  HASH = ::T.let(nil, ::T.untyped)
-  HEXCOLOR = ::T.let(nil, ::T.untyped)
-  IDENT = ::T.let(nil, ::T.untyped)
-  IDENT_HYPHEN_INTERP = ::T.let(nil, ::T.untyped)
-  IDENT_START = ::T.let(nil, ::T.untyped)
-  IMPORTANT = ::T.let(nil, ::T.untyped)
-  INCLUDES = ::T.let(nil, ::T.untyped)
-  INTERP_START = ::T.let(nil, ::T.untyped)
-  NAME = ::T.let(nil, ::T.untyped)
-  NL = ::T.let(nil, ::T.untyped)
-  NMCHAR = ::T.let(nil, ::T.untyped)
-  NMSTART = ::T.let(nil, ::T.untyped)
-  NONASCII = ::T.let(nil, ::T.untyped)
-  NOT = ::T.let(nil, ::T.untyped)
-  NUMBER = ::T.let(nil, ::T.untyped)
-  OPTIONAL = ::T.let(nil, ::T.untyped)
-  PERCENTAGE = ::T.let(nil, ::T.untyped)
-  PLUS = ::T.let(nil, ::T.untyped)
-  PREFIXMATCH = ::T.let(nil, ::T.untyped)
-  RANGE = ::T.let(nil, ::T.untyped)
-  S = ::T.let(nil, ::T.untyped)
-  SINGLE_LINE_COMMENT = ::T.let(nil, ::T.untyped)
-  STATIC_COMPONENT = ::T.let(nil, ::T.untyped)
-  STATIC_SELECTOR = ::T.let(nil, ::T.untyped)
-  STATIC_VALUE = ::T.let(nil, ::T.untyped)
-  STRING = ::T.let(nil, ::T.untyped)
-  STRING1 = ::T.let(nil, ::T.untyped)
-  STRING1_NOINTERP = ::T.let(nil, ::T.untyped)
-  STRING2 = ::T.let(nil, ::T.untyped)
-  STRING2_NOINTERP = ::T.let(nil, ::T.untyped)
-  STRING_NOINTERP = ::T.let(nil, ::T.untyped)
-  SUBSTRINGMATCH = ::T.let(nil, ::T.untyped)
-  SUFFIXMATCH = ::T.let(nil, ::T.untyped)
-  TILDE = ::T.let(nil, ::T.untyped)
-  UNICODE = ::T.let(nil, ::T.untyped)
-  UNICODERANGE = ::T.let(nil, ::T.untyped)
-  UNIT = ::T.let(nil, ::T.untyped)
-  UNITLESS_NUMBER = ::T.let(nil, ::T.untyped)
-  URI = ::T.let(nil, ::T.untyped)
-  URL = ::T.let(nil, ::T.untyped)
-  URLCHAR = ::T.let(nil, ::T.untyped)
-  URL_PREFIX = ::T.let(nil, ::T.untyped)
-  VARIABLE = ::T.let(nil, ::T.untyped)
-  W = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::SCSS::RX
-  extend ::T::Sig
-end
-
-class Sass::SCSS::StaticParser
-  PREFIXED_SELECTOR_PSEUDO_CLASSES = ::T.let(nil, ::T.untyped)
-  SELECTOR_PSEUDO_CLASSES = ::T.let(nil, ::T.untyped)
-  SELECTOR_PSEUDO_ELEMENTS = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::SCSS
-  extend ::T::Sig
-end
-
-module Sass::Script
-  CONST_RENAMES = ::T.let(nil, ::T.untyped)
-  MATCH = ::T.let(nil, ::T.untyped)
-  VALIDATE = ::T.let(nil, ::T.untyped)
-end
-
-class Sass::Script::Functions::EvaluationContext
-  TYPE_NAMES = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::Script::Functions
-  extend ::T::Sig
-end
-
-class Sass::Script::Lexer
-  IDENT_OP_NAMES = ::T.let(nil, ::T.untyped)
-  OPERATORS = ::T.let(nil, ::T.untyped)
-  OPERATORS_REVERSE = ::T.let(nil, ::T.untyped)
-  OP_NAMES = ::T.let(nil, ::T.untyped)
-  PARSEABLE_NUMBER = ::T.let(nil, ::T.untyped)
-  REGULAR_EXPRESSIONS = ::T.let(nil, ::T.untyped)
-  STRING_REGULAR_EXPRESSIONS = ::T.let(nil, ::T.untyped)
-  TOKEN_NAMES = ::T.let(nil, ::T.untyped)
-end
-
-class Sass::Script::Parser
-  ASSOCIATIVE = ::T.let(nil, ::T.untyped)
-  EXPR_NAMES = ::T.let(nil, ::T.untyped)
-  PRECEDENCE = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::Script::Tree
-  extend ::T::Sig
-end
-
-class Sass::Script::Value::Bool
-  FALSE = ::T.let(nil, ::T.untyped)
-  TRUE = ::T.let(nil, ::T.untyped)
-end
-
-class Sass::Script::Value::Color
-  ALTERNATE_COLOR_NAMES = ::T.let(nil, ::T.untyped)
-  COLOR_NAMES = ::T.let(nil, ::T.untyped)
-  COLOR_NAMES_REVERSE = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::Script::Value::Helpers
-  VALID_UNIT = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::Script::Value::Helpers
-  extend ::T::Sig
-end
-
-class Sass::Script::Value::Null
-  NULL = ::T.let(nil, ::T.untyped)
-end
-
-class Sass::Script::Value::Number
-  CONVERSION_TABLE = ::T.let(nil, ::T.untyped)
-  MUTUALLY_CONVERTIBLE = ::T.let(nil, ::T.untyped)
-  NO_UNITS = ::T.let(nil, ::T.untyped)
-  OPERATIONS = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::Script::Value
-  extend ::T::Sig
-end
-
-module Sass::Script
-  extend ::T::Sig
-end
-
-module Sass::Selector
-  SPECIFICITY_BASE = ::T.let(nil, ::T.untyped)
-end
-
-class Sass::Selector::Pseudo
-  ACTUALLY_ELEMENTS = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::Selector
-  extend ::T::Sig
-end
-
-module Sass::Shared
-  extend ::T::Sig
-end
-
-module Sass::Source
-  extend ::T::Sig
-end
-
-module Sass::Supports
-  extend ::T::Sig
-end
-
-class Sass::Tree::RuleNode
-  PARENT = ::T.let(nil, ::T.untyped)
-end
-
-class Sass::Tree::Visitors::CheckNesting
-  CONTROL_NODES = ::T.let(nil, ::T.untyped)
-  INVALID_IMPORT_PARENTS = ::T.let(nil, ::T.untyped)
-  SCRIPT_NODES = ::T.let(nil, ::T.untyped)
-  VALID_EXTEND_PARENTS = ::T.let(nil, ::T.untyped)
-  VALID_FUNCTION_CHILDREN = ::T.let(nil, ::T.untyped)
-  VALID_PROP_CHILDREN = ::T.let(nil, ::T.untyped)
-  VALID_PROP_PARENTS = ::T.let(nil, ::T.untyped)
-end
-
-class Sass::Tree::Visitors::ToCss
-  NEWLINE = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::Tree::Visitors
-  extend ::T::Sig
-end
-
-module Sass::Tree
-  extend ::T::Sig
-end
-
-module Sass::Util
-  ATOMIC_WRITE_MUTEX = ::T.let(nil, ::T.untyped)
-  BASE64_DIGITS = ::T.let(nil, ::T.untyped)
-  BASE64_DIGIT_MAP = ::T.let(nil, ::T.untyped)
-  CHARSET_REGEXP = ::T.let(nil, ::T.untyped)
-  RUBY_ENGINE = ::T.let(nil, ::T.untyped)
-  RUBY_VERSION_COMPONENTS = ::T.let(nil, ::T.untyped)
-  UTF_16BE_BOM = ::T.let(nil, ::T.untyped)
-  UTF_16LE_BOM = ::T.let(nil, ::T.untyped)
-  UTF_8_BOM = ::T.let(nil, ::T.untyped)
-  VLQ_BASE = ::T.let(nil, ::T.untyped)
-  VLQ_BASE_MASK = ::T.let(nil, ::T.untyped)
-  VLQ_BASE_SHIFT = ::T.let(nil, ::T.untyped)
-  VLQ_CONTINUATION_BIT = ::T.let(nil, ::T.untyped)
-end
-
-module Sass::Util
-  extend ::T::Sig
-end
-
-module Sass::Version
-  extend ::T::Sig
-end
-
-module Sass
-  extend ::T::Sig
-end
-
 ScanError = StringScanner::Error
 
 class ScriptError
@@ -24718,1636 +21428,6 @@ module SecureRandom
 end
 
 class SecurityError
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::Atoms
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::BridgeHelper
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::Chrome::Bridge
-  COMMANDS = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::Chrome::Bridge
-  extend ::T::Sig
-end
-
-class Selenium::WebDriver::Chrome::Options
-  KEY = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::Chrome
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions::DownloadsFiles
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions::HasAddons
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions::HasDebugger
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions::HasLocation
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions::HasNetworkConditions
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions::HasNetworkConnection
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions::HasPermissions
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions::HasRemoteStatus
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions::HasSessionId
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions::HasTouchScreen
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions::HasWebStorage
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions::Rotatable
-  ORIENTATIONS = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::DriverExtensions::Rotatable
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions::TakesScreenshot
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions::UploadsFiles
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::DriverExtensions
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::Edge
-end
-
-module Selenium::WebDriver::Edge::Bridge
-  def commands(command); end
-
-  def maximize_window(handle=T.unsafe(nil)); end
-
-  def reposition_window(x, y, handle=T.unsafe(nil)); end
-
-  def resize_window(width, height, handle=T.unsafe(nil)); end
-
-  def send_keys_to_active_element(key); end
-
-  def window_handle(); end
-
-  def window_position(handle=T.unsafe(nil)); end
-
-  def window_size(handle=T.unsafe(nil)); end
-end
-
-module Selenium::WebDriver::Edge::Bridge
-  extend ::T::Sig
-end
-
-class Selenium::WebDriver::Edge::Driver
-  include ::Selenium::WebDriver::DriverExtensions::TakesScreenshot
-  def initialize(opts=T.unsafe(nil)); end
-end
-
-class Selenium::WebDriver::Edge::Driver
-end
-
-class Selenium::WebDriver::Edge::Options
-  def add_extension_path(path); end
-
-  def as_json(*_); end
-
-  def extension_paths(); end
-
-  def in_private(); end
-
-  def in_private=(in_private); end
-
-  def initialize(**opts); end
-
-  def start_page(); end
-
-  def start_page=(start_page); end
-end
-
-class Selenium::WebDriver::Edge::Options
-end
-
-class Selenium::WebDriver::Edge::Service
-end
-
-class Selenium::WebDriver::Edge::Service
-end
-
-module Selenium::WebDriver::Edge
-  extend ::T::Sig
-  def self.driver_path(); end
-
-  def self.driver_path=(path); end
-end
-
-module Selenium::WebDriver::Error
-  DEPRECATED_ERRORS = ::T.let(nil, ::T.untyped)
-  ERRORS = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Error::ServerError
-  def initialize(response); end
-end
-
-class Selenium::WebDriver::Error::ServerError
-end
-
-module Selenium::WebDriver::Error
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::FileReaper
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::Firefox
-  DEFAULT_ASSUME_UNTRUSTED_ISSUER = ::T.let(nil, ::T.untyped)
-  DEFAULT_ENABLE_NATIVE_EVENTS = ::T.let(nil, ::T.untyped)
-  DEFAULT_LOAD_NO_FOCUS_LIB = ::T.let(nil, ::T.untyped)
-  DEFAULT_PORT = ::T.let(nil, ::T.untyped)
-  DEFAULT_SECURE_SSL = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Firefox::Binary
-  def quit(); end
-
-  def start_with(profile, profile_path, *args); end
-
-  def wait(); end
-  NO_FOCUS_LIBRARIES = ::T.let(nil, ::T.untyped)
-  NO_FOCUS_LIBRARY_NAME = ::T.let(nil, ::T.untyped)
-  QUIT_TIMEOUT = ::T.let(nil, ::T.untyped)
-  WAIT_TIMEOUT = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Firefox::Binary
-  def self.path(); end
-
-  def self.path=(path); end
-
-  def self.reset_path!(); end
-
-  def self.version(); end
-end
-
-module Selenium::WebDriver::Firefox::Driver
-end
-
-module Selenium::WebDriver::Firefox::Driver
-  extend ::T::Sig
-  def self.new(**opts); end
-end
-
-class Selenium::WebDriver::Firefox::Extension
-  def initialize(path); end
-
-  def write_to(extensions_dir); end
-  NAMESPACE = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Firefox::Extension
-end
-
-class Selenium::WebDriver::Firefox::Launcher
-  def assert_profile(); end
-
-  def connect_until_stable(); end
-
-  def create_profile(); end
-
-  def fetch_profile(); end
-
-  def find_free_port(); end
-
-  def initialize(binary, port, profile=T.unsafe(nil)); end
-
-  def launch(); end
-
-  def quit(); end
-
-  def socket_lock(); end
-
-  def start(); end
-
-  def url(); end
-  SOCKET_LOCK_TIMEOUT = ::T.let(nil, ::T.untyped)
-  STABLE_CONNECTION_TIMEOUT = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Firefox::Launcher
-end
-
-module Selenium::WebDriver::Firefox::Legacy
-end
-
-class Selenium::WebDriver::Firefox::Legacy::Driver
-  include ::Selenium::WebDriver::DriverExtensions::TakesScreenshot
-  def initialize(opts=T.unsafe(nil)); end
-end
-
-class Selenium::WebDriver::Firefox::Legacy::Driver
-end
-
-module Selenium::WebDriver::Firefox::Legacy
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::Firefox::Marionette
-end
-
-module Selenium::WebDriver::Firefox::Marionette::Bridge
-  def commands(command); end
-
-  def install_addon(path, temporary); end
-
-  def uninstall_addon(id); end
-  COMMANDS = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::Firefox::Marionette::Bridge
-  extend ::T::Sig
-end
-
-class Selenium::WebDriver::Firefox::Marionette::Driver
-  include ::Selenium::WebDriver::DriverExtensions::HasAddons
-  include ::Selenium::WebDriver::DriverExtensions::HasWebStorage
-  include ::Selenium::WebDriver::DriverExtensions::TakesScreenshot
-  def initialize(opts=T.unsafe(nil)); end
-end
-
-class Selenium::WebDriver::Firefox::Marionette::Driver
-end
-
-module Selenium::WebDriver::Firefox::Marionette
-  extend ::T::Sig
-end
-
-class Selenium::WebDriver::Firefox::Options
-  def add_argument(arg); end
-
-  def add_option(name, value); end
-
-  def add_preference(name, value); end
-
-  def args(); end
-
-  def as_json(*_); end
-
-  def binary(); end
-
-  def binary=(binary); end
-
-  def headless!(); end
-
-  def initialize(**opts); end
-
-  def log_level(); end
-
-  def log_level=(log_level); end
-
-  def options(); end
-
-  def prefs(); end
-
-  def profile(); end
-
-  def profile=(profile); end
-  KEY = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Firefox::Options
-end
-
-class Selenium::WebDriver::Firefox::Profile
-  include ::Selenium::WebDriver::ProfileHelper
-  def []=(key, value); end
-
-  def add_extension(path, name=T.unsafe(nil)); end
-
-  def add_webdriver_extension(); end
-
-  def assume_untrusted_certificate_issuer=(bool); end
-
-  def assume_untrusted_certificate_issuer?(); end
-
-  def encoded(); end
-
-  def initialize(model=T.unsafe(nil)); end
-
-  def layout_on_disk(); end
-
-  def load_no_focus_lib=(load_no_focus_lib); end
-
-  def load_no_focus_lib?(); end
-
-  def log_file(); end
-
-  def log_file=(file); end
-
-  def name(); end
-
-  def native_events=(native_events); end
-
-  def native_events?(); end
-
-  def port=(port); end
-
-  def proxy=(proxy); end
-
-  def secure_ssl=(secure_ssl); end
-
-  def secure_ssl?(); end
-  VALID_PREFERENCE_TYPES = ::T.let(nil, ::T.untyped)
-  WEBDRIVER_EXTENSION_PATH = ::T.let(nil, ::T.untyped)
-  WEBDRIVER_PREFS = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Firefox::Profile
-  extend ::Selenium::WebDriver::ProfileHelper::ClassMethods
-  def self.default_preferences(); end
-
-  def self.from_name(name); end
-
-  def self.ini(); end
-end
-
-class Selenium::WebDriver::Firefox::ProfilesIni
-  def [](name); end
-
-  def refresh(); end
-end
-
-class Selenium::WebDriver::Firefox::ProfilesIni
-end
-
-class Selenium::WebDriver::Firefox::Service
-end
-
-class Selenium::WebDriver::Firefox::Service
-end
-
-module Selenium::WebDriver::Firefox::Util
-end
-
-module Selenium::WebDriver::Firefox::Util
-  extend ::T::Sig
-  def self.app_data_path(); end
-
-  def self.stringified?(str); end
-end
-
-module Selenium::WebDriver::Firefox
-  extend ::T::Sig
-  def self.driver_path(); end
-
-  def self.driver_path=(path); end
-
-  def self.path=(path); end
-end
-
-module Selenium::WebDriver::HTML5::SharedWebStorage
-  include ::ActiveSupport::ToJsonWithActiveSupportEncoder
-end
-
-module Selenium::WebDriver::HTML5::SharedWebStorage
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::HTML5
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::IE
-end
-
-class Selenium::WebDriver::IE::Driver
-  include ::Selenium::WebDriver::DriverExtensions::HasWebStorage
-  include ::Selenium::WebDriver::DriverExtensions::TakesScreenshot
-  def initialize(opts=T.unsafe(nil)); end
-end
-
-class Selenium::WebDriver::IE::Driver
-end
-
-class Selenium::WebDriver::IE::Options
-  def add_argument(arg); end
-
-  def add_option(name, value); end
-
-  def args(); end
-
-  def as_json(*_); end
-
-  def browser_attach_timeout(); end
-
-  def browser_attach_timeout=(value); end
-
-  def element_scroll_behavior(); end
-
-  def element_scroll_behavior=(value); end
-
-  def ensure_clean_session(); end
-
-  def ensure_clean_session=(value); end
-
-  def file_upload_dialog_timeout(); end
-
-  def file_upload_dialog_timeout=(value); end
-
-  def force_create_process_api(); end
-
-  def force_create_process_api=(value); end
-
-  def force_shell_windows_api(); end
-
-  def force_shell_windows_api=(value); end
-
-  def full_page_screenshot(); end
-
-  def full_page_screenshot=(value); end
-
-  def ignore_protected_mode_settings(); end
-
-  def ignore_protected_mode_settings=(value); end
-
-  def ignore_zoom_level(); end
-
-  def ignore_zoom_level=(value); end
-
-  def initial_browser_url(); end
-
-  def initial_browser_url=(value); end
-
-  def initialize(**opts); end
-
-  def native_events(); end
-
-  def native_events=(value); end
-
-  def options(); end
-
-  def persistent_hover(); end
-
-  def persistent_hover=(value); end
-
-  def require_window_focus(); end
-
-  def require_window_focus=(value); end
-
-  def use_per_process_proxy(); end
-
-  def use_per_process_proxy=(value); end
-
-  def validate_cookie_document_type(); end
-
-  def validate_cookie_document_type=(value); end
-  CAPABILITIES = ::T.let(nil, ::T.untyped)
-  KEY = ::T.let(nil, ::T.untyped)
-  SCROLL_BOTTOM = ::T.let(nil, ::T.untyped)
-  SCROLL_TOP = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::IE::Options
-end
-
-class Selenium::WebDriver::IE::Service
-end
-
-class Selenium::WebDriver::IE::Service
-end
-
-module Selenium::WebDriver::IE
-  extend ::T::Sig
-  def self.driver_path(); end
-
-  def self.driver_path=(path); end
-end
-
-module Selenium::WebDriver::Interactions
-  KEY = ::T.let(nil, ::T.untyped)
-  NONE = ::T.let(nil, ::T.untyped)
-  POINTER = ::T.let(nil, ::T.untyped)
-  SOURCE_TYPES = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Interactions::Interaction
-  PAUSE = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Interactions::KeyInput
-  SUBTYPES = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Interactions::PointerInput
-  KIND = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Interactions::PointerMove
-  ORIGINS = ::T.let(nil, ::T.untyped)
-  POINTER = ::T.let(nil, ::T.untyped)
-  VIEWPORT = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Interactions::PointerPress
-  BUTTONS = ::T.let(nil, ::T.untyped)
-  DIRECTIONS = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::Interactions
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::KeyActions
-  extend ::T::Sig
-end
-
-class Selenium::WebDriver::Keyboard
-  MODIFIERS = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::Keys
-  KEYS = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::Keys
-  extend ::T::Sig
-end
-
-class Selenium::WebDriver::Manager
-  SECONDS_PER_DAY = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::Platform
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::PointerActions
-  extend ::T::Sig
-end
-
-class Selenium::WebDriver::PortProber
-  IGNORED_ERRORS = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::ProfileHelper::ClassMethods
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::ProfileHelper
-  extend ::T::Sig
-end
-
-class Selenium::WebDriver::Proxy
-  ALLOWED = ::T.let(nil, ::T.untyped)
-  TYPES = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::Remote
-end
-
-class Selenium::WebDriver::Remote::Bridge
-  include ::Selenium::WebDriver::Atoms
-  include ::Selenium::WebDriver::BridgeHelper
-  def browser(); end
-
-  def capabilities(); end
-
-  def context(); end
-
-  def context=(context); end
-
-  def create_session(desired_capabilities, options=T.unsafe(nil)); end
-
-  def dialect(); end
-
-  def file_detector(); end
-
-  def file_detector=(file_detector); end
-
-  def http(); end
-
-  def http=(http); end
-
-  def initialize(opts=T.unsafe(nil)); end
-
-  def session_id(); end
-  COMMANDS = ::T.let(nil, ::T.untyped)
-  PORT = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Remote::Bridge
-  def self.handshake(**opts); end
-end
-
-class Selenium::WebDriver::Remote::Capabilities
-  def ==(other); end
-
-  def [](key); end
-
-  def []=(key, value); end
-
-  def as_json(*_); end
-
-  def browser_name(); end
-
-  def browser_name=(value); end
-
-  def capabilities(); end
-
-  def css_selectors_enabled(); end
-
-  def css_selectors_enabled=(value); end
-
-  def css_selectors_enabled?(); end
-
-  def eql?(other); end
-
-  def firefox_profile(); end
-
-  def firefox_profile=(value); end
-
-  def initialize(opts=T.unsafe(nil)); end
-
-  def javascript_enabled(); end
-
-  def javascript_enabled=(value); end
-
-  def javascript_enabled?(); end
-
-  def merge!(other); end
-
-  def native_events(); end
-
-  def native_events=(value); end
-
-  def native_events?(); end
-
-  def platform(); end
-
-  def platform=(value); end
-
-  def proxy(); end
-
-  def proxy=(proxy); end
-
-  def rotatable(); end
-
-  def rotatable=(value); end
-
-  def rotatable?(); end
-
-  def takes_screenshot(); end
-
-  def takes_screenshot=(value); end
-
-  def takes_screenshot?(); end
-
-  def to_json(*_); end
-
-  def version(); end
-
-  def version=(value); end
-  DEFAULTS = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Remote::Capabilities
-  def self.chrome(opts=T.unsafe(nil)); end
-
-  def self.edge(opts=T.unsafe(nil)); end
-
-  def self.firefox(opts=T.unsafe(nil)); end
-
-  def self.firefox_legacy(opts=T.unsafe(nil)); end
-
-  def self.htmlunit(opts=T.unsafe(nil)); end
-
-  def self.htmlunitwithjs(opts=T.unsafe(nil)); end
-
-  def self.ie(opts=T.unsafe(nil)); end
-
-  def self.internet_explorer(opts=T.unsafe(nil)); end
-
-  def self.json_create(data); end
-
-  def self.phantomjs(opts=T.unsafe(nil)); end
-
-  def self.safari(opts=T.unsafe(nil)); end
-end
-
-class Selenium::WebDriver::Remote::Driver
-  include ::Selenium::WebDriver::DriverExtensions::UploadsFiles
-  include ::Selenium::WebDriver::DriverExtensions::TakesScreenshot
-  include ::Selenium::WebDriver::DriverExtensions::HasSessionId
-  include ::Selenium::WebDriver::DriverExtensions::Rotatable
-  include ::Selenium::WebDriver::DriverExtensions::HasRemoteStatus
-  include ::Selenium::WebDriver::DriverExtensions::HasWebStorage
-  def initialize(opts=T.unsafe(nil)); end
-end
-
-class Selenium::WebDriver::Remote::Driver
-end
-
-module Selenium::WebDriver::Remote::Http
-end
-
-class Selenium::WebDriver::Remote::Http::Common
-  def call(verb, url, command_hash); end
-
-  def close(); end
-
-  def quit_errors(); end
-
-  def server_url=(server_url); end
-
-  def timeout(); end
-
-  def timeout=(timeout); end
-  CONTENT_TYPE = ::T.let(nil, ::T.untyped)
-  DEFAULT_HEADERS = ::T.let(nil, ::T.untyped)
-  MAX_REDIRECTS = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Remote::Http::Common
-end
-
-class Selenium::WebDriver::Remote::Http::Default
-  def initialize(open_timeout: T.unsafe(nil), read_timeout: T.unsafe(nil)); end
-
-  def open_timeout(); end
-
-  def open_timeout=(open_timeout); end
-
-  def proxy=(proxy); end
-
-  def read_timeout(); end
-
-  def read_timeout=(read_timeout); end
-
-  def timeout=(value); end
-  MAX_RETRIES = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Remote::Http::Default
-end
-
-module Selenium::WebDriver::Remote::Http
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::Remote::OSS
-end
-
-class Selenium::WebDriver::Remote::OSS::Bridge
-  def accept_alert(); end
-
-  def action(); end
-
-  def active_element(); end
-
-  def add_cookie(cookie); end
-
-  def alert=(keys); end
-
-  def alert_text(); end
-
-  def authentication(credentials); end
-
-  def available_log_types(); end
-
-  def clear_element(element); end
-
-  def clear_local_storage(); end
-
-  def clear_session_storage(); end
-
-  def click(); end
-
-  def click_element(element); end
-
-  def close(); end
-
-  def context_click(); end
-
-  def cookies(); end
-
-  def delete_all_cookies(); end
-
-  def delete_cookie(name); end
-
-  def dismiss_alert(); end
-
-  def double_click(); end
-
-  def drag_element(element, right_by, down_by); end
-
-  def element_attribute(element, name); end
-
-  def element_displayed?(element); end
-
-  def element_enabled?(element); end
-
-  def element_location(element); end
-
-  def element_location_once_scrolled_into_view(element); end
-
-  def element_property(element, name); end
-
-  def element_rect(element); end
-
-  def element_selected?(element); end
-
-  def element_size(element); end
-
-  def element_tag_name(element); end
-
-  def element_text(element); end
-
-  def element_value(element); end
-
-  def element_value_of_css_property(element, prop); end
-
-  def execute_async_script(script, *args); end
-
-  def execute_script(script, *args); end
-
-  def find_element_by(how, what, parent=T.unsafe(nil)); end
-
-  def find_elements_by(how, what, parent=T.unsafe(nil)); end
-
-  def get(url); end
-
-  def go_back(); end
-
-  def go_forward(); end
-
-  def implicit_wait_timeout=(milliseconds); end
-
-  def initialize(capabilities, session_id, **opts); end
-
-  def keyboard(); end
-
-  def local_storage_item(key, value=T.unsafe(nil)); end
-
-  def local_storage_keys(); end
-
-  def local_storage_size(); end
-
-  def location(); end
-
-  def log(type); end
-
-  def manage(); end
-
-  def maximize_window(handle=T.unsafe(nil)); end
-
-  def mouse(); end
-
-  def mouse_down(); end
-
-  def mouse_move_to(element, x=T.unsafe(nil), y=T.unsafe(nil)); end
-
-  def mouse_up(); end
-
-  def network_connection(); end
-
-  def network_connection=(type); end
-
-  def page_source(); end
-
-  def quit(); end
-
-  def refresh(); end
-
-  def remove_local_storage_item(key); end
-
-  def remove_session_storage_item(key); end
-
-  def reposition_window(x, y, handle=T.unsafe(nil)); end
-
-  def resize_window(width, height, handle=T.unsafe(nil)); end
-
-  def screen_orientation(); end
-
-  def screen_orientation=(orientation); end
-
-  def screenshot(); end
-
-  def script_timeout=(milliseconds); end
-
-  def send_keys_to_active_element(key); end
-
-  def send_keys_to_element(element, keys); end
-
-  def session_capabilities(); end
-
-  def session_storage_item(key, value=T.unsafe(nil)); end
-
-  def session_storage_keys(); end
-
-  def session_storage_size(); end
-
-  def set_location(lat, lon, alt); end
-
-  def status(); end
-
-  def submit_element(element); end
-
-  def switch_to_active_element(); end
-
-  def switch_to_default_content(); end
-
-  def switch_to_frame(id); end
-
-  def switch_to_parent_frame(); end
-
-  def switch_to_window(name); end
-
-  def timeout(type, milliseconds); end
-
-  def title(); end
-
-  def touch_double_tap(element); end
-
-  def touch_down(x, y); end
-
-  def touch_element_flick(element, right_by, down_by, speed); end
-
-  def touch_flick(xspeed, yspeed); end
-
-  def touch_long_press(element); end
-
-  def touch_move(x, y); end
-
-  def touch_scroll(element, x, y); end
-
-  def touch_single_tap(element); end
-
-  def touch_up(x, y); end
-
-  def upload(local_file); end
-
-  def url(); end
-
-  def window_handle(); end
-
-  def window_handles(); end
-
-  def window_position(handle=T.unsafe(nil)); end
-
-  def window_size(handle=T.unsafe(nil)); end
-  COMMANDS = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Remote::OSS::Bridge
-end
-
-module Selenium::WebDriver::Remote::OSS
-  extend ::T::Sig
-end
-
-class Selenium::WebDriver::Remote::Response
-  def [](key); end
-
-  def code(); end
-
-  def error(); end
-
-  def error_message(); end
-
-  def initialize(code, payload=T.unsafe(nil)); end
-
-  def payload(); end
-
-  def payload=(payload); end
-  STACKTRACE_KEY = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Remote::Response
-end
-
-module Selenium::WebDriver::Remote::W3C
-end
-
-class Selenium::WebDriver::Remote::W3C::Bridge
-  def accept_alert(); end
-
-  def action(async=T.unsafe(nil)); end
-
-  def actions(async=T.unsafe(nil)); end
-
-  def active_element(); end
-
-  def add_cookie(cookie); end
-
-  def alert=(keys); end
-
-  def alert_text(); end
-
-  def clear_element(element); end
-
-  def clear_local_storage(); end
-
-  def clear_session_storage(); end
-
-  def click_element(element); end
-
-  def close(); end
-
-  def cookie(name); end
-
-  def cookies(); end
-
-  def delete_all_cookies(); end
-
-  def delete_cookie(name); end
-
-  def dismiss_alert(); end
-
-  def drag_element(element, right_by, down_by); end
-
-  def element_attribute(element, name); end
-
-  def element_displayed?(element); end
-
-  def element_enabled?(element); end
-
-  def element_location(element); end
-
-  def element_location_once_scrolled_into_view(element); end
-
-  def element_property(element, name); end
-
-  def element_rect(element); end
-
-  def element_selected?(element); end
-
-  def element_size(element); end
-
-  def element_tag_name(element); end
-
-  def element_text(element); end
-
-  def element_value(element); end
-
-  def element_value_of_css_property(element, prop); end
-
-  def execute_async_script(script, *args); end
-
-  def execute_script(script, *args); end
-
-  def find_element_by(how, what, parent=T.unsafe(nil)); end
-
-  def find_elements_by(how, what, parent=T.unsafe(nil)); end
-
-  def full_screen_window(); end
-
-  def get(url); end
-
-  def go_back(); end
-
-  def go_forward(); end
-
-  def implicit_wait_timeout=(milliseconds); end
-
-  def initialize(capabilities, session_id, **opts); end
-
-  def keyboard(); end
-
-  def local_storage_item(key, value=T.unsafe(nil)); end
-
-  def local_storage_keys(); end
-
-  def local_storage_size(); end
-
-  def location(); end
-
-  def manage(); end
-
-  def maximize_window(handle=T.unsafe(nil)); end
-
-  def minimize_window(); end
-
-  def mouse(); end
-
-  def network_connection(); end
-
-  def network_connection=(_type); end
-
-  def new_window(type); end
-
-  def page_source(); end
-
-  def quit(); end
-
-  def refresh(); end
-
-  def release_actions(); end
-
-  def remove_local_storage_item(key); end
-
-  def remove_session_storage_item(key); end
-
-  def reposition_window(x, y); end
-
-  def resize_window(width, height, handle=T.unsafe(nil)); end
-
-  def screen_orientation(); end
-
-  def screen_orientation=(orientation); end
-
-  def screenshot(); end
-
-  def script_timeout=(milliseconds); end
-
-  def send_actions(data); end
-
-  def send_keys_to_element(element, keys); end
-
-  def session_storage_item(key, value=T.unsafe(nil)); end
-
-  def session_storage_keys(); end
-
-  def session_storage_size(); end
-
-  def set_location(_lat, _lon, _alt); end
-
-  def set_window_rect(x: T.unsafe(nil), y: T.unsafe(nil), width: T.unsafe(nil), height: T.unsafe(nil)); end
-
-  def status(); end
-
-  def submit_element(element); end
-
-  def switch_to_active_element(); end
-
-  def switch_to_default_content(); end
-
-  def switch_to_frame(id); end
-
-  def switch_to_parent_frame(); end
-
-  def switch_to_window(name); end
-
-  def timeout(type, milliseconds); end
-
-  def title(); end
-
-  def touch_double_tap(element); end
-
-  def touch_down(x, y); end
-
-  def touch_element_flick(element, right_by, down_by, speed); end
-
-  def touch_flick(xspeed, yspeed); end
-
-  def touch_long_press(element); end
-
-  def touch_move(x, y); end
-
-  def touch_scroll(element, x, y); end
-
-  def touch_single_tap(element); end
-
-  def touch_up(x, y); end
-
-  def upload(local_file); end
-
-  def url(); end
-
-  def window_handle(); end
-
-  def window_handles(); end
-
-  def window_position(); end
-
-  def window_rect(); end
-
-  def window_size(handle=T.unsafe(nil)); end
-  COMMANDS = ::T.let(nil, ::T.untyped)
-  ESCAPE_CSS_REGEXP = ::T.let(nil, ::T.untyped)
-  QUIT_ERRORS = ::T.let(nil, ::T.untyped)
-  UNICODE_CODE_POINT = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Remote::W3C::Bridge
-end
-
-class Selenium::WebDriver::Remote::W3C::Capabilities
-  def ==(other); end
-
-  def [](key); end
-
-  def []=(key, value); end
-
-  def accept_insecure_certs(); end
-
-  def accept_insecure_certs=(value); end
-
-  def accessibility_checks(); end
-
-  def accessibility_checks=(value); end
-
-  def as_json(*_); end
-
-  def browser_name(); end
-
-  def browser_name=(value); end
-
-  def browser_version(); end
-
-  def browser_version=(value); end
-
-  def capabilities(); end
-
-  def device(); end
-
-  def device=(value); end
-
-  def eql?(other); end
-
-  def implicit_timeout(); end
-
-  def implicit_timeout=(value); end
-
-  def initialize(opts=T.unsafe(nil)); end
-
-  def merge!(other); end
-
-  def page_load_strategy(); end
-
-  def page_load_strategy=(value); end
-
-  def page_load_timeout(); end
-
-  def page_load_timeout=(value); end
-
-  def platform(); end
-
-  def platform=(value); end
-
-  def platform_name(); end
-
-  def platform_name=(value); end
-
-  def proxy(); end
-
-  def proxy=(proxy); end
-
-  def remote_session_id(); end
-
-  def remote_session_id=(value); end
-
-  def script_timeout(); end
-
-  def script_timeout=(value); end
-
-  def set_window_rect(); end
-
-  def set_window_rect=(value); end
-
-  def strict_file_interactability(); end
-
-  def strict_file_interactability=(value); end
-
-  def timeouts(); end
-
-  def timeouts=(value); end
-
-  def to_json(*_); end
-
-  def unhandled_prompt_behavior(); end
-
-  def unhandled_prompt_behavior=(value); end
-
-  def version(); end
-
-  def version=(value); end
-  EXTENSION_CAPABILITY_PATTERN = ::T.let(nil, ::T.untyped)
-  KNOWN = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Remote::W3C::Capabilities
-  def self.edge(opts=T.unsafe(nil)); end
-
-  def self.ff(opts=T.unsafe(nil)); end
-
-  def self.firefox(opts=T.unsafe(nil)); end
-
-  def self.from_oss(oss_capabilities); end
-
-  def self.json_create(data); end
-end
-
-module Selenium::WebDriver::Remote::W3C
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::Remote
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver::Safari
-end
-
-module Selenium::WebDriver::Safari::Bridge
-  def attach_debugger(); end
-
-  def commands(command); end
-
-  def permissions(); end
-
-  def permissions=(permissions); end
-  COMMANDS = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::Safari::Bridge
-  extend ::T::Sig
-end
-
-class Selenium::WebDriver::Safari::Driver
-  include ::Selenium::WebDriver::DriverExtensions::HasDebugger
-  include ::Selenium::WebDriver::DriverExtensions::HasPermissions
-  include ::Selenium::WebDriver::DriverExtensions::TakesScreenshot
-  def initialize(opts=T.unsafe(nil)); end
-end
-
-class Selenium::WebDriver::Safari::Driver
-end
-
-class Selenium::WebDriver::Safari::Options
-  def as_json(*_); end
-
-  def automatic_inspection(); end
-
-  def automatic_inspection=(automatic_inspection); end
-
-  def automatic_profiling(); end
-
-  def automatic_profiling=(automatic_profiling); end
-
-  def initialize(**opts); end
-end
-
-class Selenium::WebDriver::Safari::Options
-end
-
-class Selenium::WebDriver::Safari::Service
-end
-
-class Selenium::WebDriver::Safari::Service
-end
-
-module Selenium::WebDriver::Safari
-  extend ::T::Sig
-  def self.driver_path(); end
-
-  def self.driver_path=(path); end
-
-  def self.path(); end
-
-  def self.path=(path); end
-
-  def self.technology_preview(); end
-
-  def self.technology_preview!(); end
-end
-
-module Selenium::WebDriver::SearchContext
-  FINDERS = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::SearchContext
-  extend ::T::Sig
-end
-
-class Selenium::WebDriver::Service
-  SOCKET_LOCK_TIMEOUT = ::T.let(nil, ::T.untyped)
-  START_TIMEOUT = ::T.let(nil, ::T.untyped)
-  STOP_TIMEOUT = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::SocketPoller
-  CONNECTED_ERRORS = ::T.let(nil, ::T.untyped)
-  CONNECT_TIMEOUT = ::T.let(nil, ::T.untyped)
-  NOT_CONNECTED_ERRORS = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::Support
-end
-
-class Selenium::WebDriver::Support::AbstractEventListener
-  def after_change_value_of(element, driver); end
-
-  def after_click(element, driver); end
-
-  def after_close(driver); end
-
-  def after_execute_script(script, driver); end
-
-  def after_find(by, what, driver); end
-
-  def after_navigate_back(driver); end
-
-  def after_navigate_forward(driver); end
-
-  def after_navigate_to(url, driver); end
-
-  def after_quit(driver); end
-
-  def before_change_value_of(element, driver); end
-
-  def before_click(element, driver); end
-
-  def before_close(driver); end
-
-  def before_execute_script(script, driver); end
-
-  def before_find(by, what, driver); end
-
-  def before_navigate_back(driver); end
-
-  def before_navigate_forward(driver); end
-
-  def before_navigate_to(url, driver); end
-
-  def before_quit(driver); end
-end
-
-class Selenium::WebDriver::Support::AbstractEventListener
-end
-
-class Selenium::WebDriver::Support::BlockEventListener
-  def initialize(callback); end
-
-  def method_missing(meth, *args); end
-end
-
-class Selenium::WebDriver::Support::BlockEventListener
-end
-
-class Selenium::WebDriver::Support::Color
-  def ==(other); end
-
-  def alpha(); end
-
-  def blue(); end
-
-  def eql?(other); end
-
-  def green(); end
-
-  def hex(); end
-
-  def initialize(red, green, blue, alpha=T.unsafe(nil)); end
-
-  def red(); end
-
-  def rgb(); end
-
-  def rgba(); end
-  HEX3_PATTERN = ::T.let(nil, ::T.untyped)
-  HEX_PATTERN = ::T.let(nil, ::T.untyped)
-  HSLA_PATTERN = ::T.let(nil, ::T.untyped)
-  HSL_PATTERN = ::T.let(nil, ::T.untyped)
-  RGBA_PATTERN = ::T.let(nil, ::T.untyped)
-  RGBA_PCT_PATTERN = ::T.let(nil, ::T.untyped)
-  RGB_PATTERN = ::T.let(nil, ::T.untyped)
-  RGB_PCT_PATTERN = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Support::Color
-  def self.from_hsl(h, s, l, a); end
-
-  def self.from_string(str); end
-
-  def self.hue_to_rgb(lum1, lum2, hue); end
-end
-
-module Selenium::WebDriver::Support::Escaper
-end
-
-module Selenium::WebDriver::Support::Escaper
-  extend ::T::Sig
-  def self.escape(str); end
-end
-
-class Selenium::WebDriver::Support::EventFiringBridge
-  def clear_element(ref); end
-
-  def click_element(ref); end
-
-  def close(); end
-
-  def execute_script(script, *args); end
-
-  def find_element_by(how, what, parent=T.unsafe(nil)); end
-
-  def find_elements_by(how, what, parent=T.unsafe(nil)); end
-
-  def get(url); end
-
-  def go_back(); end
-
-  def go_forward(); end
-
-  def initialize(delegate, listener); end
-
-  def quit(); end
-
-  def send_keys_to_element(ref, keys); end
-end
-
-class Selenium::WebDriver::Support::EventFiringBridge
-end
-
-class Selenium::WebDriver::Support::Select
-  def deselect_all(); end
-
-  def deselect_by(how, what); end
-
-  def first_selected_option(); end
-
-  def initialize(element); end
-
-  def multiple?(); end
-
-  def options(); end
-
-  def select_all(); end
-
-  def select_by(how, what); end
-
-  def selected_options(); end
-end
-
-class Selenium::WebDriver::Support::Select
-end
-
-module Selenium::WebDriver::Support
-  extend ::T::Sig
-end
-
-class Selenium::WebDriver::TouchScreen
-  FLICK_SPEED = ::T.let(nil, ::T.untyped)
-end
-
-class Selenium::WebDriver::Wait
-  DEFAULT_INTERVAL = ::T.let(nil, ::T.untyped)
-  DEFAULT_TIMEOUT = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::Zipper
-  EXTENSIONS = ::T.let(nil, ::T.untyped)
-end
-
-module Selenium::WebDriver::Zipper
-  extend ::T::Sig
-end
-
-module Selenium::WebDriver
-  extend ::T::Sig
-end
-
-module Selenium
   extend ::T::Sig
 end
 
@@ -26459,14 +21539,6 @@ module Singleton
 end
 
 SizedQueue = Thread::SizedQueue
-
-module Skiptrace
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-module Skiptrace
-  extend ::T::Sig
-end
 
 class Socket
   AF_CCITT = ::T.let(nil, ::T.untyped)
@@ -27123,23 +22195,9 @@ class SortedSet
   def self.setup(); end
 end
 
-module Spring::Watcher
-  extend ::T::Sig
-end
-
-module Spring
-  extend ::T::Sig
-end
-
 module Sprockets
   VERSION = ::T.let(nil, ::T.untyped)
 end
-
-Sprockets::Autoload::CoffeeScript = CoffeeScript
-
-Sprockets::Autoload::Sass = Sass
-
-Sprockets::Autoload::Uglifier = Uglifier
 
 module Sprockets::Autoload
   extend ::T::Sig
@@ -27461,16 +22519,6 @@ end
 
 Sprockets::SassFunctions = Sprockets::SassProcessor::Functions
 
-class Sprockets::SassProcessor::CacheStore
-  def initialize(cache, version); end
-
-  def path_to(key); end
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class Sprockets::SassProcessor::CacheStore
-end
-
 module Sprockets::SassProcessor::Functions
   extend ::T::Sig
 end
@@ -27580,8 +22628,6 @@ class String
   def encode!(*_); end
 
   def grapheme_clusters(); end
-
-  def parse_csv(**options); end
 
   def reverse!(); end
 
@@ -27823,36 +22869,6 @@ module TZInfo::CountryIndexDefinition
   extend ::T::Sig
 end
 
-module TZInfo::Data
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-module TZInfo::Data::Definitions::Etc::UTC
-  extend ::T::Sig
-end
-
-module TZInfo::Data::Definitions::Etc
-  extend ::T::Sig
-end
-
-module TZInfo::Data::Definitions
-  extend ::T::Sig
-end
-
-module TZInfo::Data::Version
-  FORMAT = ::T.let(nil, ::T.untyped)
-  STRING = ::T.let(nil, ::T.untyped)
-  TZDATA = ::T.let(nil, ::T.untyped)
-end
-
-module TZInfo::Data::Version
-  extend ::T::Sig
-end
-
-module TZInfo::Data
-  extend ::T::Sig
-end
-
 module TZInfo::OffsetRationals
   extend ::T::Sig
 end
@@ -27923,7 +22939,148 @@ class Thor
 end
 
 module Thor::Actions
+  def _cleanup_options_and_set(options, key); end
+
+  def _shared_configuration(); end
+
+  def action(instance); end
+
+  def add_file(destination, *args, &block); end
+
+  def add_link(destination, *args); end
+
+  def append_file(path, *args, &block); end
+
+  def append_to_file(path, *args, &block); end
+
+  def apply(path, config=T.unsafe(nil)); end
+
+  def behavior(); end
+
+  def behavior=(behavior); end
+
+  def chmod(path, mode, config=T.unsafe(nil)); end
+
+  def comment_lines(path, flag, *args); end
+
+  def copy_file(source, *args, &block); end
+
+  def create_file(destination, *args, &block); end
+
+  def create_link(destination, *args); end
+
+  def destination_root(); end
+
+  def destination_root=(root); end
+
+  def directory(source, *args, &block); end
+
+  def empty_directory(destination, config=T.unsafe(nil)); end
+
+  def find_in_source_paths(file); end
+
+  def get(source, *args, &block); end
+
+  def gsub_file(path, flag, *args, &block); end
+
+  def in_root(); end
+
+  def initialize(args=T.unsafe(nil), options=T.unsafe(nil), config=T.unsafe(nil)); end
+
+  def inject_into_class(path, klass, *args, &block); end
+
+  def inject_into_file(destination, *args, &block); end
+
+  def inject_into_module(path, module_name, *args, &block); end
+
+  def insert_into_file(destination, *args, &block); end
+
+  def inside(dir=T.unsafe(nil), config=T.unsafe(nil), &block); end
+
+  def link_file(source, *args); end
+
+  def prepend_file(path, *args, &block); end
+
+  def prepend_to_file(path, *args, &block); end
+
+  def relative_to_original_destination_root(path, remove_dot=T.unsafe(nil)); end
+
+  def remove_dir(path, config=T.unsafe(nil)); end
+
+  def remove_file(path, config=T.unsafe(nil)); end
+
+  def run(command, config=T.unsafe(nil)); end
+
+  def run_ruby_script(command, config=T.unsafe(nil)); end
+
+  def source_paths(); end
+
+  def template(source, *args, &block); end
+
+  def thor(command, *args); end
+
+  def uncomment_lines(path, flag, *args); end
+end
+
+class Thor::Actions::CreateFile
+  def data(); end
+
+  def force_on_collision?(); end
+
+  def force_or_skip_or_conflict(force, skip, &block); end
+
+  def identical?(); end
+
+  def initialize(base, destination, data, config=T.unsafe(nil)); end
+
+  def on_conflict_behavior(&block); end
+
+  def render(); end
+end
+
+class Thor::Actions::CreateFile
+end
+
+class Thor::Actions::EmptyDirectory
+  def base(); end
+
+  def config(); end
+
+  def convert_encoded_instructions(filename); end
+
+  def destination(); end
+
+  def destination=(destination); end
+
+  def exists?(); end
+
+  def given_destination(); end
+
+  def initialize(base, destination, config=T.unsafe(nil)); end
+
+  def invoke!(); end
+
+  def invoke_with_conflict_check(&block); end
+
+  def on_conflict_behavior(); end
+
+  def on_file_clash_behavior(); end
+
+  def pretend?(); end
+
+  def relative_destination(); end
+
+  def revoke!(); end
+
+  def say_status(status, color); end
+end
+
+class Thor::Actions::EmptyDirectory
+end
+
+module Thor::Actions
   extend ::T::Sig
+  def self.included(base); end
 end
 
 Thor::AmbiguousTaskError = Thor::AmbiguousCommandError
@@ -28497,160 +23654,6 @@ module Threadsafe
   extend ::T::Sig
 end
 
-module Tilt
-  LOCK = ::T.let(nil, ::T.untyped)
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class Tilt::BuilderTemplate
-  def precompiled_postamble(locals); end
-
-  def precompiled_template(locals); end
-end
-
-class Tilt::BuilderTemplate
-end
-
-class Tilt::CSVTemplate
-  def precompiled(locals); end
-
-  def precompiled_template(locals); end
-end
-
-class Tilt::CSVTemplate
-  def self.engine(); end
-end
-
-class Tilt::CoffeeScriptLiterateTemplate
-end
-
-class Tilt::CoffeeScriptLiterateTemplate
-end
-
-class Tilt::CoffeeScriptTemplate
-  def allows_script?(); end
-end
-
-class Tilt::CoffeeScriptTemplate
-  def self.default_bare(); end
-
-  def self.default_bare=(value); end
-
-  def self.default_no_wrap(); end
-
-  def self.default_no_wrap=(value); end
-
-  def self.literate?(); end
-end
-
-module Tilt::CompiledTemplates
-  extend ::T::Sig
-end
-
-class Tilt::ERBTemplate
-  def precompiled(locals); end
-
-  def precompiled_postamble(locals); end
-
-  def precompiled_preamble(locals); end
-
-  def precompiled_template(locals); end
-  SUPPORTS_KVARGS = ::T.let(nil, ::T.untyped)
-end
-
-class Tilt::ERBTemplate
-  def self.default_output_variable(); end
-
-  def self.default_output_variable=(name); end
-end
-
-class Tilt::ErubiTemplate
-  def precompiled_template(locals); end
-end
-
-class Tilt::ErubiTemplate
-end
-
-class Tilt::EtanniTemplate
-  def precompiled(locals); end
-
-  def precompiled_template(locals); end
-end
-
-class Tilt::EtanniTemplate
-end
-
-class Tilt::Mapping
-  AUTOLOAD_IS_BROKEN = ::T.let(nil, ::T.untyped)
-  LOCK = ::T.let(nil, ::T.untyped)
-end
-
-class Tilt::NokogiriTemplate
-  def evaluate(scope, locals); end
-
-  def precompiled_postamble(locals); end
-
-  def precompiled_preamble(locals); end
-
-  def precompiled_template(locals); end
-  DOCUMENT_HEADER = ::T.let(nil, ::T.untyped)
-end
-
-class Tilt::NokogiriTemplate
-end
-
-class Tilt::PlainTemplate
-end
-
-class Tilt::PlainTemplate
-end
-
-class Tilt::RDocTemplate
-  def allows_script?(); end
-
-  def markup(); end
-end
-
-class Tilt::RDocTemplate
-end
-
-class Tilt::SassTemplate
-  def allows_script?(); end
-end
-
-Tilt::SassTemplate::Sass = Sass
-
-class Tilt::SassTemplate
-end
-
-class Tilt::ScssTemplate
-end
-
-class Tilt::ScssTemplate
-end
-
-class Tilt::SigilTemplate
-  def allows_script?(); end
-end
-
-class Tilt::SigilTemplate
-end
-
-class Tilt::StringTemplate
-  def precompiled(locals); end
-
-  def precompiled_template(locals); end
-end
-
-class Tilt::StringTemplate
-end
-
-Tilt::TOPOBJECT = Tilt::CompiledTemplates
-
-module Tilt
-  extend ::T::Sig
-end
-
 class Time
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
   COMMON_YEAR_DAYS_IN_MONTH = ::T.let(nil, ::T.untyped)
@@ -28685,38 +23688,6 @@ class TrueClass
 end
 
 class TrueClass
-  extend ::T::Sig
-end
-
-module Turbolinks
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-module Turbolinks::Assertions
-  TURBOLINKS_VISIT = ::T.let(nil, ::T.untyped)
-end
-
-module Turbolinks::Assertions
-  extend ::T::Sig
-end
-
-module Turbolinks::Controller
-  extend ::T::Sig
-end
-
-module Turbolinks::Redirection
-  extend ::T::Sig
-end
-
-module Turbolinks::Source
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-module Turbolinks::Source
-  extend ::T::Sig
-end
-
-module Turbolinks
   extend ::T::Sig
 end
 
@@ -28763,9 +23734,6 @@ module URI::Escape
 end
 
 class URI::FTP
-  include ::OpenURI::OpenRead
-  def buffer_open(buf, proxy, options); end
-
   def set_typecode(v); end
 
   def typecode(); end
@@ -28912,9 +23880,6 @@ class URI::Generic
 end
 
 class URI::HTTP
-  include ::OpenURI::OpenRead
-  def buffer_open(buf, proxy, options); end
-
   def request_uri(); end
 end
 
@@ -29072,20 +24037,6 @@ module URI
   def self.get_encoding(label); end
 end
 
-class Uglifier
-  DEFAULTS = ::T.let(nil, ::T.untyped)
-  ES5FallbackPath = ::T.let(nil, ::T.untyped)
-  EXTRA_OPTIONS = ::T.let(nil, ::T.untyped)
-  HarmonySourcePath = ::T.let(nil, ::T.untyped)
-  MANGLE_PROPERTIES_DEFAULTS = ::T.let(nil, ::T.untyped)
-  SOURCE_MAP_DEFAULTS = ::T.let(nil, ::T.untyped)
-  SourceMapPath = ::T.let(nil, ::T.untyped)
-  SourcePath = ::T.let(nil, ::T.untyped)
-  SplitFallbackPath = ::T.let(nil, ::T.untyped)
-  UglifyJSWrapperPath = ::T.let(nil, ::T.untyped)
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
 class UnboundMethod
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
   def clone(); end
@@ -29133,313 +24084,11 @@ module Warning
   extend ::Warning
 end
 
-class WebConsole::Context
-  def extract(input=T.unsafe(nil)); end
-
-  def initialize(binding); end
-  GLOBAL_OBJECTS = ::T.let(nil, ::T.untyped)
-end
-
-class WebConsole::Context
-end
-
-class WebConsole::DoubleRenderError
-end
-
-class WebConsole::DoubleRenderError
-end
-
-class WebConsole::Error
-end
-
-class WebConsole::Error
-end
-
-class WebConsole::Evaluator
-  def cleaner(); end
-
-  def eval(input); end
-
-  def initialize(binding=T.unsafe(nil)); end
-end
-
-class WebConsole::Evaluator
-  def self.cleaner(); end
-end
-
-class WebConsole::ExceptionMapper
-  def [](index); end
-
-  def first(); end
-
-  def initialize(exception); end
-end
-
-class WebConsole::ExceptionMapper
-end
-
-class WebConsole::Injector
-  def initialize(body, headers); end
-
-  def inject(content); end
-end
-
-class WebConsole::Injector
-end
-
-class WebConsole::Middleware
-  TEMPLATES_PATH = ::T.let(nil, ::T.untyped)
-end
-
-class WebConsole::Session
-  def context(objpath); end
-
-  def eval(input); end
-
-  def id(); end
-
-  def initialize(bindings); end
-
-  def inmemory_storage(); end
-
-  def switch_binding_to(index); end
-end
-
-class WebConsole::Session
-  def self.find(id); end
-
-  def self.from(storage); end
-
-  def self.inmemory_storage(); end
-end
-
-class WebConsole::Template
-  def initialize(env, session); end
-
-  def render(template); end
-
-  def template_paths(); end
-
-  def template_paths=(obj); end
-end
-
-class WebConsole::Template
-  def self.template_paths(); end
-
-  def self.template_paths=(obj); end
-end
-
-class WebConsole::View
-  def only_on_error_page(*args); end
-
-  def only_on_regular_page(*args); end
-
-  def render(*_); end
-
-  def render_inlined_string(template); end
-
-  def render_javascript(template); end
-end
-
-class WebConsole::View
-end
-
-class WebConsole::WhinyRequest
-  def from_whitelisted_ip?(); end
-end
-
-class WebConsole::WhinyRequest
-end
-
-class WebConsole::Whitelist
-  ALWAYS_WHITELISTED_NETWORKS = ::T.let(nil, ::T.untyped)
-end
-
-module WebConsole
-  extend ::T::Sig
-end
-
-module XPath::DSL
-  AXES = ::T.let(nil, ::T.untyped)
-  LOWERCASE_LETTERS = ::T.let(nil, ::T.untyped)
-  METHODS = ::T.let(nil, ::T.untyped)
-  OPERATORS = ::T.let(nil, ::T.untyped)
-  UPPERCASE_LETTERS = ::T.let(nil, ::T.untyped)
-end
-
-module XPath::DSL
-  extend ::T::Sig
-end
-
-module XPath
-  extend ::T::Sig
-  def self.generate(); end
-end
-
 YAML = Psych
 
 YAMLTree = Psych::Visitors::YAMLTree
 
 class ZeroDivisionError
-  extend ::T::Sig
-end
-
-module Zip
-  CDIR_ENTRY_STATIC_HEADER_LENGTH = ::T.let(nil, ::T.untyped)
-  CENTRAL_DIRECTORY_ENTRY_SIGNATURE = ::T.let(nil, ::T.untyped)
-  FILE_TYPE_DIR = ::T.let(nil, ::T.untyped)
-  FILE_TYPE_FILE = ::T.let(nil, ::T.untyped)
-  FILE_TYPE_SYMLINK = ::T.let(nil, ::T.untyped)
-  FSTYPES = ::T.let(nil, ::T.untyped)
-  FSTYPE_ACORN = ::T.let(nil, ::T.untyped)
-  FSTYPE_AMIGA = ::T.let(nil, ::T.untyped)
-  FSTYPE_ATARI = ::T.let(nil, ::T.untyped)
-  FSTYPE_ATHEOS = ::T.let(nil, ::T.untyped)
-  FSTYPE_BEOS = ::T.let(nil, ::T.untyped)
-  FSTYPE_CPM = ::T.let(nil, ::T.untyped)
-  FSTYPE_FAT = ::T.let(nil, ::T.untyped)
-  FSTYPE_HPFS = ::T.let(nil, ::T.untyped)
-  FSTYPE_MAC = ::T.let(nil, ::T.untyped)
-  FSTYPE_MAC_OSX = ::T.let(nil, ::T.untyped)
-  FSTYPE_MVS = ::T.let(nil, ::T.untyped)
-  FSTYPE_NTFS = ::T.let(nil, ::T.untyped)
-  FSTYPE_QDOS = ::T.let(nil, ::T.untyped)
-  FSTYPE_TANDEM = ::T.let(nil, ::T.untyped)
-  FSTYPE_THEOS = ::T.let(nil, ::T.untyped)
-  FSTYPE_TOPS20 = ::T.let(nil, ::T.untyped)
-  FSTYPE_UNIX = ::T.let(nil, ::T.untyped)
-  FSTYPE_VFAT = ::T.let(nil, ::T.untyped)
-  FSTYPE_VMS = ::T.let(nil, ::T.untyped)
-  FSTYPE_VM_CMS = ::T.let(nil, ::T.untyped)
-  FSTYPE_Z_SYSTEM = ::T.let(nil, ::T.untyped)
-  LOCAL_ENTRY_SIGNATURE = ::T.let(nil, ::T.untyped)
-  LOCAL_ENTRY_STATIC_HEADER_LENGTH = ::T.let(nil, ::T.untyped)
-  LOCAL_ENTRY_TRAILING_DESCRIPTOR_LENGTH = ::T.let(nil, ::T.untyped)
-  RUNNING_ON_WINDOWS = ::T.let(nil, ::T.untyped)
-  VERSION_MADE_BY = ::T.let(nil, ::T.untyped)
-  VERSION_NEEDED_TO_EXTRACT = ::T.let(nil, ::T.untyped)
-  VERSION_NEEDED_TO_EXTRACT_ZIP64 = ::T.let(nil, ::T.untyped)
-end
-
-class Zip::CentralDirectory
-  END_OF_CDS = ::T.let(nil, ::T.untyped)
-  MAX_END_OF_CDS_SIZE = ::T.let(nil, ::T.untyped)
-  STATIC_EOCD_SIZE = ::T.let(nil, ::T.untyped)
-  ZIP64_END_OF_CDS = ::T.let(nil, ::T.untyped)
-  ZIP64_EOCD_LOCATOR = ::T.let(nil, ::T.untyped)
-end
-
-class Zip::Decompressor
-  CHUNK_SIZE = ::T.let(nil, ::T.untyped)
-end
-
-class Zip::Entry
-  DEFLATED = ::T.let(nil, ::T.untyped)
-  EFS = ::T.let(nil, ::T.untyped)
-  STORED = ::T.let(nil, ::T.untyped)
-end
-
-class Zip::ExtraField
-  ID_MAP = ::T.let(nil, ::T.untyped)
-end
-
-class Zip::ExtraField::IUnix
-  HEADER_ID = ::T.let(nil, ::T.untyped)
-end
-
-class Zip::ExtraField::NTFS
-  HEADER_ID = ::T.let(nil, ::T.untyped)
-  SEC_TO_UNIX_EPOCH = ::T.let(nil, ::T.untyped)
-  WINDOWS_TICK = ::T.let(nil, ::T.untyped)
-end
-
-class Zip::ExtraField::OldUnix
-  HEADER_ID = ::T.let(nil, ::T.untyped)
-end
-
-class Zip::ExtraField::UniversalTime
-  HEADER_ID = ::T.let(nil, ::T.untyped)
-end
-
-class Zip::ExtraField::Zip64
-  HEADER_ID = ::T.let(nil, ::T.untyped)
-end
-
-class Zip::ExtraField::Zip64Placeholder
-  HEADER_ID = ::T.let(nil, ::T.untyped)
-end
-
-class Zip::File
-  CREATE = ::T.let(nil, ::T.untyped)
-  DATA_BUFFER_SIZE = ::T.let(nil, ::T.untyped)
-  IO_METHODS = ::T.let(nil, ::T.untyped)
-  MAX_SEGMENT_SIZE = ::T.let(nil, ::T.untyped)
-  MIN_SEGMENT_SIZE = ::T.let(nil, ::T.untyped)
-  SPLIT_SIGNATURE = ::T.let(nil, ::T.untyped)
-  ZIP64_EOCD_SIGNATURE = ::T.let(nil, ::T.untyped)
-end
-
-module Zip::IOExtras
-  CHUNK_SIZE = ::T.let(nil, ::T.untyped)
-  RANGE_ALL = ::T.let(nil, ::T.untyped)
-end
-
-module Zip::IOExtras::AbstractInputStream
-  include ::ActiveSupport::ToJsonWithActiveSupportEncoder
-end
-
-module Zip::IOExtras::AbstractInputStream
-  extend ::T::Sig
-end
-
-module Zip::IOExtras::AbstractOutputStream
-  extend ::T::Sig
-end
-
-module Zip::IOExtras::FakeIO
-  extend ::T::Sig
-end
-
-module Zip::IOExtras
-  extend ::T::Sig
-end
-
-module Zip::NullDecompressor
-  extend ::T::Sig
-end
-
-module Zip::NullEncryption
-  extend ::T::Sig
-end
-
-module Zip::NullInputStream
-  include ::ActiveSupport::ToJsonWithActiveSupportEncoder
-end
-
-module Zip::NullInputStream
-  extend ::T::Sig
-end
-
-class Zip::StreamableStream
-end
-
-module Zip::TraditionalEncryption
-  extend ::T::Sig
-end
-
-Zip::ZipCompressionMethodError = Zip::CompressionMethodError
-
-Zip::ZipDestinationFileExistsError = Zip::DestinationFileExistsError
-
-Zip::ZipEntryExistsError = Zip::EntryExistsError
-
-Zip::ZipEntryNameError = Zip::EntryNameError
-
-Zip::ZipError = Zip::Error
-
-Zip::ZipInternalError = Zip::InternalError
-
-module Zip
   extend ::T::Sig
 end
 
@@ -29627,7 +24276,6 @@ class Zlib::GzipReader
 end
 
 class Zlib::GzipReader
-  def self.open(*_); end
 end
 
 class Zlib::GzipWriter
@@ -29651,7 +24299,6 @@ class Zlib::GzipWriter
 end
 
 class Zlib::GzipWriter
-  def self.open(*_); end
 end
 
 class Zlib::Inflate
@@ -29702,10 +24349,6 @@ class Zlib::VersionError
 end
 
 class Zlib::VersionError
-end
-
-class Zlib::ZReader
-  DEFAULT_DELEGATE_READ_SIZE = ::T.let(nil, ::T.untyped)
 end
 
 class Zlib::ZStream

@@ -1148,7 +1148,7 @@ class ActiveRecord::Type::Time < ActiveModel::Type::Time
   def serialize(value); end
   include ActiveRecord::Type::Internal::Timezone
 end
-class ActiveRecord::Type::Time::Value < Anonymous_Delegator_11
+class ActiveRecord::Type::Time::Value < Anonymous_Delegator_10
 end
 class ActiveRecord::Type::Text < ActiveModel::Type::String
   def type; end
@@ -1157,7 +1157,7 @@ class ActiveRecord::Type::UnsignedInteger < ActiveModel::Type::Integer
   def max_value; end
   def min_value; end
 end
-class ActiveRecord::Type::Serialized < Anonymous_Delegator_12
+class ActiveRecord::Type::Serialized < Anonymous_Delegator_11
   def accessor; end
   def assert_valid_value(value); end
   def changed_in_place?(raw_old_value, value); end
@@ -1684,7 +1684,7 @@ module ActiveRecord::Locking::Optimistic::ClassMethods
   def reset_locking_column; end
   def update_counters(id, counters); end
 end
-class ActiveRecord::Locking::LockingType < Anonymous_Delegator_13
+class ActiveRecord::Locking::LockingType < Anonymous_Delegator_12
   def deserialize(value); end
   def encode_with(coder); end
   def init_with(coder); end
@@ -1749,7 +1749,7 @@ end
 module ActiveRecord::AttributeMethods::TimeZoneConversion
   extend ActiveSupport::Concern
 end
-class ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter < Anonymous_Delegator_14
+class ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter < Anonymous_Delegator_13
   def cast(value); end
   def convert_time_to_time_zone(value); end
   def deserialize(value); end
@@ -3378,10 +3378,10 @@ class ActiveRecord::Base
   include ActiveRecord::Validations
   include ActiveSupport::Callbacks
   include ActiveSupport::Callbacks
-  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_15
+  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_14
   include GlobalID::Identification
 end
-module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_15
+module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_14
 end
 module ActiveRecord::Base::GeneratedAssociationMethods
 end
@@ -3603,7 +3603,7 @@ class ActiveRecord::ConnectionAdapters::TransactionManager
   def rollback_transaction(transaction = nil); end
   def within_new_transaction(options = nil); end
 end
-module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_16
+module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_15
 end
 class ActiveRecord::SchemaMigration < ActiveRecord::Base
   def self._validators; end
@@ -3619,7 +3619,7 @@ class ActiveRecord::SchemaMigration < ActiveRecord::Base
   def self.table_name; end
   def version; end
   include ActiveRecord::SchemaMigration::GeneratedAssociationMethods
-  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_16
+  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_15
 end
 module ActiveRecord::SchemaMigration::GeneratedAssociationMethods
 end
@@ -3698,7 +3698,7 @@ class ActiveRecord::PredicateBuilder::RangeHandler
   def initialize(predicate_builder); end
   def predicate_builder; end
 end
-class Anonymous_Struct_17 < Struct
+class Anonymous_Struct_16 < Struct
   def begin; end
   def begin=(_); end
   def end; end
@@ -3708,7 +3708,7 @@ class Anonymous_Struct_17 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class ActiveRecord::PredicateBuilder::RangeHandler::RangeWithBinds < Anonymous_Struct_17
+class ActiveRecord::PredicateBuilder::RangeHandler::RangeWithBinds < Anonymous_Struct_16
   def exclude_end?; end
 end
 class ActiveRecord::PredicateBuilder::RelationHandler

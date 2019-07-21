@@ -1592,9 +1592,90 @@ class ActionDispatch::Callbacks
   extend ActiveSupport::DescendantsTracker
   include ActiveSupport::Callbacks
 end
-module ActionController::ApiRendering
-  def render_to_body(options = nil); end
-  extend ActiveSupport::Concern
+class ActionDispatch::MiddlewareStack
+  def [](i); end
+  def assert_index(index, where); end
+  def build(app = nil); end
+  def build_middleware(klass, args, block); end
+  def delete(target); end
+  def each; end
+  def initialize(*args); end
+  def initialize_copy(other); end
+  def insert(index, klass, *args, &block); end
+  def insert_after(index, *args, &block); end
+  def insert_before(index, klass, *args, &block); end
+  def last; end
+  def middlewares; end
+  def middlewares=(arg0); end
+  def size; end
+  def swap(target, *args, &block); end
+  def unshift(klass, *args, &block); end
+  def use(klass, *args, &block); end
+  include Enumerable
+end
+class ActionDispatch::MiddlewareStack::Middleware
+  def ==(middleware); end
+  def args; end
+  def block; end
+  def build(app); end
+  def initialize(klass, args, block); end
+  def inspect; end
+  def klass; end
+  def name; end
+end
+class ActionDispatch::FileHandler
+  def call(env); end
+  def content_type(path); end
+  def ext; end
+  def gzip_encoding_accepted?(request); end
+  def gzip_file_path(path); end
+  def initialize(root, index: nil, headers: nil); end
+  def match?(path); end
+  def serve(request); end
+end
+class ActionDispatch::Static
+  def call(env); end
+  def initialize(app, path, index: nil, headers: nil); end
+end
+class ActionDispatch::Executor
+  def call(env); end
+  def initialize(app, executor); end
+end
+class ActionDispatch::RequestId
+  def call(env); end
+  def initialize(app); end
+  def internal_request_id; end
+  def make_request_id(request_id); end
+end
+class ActionDispatch::RemoteIp
+  def call(env); end
+  def check_ip; end
+  def initialize(app, ip_spoofing_check = nil, custom_proxies = nil); end
+  def proxies; end
+end
+class ActionDispatch::RemoteIp::IpSpoofAttackError < StandardError
+end
+class ActionDispatch::RemoteIp::GetIp
+  def calculate_ip; end
+  def filter_proxies(ips); end
+  def initialize(req, check_ip, proxies); end
+  def ips_from(header); end
+  def to_s; end
+end
+class ActionDispatch::ShowExceptions
+  def call(env); end
+  def initialize(app, exceptions_app); end
+  def pass_response(status); end
+  def render_exception(request, exception); end
+end
+class ActionDispatch::PublicExceptions
+  def call(env); end
+  def initialize(public_path); end
+  def public_path; end
+  def public_path=(arg0); end
+  def render(status, content_type, body); end
+  def render_format(status, content_type, body); end
+  def render_html(status); end
 end
 class ActionDispatch::Routing::RouteWrapper < SimpleDelegator
   def action; end
@@ -1655,91 +1736,6 @@ class ActionDispatch::DebugExceptions::DebugView < ActionView::Base
   def debug_headers(headers); end
   def debug_params(params); end
   def render(*arg0); end
-end
-class ActionDispatch::RemoteIp
-  def call(env); end
-  def check_ip; end
-  def initialize(app, ip_spoofing_check = nil, custom_proxies = nil); end
-  def proxies; end
-end
-class ActionDispatch::RemoteIp::IpSpoofAttackError < StandardError
-end
-class ActionDispatch::RemoteIp::GetIp
-  def calculate_ip; end
-  def filter_proxies(ips); end
-  def initialize(req, check_ip, proxies); end
-  def ips_from(header); end
-  def to_s; end
-end
-class ActionDispatch::MiddlewareStack
-  def [](i); end
-  def assert_index(index, where); end
-  def build(app = nil); end
-  def build_middleware(klass, args, block); end
-  def delete(target); end
-  def each; end
-  def initialize(*args); end
-  def initialize_copy(other); end
-  def insert(index, klass, *args, &block); end
-  def insert_after(index, *args, &block); end
-  def insert_before(index, klass, *args, &block); end
-  def last; end
-  def middlewares; end
-  def middlewares=(arg0); end
-  def size; end
-  def swap(target, *args, &block); end
-  def unshift(klass, *args, &block); end
-  def use(klass, *args, &block); end
-  include Enumerable
-end
-class ActionDispatch::MiddlewareStack::Middleware
-  def ==(middleware); end
-  def args; end
-  def block; end
-  def build(app); end
-  def initialize(klass, args, block); end
-  def inspect; end
-  def klass; end
-  def name; end
-end
-class ActionDispatch::FileHandler
-  def call(env); end
-  def content_type(path); end
-  def ext; end
-  def gzip_encoding_accepted?(request); end
-  def gzip_file_path(path); end
-  def initialize(root, index: nil, headers: nil); end
-  def match?(path); end
-  def serve(request); end
-end
-class ActionDispatch::Static
-  def call(env); end
-  def initialize(app, path, index: nil, headers: nil); end
-end
-class ActionDispatch::Executor
-  def call(env); end
-  def initialize(app, executor); end
-end
-class ActionDispatch::RequestId
-  def call(env); end
-  def initialize(app); end
-  def internal_request_id; end
-  def make_request_id(request_id); end
-end
-class ActionDispatch::ShowExceptions
-  def call(env); end
-  def initialize(app, exceptions_app); end
-  def pass_response(status); end
-  def render_exception(request, exception); end
-end
-class ActionDispatch::PublicExceptions
-  def call(env); end
-  def initialize(public_path); end
-  def public_path; end
-  def public_path=(arg0); end
-  def render(status, content_type, body); end
-  def render_format(status, content_type, body); end
-  def render_html(status); end
 end
 class ActionDispatch::Reloader < ActionDispatch::Executor
 end
@@ -2399,7 +2395,6 @@ module AbstractController::Collector
   def url_encoded_form(*args, &block); end
   def vcf(*args, &block); end
   def vtt(*args, &block); end
-  def web_console_v2(*args, &block); end
   def webm(*args, &block); end
   def woff(*args, &block); end
   def woff2(*args, &block); end
@@ -2701,176 +2696,6 @@ class ActionController::Renderer
   def self.for(controller, env = nil, defaults = nil); end
   def with_defaults(defaults); end
 end
-module ActionDispatch::Assertions
-  def html_document; end
-  extend ActiveSupport::Concern
-  include ActionDispatch::Assertions::ResponseAssertions
-  include ActionDispatch::Assertions::RoutingAssertions
-  include Rails::Dom::Testing::Assertions
-  include Turbolinks::Assertions
-  include Turbolinks::Assertions
-end
-module ActionDispatch::Assertions::ResponseAssertions
-  def assert_redirected_to(options = nil, message = nil); end
-  def assert_response(type, message = nil); end
-  def code_with_name(code_or_name); end
-  def generate_response_message(expected, actual = nil); end
-  def location_if_redirected; end
-  def normalize_argument_to_redirection(fragment); end
-  def parameterize(value); end
-  def response_body_if_short; end
-end
-module ActionDispatch::Assertions::RoutingAssertions
-  def assert_generates(expected_path, options, defaults = nil, extras = nil, message = nil); end
-  def assert_recognizes(expected_options, path, extras = nil, msg = nil); end
-  def assert_routing(path, options, defaults = nil, extras = nil, message = nil); end
-  def fail_on(exception_class, message); end
-  def method_missing(selector, *args, &block); end
-  def recognized_request_for(path, extras = nil, msg); end
-  def with_routing; end
-end
-class ActionController::API < ActionController::Metal
-  def __callbacks; end
-  def __callbacks?; end
-  def _helper_methods; end
-  def _helper_methods=(val); end
-  def _helper_methods?; end
-  def _helpers; end
-  def _helpers=(val); end
-  def _helpers?; end
-  def _process_action_callbacks; end
-  def _renderers; end
-  def _renderers=(val); end
-  def _renderers?; end
-  def _run_process_action_callbacks(&block); end
-  def _view_paths; end
-  def _view_paths=(val); end
-  def _view_paths?; end
-  def _wrapper_options; end
-  def _wrapper_options=(val); end
-  def _wrapper_options?; end
-  def default_url_options; end
-  def default_url_options=(val); end
-  def default_url_options?; end
-  def etaggers; end
-  def etaggers=(val); end
-  def etaggers?; end
-  def helpers_path; end
-  def helpers_path=(val); end
-  def helpers_path?; end
-  def include_all_helpers; end
-  def include_all_helpers=(val); end
-  def include_all_helpers?; end
-  def logger; end
-  def logger=(value); end
-  def rescue_handlers; end
-  def rescue_handlers=(val); end
-  def rescue_handlers?; end
-  def self.__callbacks; end
-  def self.__callbacks=(val); end
-  def self.__callbacks?; end
-  def self._helper_methods; end
-  def self._helper_methods=(val); end
-  def self._helper_methods?; end
-  def self._helpers; end
-  def self._helpers=(val); end
-  def self._helpers?; end
-  def self._process_action_callbacks; end
-  def self._process_action_callbacks=(value); end
-  def self._renderers; end
-  def self._renderers=(val); end
-  def self._renderers?; end
-  def self._view_paths; end
-  def self._view_paths=(val); end
-  def self._view_paths?; end
-  def self._wrapper_options; end
-  def self._wrapper_options=(val); end
-  def self._wrapper_options?; end
-  def self.default_url_options; end
-  def self.default_url_options=(val); end
-  def self.default_url_options?; end
-  def self.etaggers; end
-  def self.etaggers=(val); end
-  def self.etaggers?; end
-  def self.helpers_path; end
-  def self.helpers_path=(val); end
-  def self.helpers_path?; end
-  def self.include_all_helpers; end
-  def self.include_all_helpers=(val); end
-  def self.include_all_helpers?; end
-  def self.logger; end
-  def self.logger=(value); end
-  def self.middleware_stack; end
-  def self.rescue_handlers; end
-  def self.rescue_handlers=(val); end
-  def self.rescue_handlers?; end
-  def self.without_modules(*modules); end
-  extend AbstractController::Callbacks::ClassMethods
-  extend AbstractController::Helpers::ClassMethods
-  extend AbstractController::UrlFor::ClassMethods
-  extend ActionController::ConditionalGet::ClassMethods
-  extend ActionController::ForceSSL::ClassMethods
-  extend ActionController::Helpers::ClassMethods
-  extend ActionController::Instrumentation::ClassMethods
-  extend ActionController::ParamsWrapper::ClassMethods
-  extend ActionController::Railties::Helpers
-  extend ActionController::Renderers::ClassMethods
-  extend ActionController::Rendering::ClassMethods
-  extend ActionView::Rendering::ClassMethods
-  extend ActionView::ViewPaths::ClassMethods
-  extend ActiveRecord::Railties::ControllerRuntime::ClassMethods
-  extend ActiveSupport::Callbacks::ClassMethods
-  extend ActiveSupport::DescendantsTracker
-  extend ActiveSupport::Rescuable::ClassMethods
-  extend Anonymous_Module_3
-  include AbstractController::Callbacks
-  include AbstractController::Callbacks
-  include AbstractController::Helpers
-  include AbstractController::Logger
-  include AbstractController::Logger
-  include AbstractController::Rendering
-  include AbstractController::UrlFor
-  include ActionController::ApiRendering
-  include ActionController::BasicImplicitRender
-  include ActionController::ConditionalGet
-  include ActionController::DataStreaming
-  include ActionController::ForceSSL
-  include ActionController::Helpers
-  include ActionController::ImplicitRender
-  include ActionController::Instrumentation
-  include ActionController::ParamsWrapper
-  include ActionController::Redirecting
-  include ActionController::Renderers
-  include ActionController::Renderers::All
-  include ActionController::Rendering
-  include ActionController::Rendering
-  include ActionController::Rescue
-  include ActionController::StrongParameters
-  include ActionController::UrlFor
-  include ActionController::UrlFor
-  include ActionDispatch::Routing::RouteSet::MountedHelpers
-  include ActionDispatch::Routing::UrlFor
-  include ActionDispatch::Routing::UrlFor
-  include ActionView::Rendering
-  include ActionView::ViewPaths
-  include ActionView::ViewPaths
-  include ActiveRecord::Railties::ControllerRuntime
-  include ActiveSupport::Benchmarkable
-  include ActiveSupport::Callbacks
-  include ActiveSupport::Rescuable
-  include ActiveSupport::Rescuable
-  include Turbolinks::Controller
-  include Turbolinks::Redirection
-end
-module Anonymous_Module_3
-  def inherited(klass); end
-end
-module ActionView::RoutingUrlFor
-  def default_url_options=(obj); end
-  def self.default_url_options=(obj); end
-  include ActionDispatch::Routing::UrlFor
-  include ActionDispatch::Routing::UrlFor
-end
 class ActionController::Base < ActionController::Metal
   def __callbacks; end
   def __callbacks?; end
@@ -3074,7 +2899,7 @@ class ActionController::Base < ActionController::Metal
   extend ActiveSupport::Callbacks::ClassMethods
   extend ActiveSupport::DescendantsTracker
   extend ActiveSupport::Rescuable::ClassMethods
-  extend Anonymous_Module_4
+  extend Anonymous_Module_3
   include AbstractController::AssetPaths
   include AbstractController::Caching
   include AbstractController::Caching::Fragments
@@ -3134,11 +2959,14 @@ class ActionController::Base < ActionController::Metal
   include ActiveSupport::Callbacks
   include ActiveSupport::Rescuable
   include ActiveSupport::Rescuable
-  include Turbolinks::Controller
-  include Turbolinks::Redirection
 end
-module Anonymous_Module_4
+module Anonymous_Module_3
   def inherited(klass); end
+end
+module ActionView::RoutingUrlFor
+  def default_url_options=(obj); end
+  def self.default_url_options=(obj); end
+  include ActionDispatch::Routing::UrlFor
 end
 module ActionController::TemplateAssertions
   def assert_template(options = nil, message = nil); end
@@ -3174,6 +3002,32 @@ module ActionDispatch::TestProcess
 end
 module ActionDispatch::TestProcess::FixtureFile
   def fixture_file_upload(path, mime_type = nil, binary = nil); end
+end
+module ActionDispatch::Assertions
+  def html_document; end
+  extend ActiveSupport::Concern
+  include ActionDispatch::Assertions::ResponseAssertions
+  include ActionDispatch::Assertions::RoutingAssertions
+  include Rails::Dom::Testing::Assertions
+end
+module ActionDispatch::Assertions::ResponseAssertions
+  def assert_redirected_to(options = nil, message = nil); end
+  def assert_response(type, message = nil); end
+  def code_with_name(code_or_name); end
+  def generate_response_message(expected, actual = nil); end
+  def location_if_redirected; end
+  def normalize_argument_to_redirection(fragment); end
+  def parameterize(value); end
+  def response_body_if_short; end
+end
+module ActionDispatch::Assertions::RoutingAssertions
+  def assert_generates(expected_path, options, defaults = nil, extras = nil, message = nil); end
+  def assert_recognizes(expected_options, path, extras = nil, msg = nil); end
+  def assert_routing(path, options, defaults = nil, extras = nil, message = nil); end
+  def fail_on(exception_class, message); end
+  def method_missing(selector, *args, &block); end
+  def recognized_request_for(path, extras = nil, msg); end
+  def with_routing; end
 end
 class ActionController::TestRequest < ActionDispatch::TestRequest
   def assign_parameters(routes, controller_path, action, parameters, generated_path, query_string_keys); end

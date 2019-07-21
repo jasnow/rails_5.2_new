@@ -492,6 +492,50 @@ class Rails::Application::Configuration::Custom
   def method_missing(method, *args); end
   def respond_to_missing?(symbol, *arg1); end
 end
+module Rails::Application::Bootstrap
+  extend Rails::Initializable::ClassMethods
+  include Rails::Initializable
+end
+module Rails::Application::Finisher
+  extend Rails::Initializable::ClassMethods
+  include Rails::Initializable
+end
+class Rails::Application::Finisher::MutexHook
+  def complete(_state); end
+  def initialize(mutex = nil); end
+  def run; end
+end
+module Rails::Application::Finisher::InterlockHook
+  def self.complete(_state); end
+  def self.run; end
+end
+class Rails::Application::RoutesReloader
+  def clear!; end
+  def eager_load; end
+  def eager_load=(arg0); end
+  def execute(*args, &block); end
+  def execute_if_updated(*args, &block); end
+  def finalize!; end
+  def initialize; end
+  def load_paths; end
+  def paths; end
+  def reload!; end
+  def revert; end
+  def route_sets; end
+  def updated?(*args, &block); end
+  def updater; end
+end
+class Rails::Rack::Logger < ActiveSupport::LogSubscriber
+end
+class Rails::Application::DefaultMiddlewareStack
+  def app; end
+  def build_stack; end
+  def config; end
+  def initialize(app, config, paths); end
+  def load_rack_cache; end
+  def paths; end
+  def show_exceptions_app; end
+end
 module Rails::Command
   def self.command_type; end
   def self.environment; end
@@ -547,136 +591,6 @@ module Rails::Generators
   def self.templates_path; end
   extend Rails::Command::Behavior::ClassMethods
   include Rails::Command::Behavior
-end
-module Rails::Application::Bootstrap
-  extend Rails::Initializable::ClassMethods
-  include Rails::Initializable
-end
-module Rails::Application::Finisher
-  extend Rails::Initializable::ClassMethods
-  include Rails::Initializable
-end
-class Rails::Application::Finisher::MutexHook
-  def complete(_state); end
-  def initialize(mutex = nil); end
-  def run; end
-end
-module Rails::Application::Finisher::InterlockHook
-  def self.complete(_state); end
-  def self.run; end
-end
-class Rails::Application::RoutesReloader
-  def clear!; end
-  def eager_load; end
-  def eager_load=(arg0); end
-  def execute(*args, &block); end
-  def execute_if_updated(*args, &block); end
-  def finalize!; end
-  def initialize; end
-  def load_paths; end
-  def paths; end
-  def reload!; end
-  def revert; end
-  def route_sets; end
-  def updated?(*args, &block); end
-  def updater; end
-end
-class Rails::Rack::Logger < ActiveSupport::LogSubscriber
-end
-module Rails::Generators::Actions
-  def add_source(source, options = nil, &block); end
-  def after_bundle(&block); end
-  def application(data = nil, options = nil); end
-  def capify!; end
-  def environment(data = nil, options = nil); end
-  def execute_command(executor, command, options = nil); end
-  def extify(name); end
-  def gem(*args); end
-  def gem_group(*names, &block); end
-  def generate(what, *args); end
-  def git(commands = nil); end
-  def initialize(*arg0); end
-  def initializer(filename, data = nil); end
-  def lib(filename, data = nil); end
-  def log(*args); end
-  def optimize_indentation(value, amount = nil); end
-  def quote(value); end
-  def rails_command(command, options = nil); end
-  def rake(command, options = nil); end
-  def rakefile(filename, data = nil); end
-  def readme(path); end
-  def route(routing_code); end
-  def vendor(filename, data = nil); end
-end
-class Rails::Generators::Error < Thor::Error
-end
-class Rails::Generators::Base < Thor::Group
-  def self.add_shebang_option!; end
-  def self.banner; end
-  def self.base_name; end
-  def self.base_root; end
-  def self.class_option(name, options = nil); end
-  def self.default_aliases_for_option(name, options); end
-  def self.default_for_option(config, name, options, default); end
-  def self.default_generator_root; end
-  def self.default_source_root; end
-  def self.default_value_for_option(name, options); end
-  def self.desc(description = nil); end
-  def self.generator_name; end
-  def self.hide!; end
-  def self.hook_for(*names, &block); end
-  def self.hooks; end
-  def self.inherited(base); end
-  def self.namespace(name = nil); end
-  def self.prepare_for_invocation(name, value); end
-  def self.remove_hook_for(*names); end
-  def self.source_root(path = nil); end
-  def self.usage_path; end
-  extend Thor::Actions::ClassMethods
-  include Rails::Generators::Actions
-  include Thor::Actions
-end
-class Rails::Generators::GeneratedAttribute
-  def attr_options; end
-  def column_name; end
-  def default; end
-  def field_type; end
-  def foreign_key?; end
-  def has_index?; end
-  def has_uniq_index?; end
-  def human_name; end
-  def index_name; end
-  def index_name=(arg0); end
-  def initialize(name, type = nil, index_type = nil, attr_options = nil); end
-  def inject_index_options; end
-  def inject_options; end
-  def name; end
-  def name=(arg0); end
-  def options_for_migration; end
-  def password_digest?; end
-  def plural_name; end
-  def polymorphic?; end
-  def reference?; end
-  def required?; end
-  def self.parse(column_definition); end
-  def self.parse_type_and_options(type); end
-  def self.reference?(type); end
-  def singular_name; end
-  def token?; end
-  def type; end
-  def type=(arg0); end
-end
-class Rails::Generators::NamedBase < Rails::Generators::Base
-  def self.check_class_collision(options = nil); end
-end
-class Rails::Application::DefaultMiddlewareStack
-  def app; end
-  def build_stack; end
-  def config; end
-  def initialize(app, config, paths); end
-  def load_rack_cache; end
-  def paths; end
-  def show_exceptions_app; end
 end
 module Rails::Generators::Testing
 end

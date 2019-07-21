@@ -3,9 +3,10 @@
 
 # typed: strong
 module ::Anonymous_Delegator_1; end
+module ::Anonymous_Delegator_10; end
 module ::Anonymous_Delegator_11; end
 module ::Anonymous_Delegator_12; end
 module ::Anonymous_Delegator_13; end
-module ::Anonymous_Delegator_14; end
-module ::Anonymous_Delegator_26; end
-module ::Anonymous_Delegator_27; end
+module ::Anonymous_Delegator_22; end
+module ::Spring; end
+module ActionDispatch::SystemTestCase; end
