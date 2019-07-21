@@ -1,20 +1,20 @@
 # README
 
-* Ruby version: 2.5.1
+* Ruby version: 2.5.x (latest)
 
-* Rails version: 5.2.x
+* Rails version: 5.2.x (latest)
 
 ## How to create this repo
 
  1. Run "gem install rails" if needed.
  2. Run "rails _5.2.3_ new rails_5.2_new".
- 3. Run [cd rails_5.2_new; echo 'rvm use 2.5.1@ruby2.5-rails5.2 --create' > .rvmrc]
+ 3. Run [cd rails_5.2_new; echo 'rvm use 2.5.5@ruby2.5-rails5.2 --create' > .rvmrc]
  4. Run "git init" to set up Git.
  5. Add .travis.yml file such as:
 ```
 language: ruby
 rvm:
-  - 2.5.1
+  - 2.5.5
 before_install: gem install bundler
 cache: bundler
 ```
