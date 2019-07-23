@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/sorbet-runtime/all/sorbet-runtime.rbi
 #
-# sorbet-runtime-0.4.4486
+# sorbet-runtime-0.4.4489
 module T::Configuration
   def self.call_validation_error_handler(signature, opts); end
   def self.call_validation_error_handler=(value); end
@@ -73,8 +73,6 @@ class T::Private::DeclState
   def reset!; end
   def self.current; end
   def self.current=(other); end
-  def skip_next_on_method_added; end
-  def skip_next_on_method_added=(arg0); end
 end
 module T::Utils
   def self.arity(method); end

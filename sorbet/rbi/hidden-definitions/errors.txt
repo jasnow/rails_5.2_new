@@ -2095,8 +2095,6 @@
 # uninitialized constant Date::Infinity::PETABYTE
 # uninitialized constant Date::Infinity::TERABYTE
 # wrong constant name initialize
-# undefined singleton method `_parse$1' for `Date'
-# wrong constant name _parse$1
 # wrong constant name !=
 # wrong constant name ==
 # wrong constant name __getobj__
@@ -2625,8 +2623,6 @@
 # wrong constant name debug=
 # wrong constant name <static-init>
 # wrong constant name garbage_collect
-# undefined singleton method `report$1' for `GC::Profiler'
-# wrong constant name report$1
 # undefined singleton method `start$1' for `GC'
 # undefined singleton method `stat$2' for `GC'
 # wrong constant name latest_gc_info
@@ -4838,12 +4834,6 @@
 # wrong constant name sqrt
 # wrong constant name from_state
 # wrong constant name initialize
-# undefined singleton method `dump$1' for `JSON'
-# undefined singleton method `generate$1' for `JSON'
-# undefined singleton method `pretty_generate$1' for `JSON'
-# wrong constant name dump$1
-# wrong constant name generate$1
-# wrong constant name pretty_generate$1
 # undefined method `clone$1' for module `Kernel'
 # Did you mean?  clone
 # undefined method `define_singleton_method$2' for module `Kernel'
@@ -6611,8 +6601,6 @@
 # undefined method `[]$2' for class `MatchData'
 # wrong constant name []$2
 # wrong constant name named_captures
-# undefined singleton method `log$1' for `Math'
-# wrong constant name log$1
 # wrong constant name ===
 # wrong constant name []
 # wrong constant name arity
@@ -6727,8 +6715,6 @@
 # uninitialized constant Net::HTTP::DigestAuth
 # uninitialized constant Net::HTTP::Persistent
 # uninitialized constant Net::HTTP::Persistent
-# undefined singleton method `new$1' for `Net::HTTP'
-# wrong constant name new$1
 # uninitialized constant Net::HTTPAlreadyReported::CODE_CLASS_TO_OBJ
 # uninitialized constant Net::HTTPAlreadyReported::CODE_TO_OBJ
 # wrong constant name <static-init>
@@ -7253,8 +7239,6 @@
 # wrong constant name symlink?$2
 # wrong constant name sysopen$1
 # wrong constant name write$1
-# undefined singleton method `glob$1' for `Pathname'
-# wrong constant name glob$1
 # undefined method `curry$1' for class `Proc'
 # wrong constant name ===
 # wrong constant name clone
@@ -9125,8 +9109,6 @@
 # wrong constant name <static-init>
 # wrong constant name main
 # wrong constant name output_file
-# wrong constant name <static-init>
-# wrong constant name <static-init>
 # uninitialized constant SortedSet::InspectKey
 # wrong constant name initialize
 # wrong constant name setup
@@ -9720,20 +9702,6 @@
 # wrong constant name localtime$1
 # wrong constant name round$1
 # wrong constant name to_s$1
-# undefined singleton method `at$2' for `Time'
-# undefined singleton method `gm$1' for `Time'
-# undefined singleton method `local$1' for `Time'
-# undefined singleton method `mktime$1' for `Time'
-# undefined singleton method `utc$1' for `Time'
-# undefined singleton method `zone_offset$1' for `Time'
-# wrong constant name at$2
-# wrong constant name gm$1
-# wrong constant name local$1
-# wrong constant name mktime$1
-# wrong constant name utc$1
-# wrong constant name zone_offset$1
-# undefined singleton method `catch$1' for `Timeout::Error'
-# wrong constant name catch$1
 # wrong constant name event
 # wrong constant name decode
 # wrong constant name encode
