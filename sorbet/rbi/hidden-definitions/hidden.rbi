@@ -12834,85 +12834,12 @@ end
 OptParse = OptionParser
 
 class OptionParser
-  def abort(mesg=T.unsafe(nil)); end
-
-  def accept(*args, &blk); end
-
-  def add_officious(); end
-
-  def banner(); end
-
-  def banner=(banner); end
-
-  def base(); end
-
-  def candidate(word); end
-
-  def compsys(to, name=T.unsafe(nil)); end
-
+  include ::ActiveSupport::ToJsonWithActiveSupportEncoder
   def def_head_option(*opts, &block); end
 
   def def_option(*opts, &block); end
 
   def def_tail_option(*opts, &block); end
-
-  def default_argv(); end
-
-  def default_argv=(default_argv); end
-
-  def define(*opts, &block); end
-
-  def define_head(*opts, &block); end
-
-  def define_tail(*opts, &block); end
-
-  def environment(env=T.unsafe(nil)); end
-
-  def getopts(*args); end
-
-  def help(); end
-
-  def inc(*args); end
-
-  def initialize(banner=T.unsafe(nil), width=T.unsafe(nil), indent=T.unsafe(nil)); end
-
-  def load(filename=T.unsafe(nil)); end
-
-  def make_switch(opts, block=T.unsafe(nil)); end
-
-  def new(); end
-
-  def on(*opts, &block); end
-
-  def on_head(*opts, &block); end
-
-  def on_tail(*opts, &block); end
-
-  def order(*argv, into: T.unsafe(nil), &nonopt); end
-
-  def order!(argv=T.unsafe(nil), into: T.unsafe(nil), &nonopt); end
-
-  def parse(*argv, into: T.unsafe(nil)); end
-
-  def parse!(argv=T.unsafe(nil), into: T.unsafe(nil)); end
-
-  def permute(*argv, into: T.unsafe(nil)); end
-
-  def permute!(argv=T.unsafe(nil), into: T.unsafe(nil)); end
-
-  def program_name(); end
-
-  def program_name=(program_name); end
-
-  def reject(*args, &blk); end
-
-  def release(); end
-
-  def release=(release); end
-
-  def remove(); end
-
-  def separator(string); end
 
   def set_banner(_); end
 
@@ -12921,30 +12848,6 @@ class OptionParser
   def set_summary_indent(_); end
 
   def set_summary_width(_); end
-
-  def summarize(to=T.unsafe(nil), width=T.unsafe(nil), max=T.unsafe(nil), indent=T.unsafe(nil), &blk); end
-
-  def summary_indent(); end
-
-  def summary_indent=(summary_indent); end
-
-  def summary_width(); end
-
-  def summary_width=(summary_width); end
-
-  def terminate(arg=T.unsafe(nil)); end
-
-  def to_a(); end
-
-  def top(); end
-
-  def ver(); end
-
-  def version(); end
-
-  def version=(version); end
-
-  def warn(mesg=T.unsafe(nil)); end
   ArgumentStyle = ::T.let(nil, ::T.untyped)
   COMPSYS_HEADER = ::T.let(nil, ::T.untyped)
   DecimalInteger = ::T.let(nil, ::T.untyped)
@@ -12967,233 +12870,48 @@ module OptionParser::Acceptables
   OctalInteger = ::T.let(nil, ::T.untyped)
 end
 
-module OptionParser::Acceptables
-end
-
 class OptionParser::AmbiguousArgument
   Reason = ::T.let(nil, ::T.untyped)
-end
-
-class OptionParser::AmbiguousArgument
 end
 
 class OptionParser::AmbiguousOption
   Reason = ::T.let(nil, ::T.untyped)
 end
 
-class OptionParser::AmbiguousOption
-end
-
-module OptionParser::Arguable
-  def getopts(*args); end
-
-  def initialize(*args); end
-
-  def options(); end
-
-  def options=(opt); end
-
-  def order!(&blk); end
-
-  def parse!(); end
-
-  def permute!(); end
-end
-
-module OptionParser::Arguable
-  def self.extend_object(obj); end
-end
-
 class OptionParser::CompletingHash
-  include ::OptionParser::Completion
-  def match(key); end
-end
-
-class OptionParser::CompletingHash
-end
-
-module OptionParser::Completion
-  def candidate(key, icase=T.unsafe(nil), pat=T.unsafe(nil)); end
-
-  def complete(key, icase=T.unsafe(nil), pat=T.unsafe(nil)); end
-
-  def convert(opt=T.unsafe(nil), val=T.unsafe(nil), *_); end
-end
-
-module OptionParser::Completion
-  def self.candidate(key, icase=T.unsafe(nil), pat=T.unsafe(nil), &block); end
-
-  def self.regexp(key, icase); end
+  include ::ActiveSupport::ToJsonWithActiveSupportEncoder
 end
 
 class OptionParser::InvalidArgument
   Reason = ::T.let(nil, ::T.untyped)
 end
 
-class OptionParser::InvalidArgument
-end
-
 class OptionParser::InvalidOption
   Reason = ::T.let(nil, ::T.untyped)
 end
 
-class OptionParser::InvalidOption
-end
-
 class OptionParser::List
-  def accept(t, pat=T.unsafe(nil), &block); end
-
-  def add_banner(to); end
-
-  def append(*args); end
-
-  def atype(); end
-
-  def complete(id, opt, icase=T.unsafe(nil), *pat, &block); end
-
-  def compsys(*args, &block); end
-
-  def each_option(&block); end
-
-  def list(); end
-
-  def long(); end
-
-  def prepend(*args); end
-
-  def reject(t); end
-
-  def search(id, key); end
-
-  def short(); end
-
-  def summarize(*args, &block); end
-end
-
-class OptionParser::List
+  include ::ActiveSupport::ToJsonWithActiveSupportEncoder
 end
 
 class OptionParser::MissingArgument
   Reason = ::T.let(nil, ::T.untyped)
 end
 
-class OptionParser::MissingArgument
-end
-
 class OptionParser::NeedlessArgument
   Reason = ::T.let(nil, ::T.untyped)
 end
 
-class OptionParser::NeedlessArgument
-end
-
 class OptionParser::OptionMap
-  include ::OptionParser::Completion
-end
-
-class OptionParser::OptionMap
+  include ::ActiveSupport::ToJsonWithActiveSupportEncoder
 end
 
 class OptionParser::ParseError
-  def args(); end
-
-  def initialize(*args); end
-
-  def reason(); end
-
-  def reason=(reason); end
-
-  def recover(argv); end
-
-  def set_backtrace(array); end
-
-  def set_option(opt, eq); end
   Reason = ::T.let(nil, ::T.untyped)
 end
 
-class OptionParser::ParseError
-  def self.filter_backtrace(array); end
-end
-
 class OptionParser::Switch
-  def add_banner(to); end
-
-  def arg(); end
-
-  def block(); end
-
-  def compsys(sdone, ldone); end
-
-  def conv(); end
-
-  def desc(); end
-
-  def initialize(pattern=T.unsafe(nil), conv=T.unsafe(nil), short=T.unsafe(nil), long=T.unsafe(nil), arg=T.unsafe(nil), desc=T.unsafe(nil), block=T.unsafe(nil)); end
-
-  def long(); end
-
-  def match_nonswitch?(str); end
-
-  def pattern(); end
-
-  def short(); end
-
-  def summarize(sdone=T.unsafe(nil), ldone=T.unsafe(nil), width=T.unsafe(nil), max=T.unsafe(nil), indent=T.unsafe(nil)); end
-
-  def switch_name(); end
-end
-
-class OptionParser::Switch::NoArgument
-  def parse(arg, argv); end
-end
-
-class OptionParser::Switch::NoArgument
-  def self.incompatible_argument_styles(*_); end
-end
-
-class OptionParser::Switch::OptionalArgument
-  def parse(arg, argv, &error); end
-end
-
-class OptionParser::Switch::OptionalArgument
-end
-
-class OptionParser::Switch::PlacedArgument
-  def parse(arg, argv, &error); end
-end
-
-class OptionParser::Switch::PlacedArgument
-end
-
-class OptionParser::Switch::RequiredArgument
-  def parse(arg, argv); end
-end
-
-class OptionParser::Switch::RequiredArgument
-end
-
-class OptionParser::Switch
-  def self.guess(arg); end
-
-  def self.incompatible_argument_styles(arg, t); end
-
-  def self.pattern(); end
-end
-
-class OptionParser
-  def self.accept(*args, &blk); end
-
-  def self.getopts(*args); end
-
-  def self.inc(arg, default=T.unsafe(nil)); end
-
-  def self.reject(*args, &blk); end
-
-  def self.terminate(arg=T.unsafe(nil)); end
-
-  def self.top(); end
-
-  def self.with(*args, &block); end
+  include ::ActiveSupport::ToJsonWithActiveSupportEncoder
 end
 
 ParseError = Racc::ParseError

@@ -1,4 +1,4 @@
-# typed: false
+# typed: strong
 
 #HID: %w[
 #HID:   .ruby-version
