@@ -40,5 +40,5 @@ end
 gem 'sorbet', :group => :development
 gem 'sorbet-runtime'
 gem 'sorbet-rails'
-#gem 'dalli' # 7/21/2019: Required by Sorbet
-#gem 'redis' # 7/21/2019: Required by Sorbet
+gem 'dalli' # 7/21/2019: Required by Sorbet
+gem 'redis' # 7/21/2019: Required by Sorbet
