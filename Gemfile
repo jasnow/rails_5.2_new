@@ -38,7 +38,7 @@ end
 #HID: gem 'tzinfo-data'
 
 gem 'sorbet', :group => :development
-gem 'sorbet-runtime'
+#HID: gem 'sorbet-runtime'
 gem 'sorbet-rails'
 gem 'dalli' # 7/21/2019: Required by Sorbet
 gem 'redis' # 7/21/2019: Required by Sorbet
