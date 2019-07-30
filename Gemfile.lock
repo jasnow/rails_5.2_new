@@ -139,7 +139,7 @@ DEPENDENCIES
   dalli
   listen
   puma
-  rails
+  rails (= 5.2.3)
   redis
   sorbet
   sorbet-rails
@@ -150,4 +150,4 @@ RUBY VERSION
    ruby 2.4.6p354
 
 BUNDLED WITH
-   2.0.2
+   1.17.3

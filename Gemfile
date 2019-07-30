@@ -4,12 +4,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.4.6'
 
 #REQUIRED
-gem 'rails'
+gem 'rails', '5.2.3'
 gem 'sqlite3'
 gem 'puma'
 gem 'bootsnap'
 group :development do
-   gem 'listen'
+  gem 'listen'
 end
 
 #HID: gem 'sass-rails'
