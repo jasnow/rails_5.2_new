@@ -3768,30 +3768,6 @@ module Bootsnap::LoadPathCache::PathScanner
   REQUIRABLE_EXTENSIONS = ::T.let(nil, ::T.untyped)
 end
 
-class Bundler::CurrentRuby
-  def jruby_27?(); end
-
-  def maglev_27?(); end
-
-  def mingw_27?(); end
-
-  def mri_27?(); end
-
-  def mswin64_27?(); end
-
-  def mswin_27?(); end
-
-  def on_27?(); end
-
-  def rbx_27?(); end
-
-  def ruby_27?(); end
-
-  def truffleruby_27?(); end
-
-  def x64_mingw_27?(); end
-end
-
 Bundler::Deprecate = Gem::Deprecate
 
 class Bundler::Env
@@ -3807,8 +3783,6 @@ end
 
 class Bundler::FeatureFlag
   def github_https?(); end
-
-  def lockfile_upgrade_warning?(); end
 end
 
 class Bundler::Fetcher
@@ -3985,20 +3959,6 @@ class Bundler::Fetcher
   def self.redirect_limit=(redirect_limit); end
 end
 
-module Bundler::FileUtils
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class Bundler::FileUtils::Entry_
-  def link(dest); end
-end
-
-module Bundler::FileUtils
-  def self.cp_lr(src, dest, noop: T.unsafe(nil), verbose: T.unsafe(nil), dereference_root: T.unsafe(nil), remove_destination: T.unsafe(nil)); end
-
-  def self.link_entry(src, dest, dereference_root=T.unsafe(nil), remove_destination=T.unsafe(nil)); end
-end
-
 class Bundler::GemHelper
   def allowed_push_host(); end
 
@@ -4040,9 +4000,7 @@ class Bundler::GemHelper
 
   def sh(cmd, &block); end
 
-  def sh_with_input(cmd); end
-
-  def sh_with_status(cmd, &block); end
+  def sh_with_code(cmd, &block); end
 
   def spec_path(); end
 
@@ -4383,13 +4341,10 @@ class Bundler::Retry
 end
 
 class Bundler::RubyGemsGemInstaller
+  def initialize(gem, options=T.unsafe(nil)); end
 end
 
 class Bundler::RubyGemsGemInstaller
-end
-
-class Bundler::RubygemsIntegration::MoreFuture
-  def default_stubs(); end
 end
 
 class Bundler::Settings::Mirror
@@ -11632,21 +11587,7 @@ class MiniMime::Info
   BINARY_ENCODINGS = ::T.let(nil, ::T.untyped)
 end
 
-module Minitest
-end
-
-MiniTest::Assertions = Minitest::Assertions
-
-MiniTest::Guard = Minitest::Guard
-
-MiniTest::Reportable = Minitest::Reportable
-
-MiniTest::Runnable = Minitest::Runnable
-
-MiniTest::Test = Minitest::Test
-
-module Minitest
-end
+MiniTest = Minitest
 
 module Minitest
   ENCS = ::T.let(nil, ::T.untyped)
@@ -11785,6 +11726,8 @@ class Net::BufferedIO
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
 end
 
+Net::HTTP::ProxyMod = Net::HTTP::ProxyDelta
+
 Net::HTTPClientError::EXCEPTION_TYPE = Net::HTTPServerException
 
 Net::HTTPClientErrorCode = Net::HTTPClientError
@@ -11798,6 +11741,8 @@ end
 class Net::HTTPGenericRequest::Chunker
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
 end
+
+Net::HTTPInformation::EXCEPTION_TYPE = Net::HTTPError
 
 Net::HTTPInformationCode = Net::HTTPInformation
 
@@ -11827,15 +11772,7 @@ Net::HTTPServerError::EXCEPTION_TYPE = Net::HTTPFatalError
 
 Net::HTTPServerErrorCode = Net::HTTPServerError
 
-class Net::HTTP
-end
-
-Net::HTTPSession::ProxyDelta = Net::HTTP::ProxyDelta
-
-Net::HTTPSession::ProxyMod = Net::HTTP::ProxyDelta
-
-class Net::HTTP
-end
+Net::HTTPSession = Net::HTTP
 
 Net::HTTPSuccess::EXCEPTION_TYPE = Net::HTTPError
 
@@ -16284,6 +16221,8 @@ class Sorbet::Private::RequireEverything
   def self.patch_kernel(); end
 
   def self.rails?(); end
+
+  def self.rb_file_paths(); end
 
   def self.require_all_files(); end
 
