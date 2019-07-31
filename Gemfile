@@ -12,7 +12,7 @@ group :development do
   gem 'listen'
 end
 
-#HID: gem 'sass-rails'
+#HID: gem 'sassc-rails'
 #HID: gem 'uglifier'
 #HID:
 #HID: gem 'coffee-rails'
