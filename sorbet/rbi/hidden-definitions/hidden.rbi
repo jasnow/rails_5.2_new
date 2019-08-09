@@ -11585,11 +11585,13 @@ class Net::BufferedIO
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
 end
 
-Net::HTTP::ProxyMod = Net::HTTP::ProxyDelta
+class Net::HTTPClientError
+end
 
-Net::HTTPClientError::EXCEPTION_TYPE = Net::HTTPServerException
+Net::HTTPClientErrorCode::EXCEPTION_TYPE = Net::HTTPServerException
 
-Net::HTTPClientErrorCode = Net::HTTPClientError
+class Net::HTTPClientError
+end
 
 Net::HTTPFatalErrorCode = Net::HTTPClientError
 
@@ -11601,9 +11603,13 @@ class Net::HTTPGenericRequest::Chunker
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
 end
 
-Net::HTTPInformation::EXCEPTION_TYPE = Net::HTTPError
+class Net::HTTPInformation
+end
 
-Net::HTTPInformationCode = Net::HTTPInformation
+Net::HTTPInformationCode::EXCEPTION_TYPE = Net::HTTPError
+
+class Net::HTTPInformation
+end
 
 Net::HTTPMovedTemporarily = Net::HTTPFound
 
@@ -11627,11 +11633,23 @@ end
 
 Net::HTTPRetriableCode = Net::HTTPRedirection
 
-Net::HTTPServerError::EXCEPTION_TYPE = Net::HTTPFatalError
+class Net::HTTPServerError
+end
 
-Net::HTTPServerErrorCode = Net::HTTPServerError
+Net::HTTPServerErrorCode::EXCEPTION_TYPE = Net::HTTPFatalError
 
-Net::HTTPSession = Net::HTTP
+class Net::HTTPServerError
+end
+
+class Net::HTTP
+end
+
+Net::HTTPSession::ProxyDelta = Net::HTTP::ProxyDelta
+
+Net::HTTPSession::ProxyMod = Net::HTTP::ProxyDelta
+
+class Net::HTTP
+end
 
 Net::HTTPSuccess::EXCEPTION_TYPE = Net::HTTPError
 
@@ -13369,6 +13387,9 @@ module Puma::Const
   HTTP_HOST = ::T.let(nil, ::T.untyped)
   HTTP_VERSION = ::T.let(nil, ::T.untyped)
   HTTP_X_FORWARDED_FOR = ::T.let(nil, ::T.untyped)
+  HTTP_X_FORWARDED_PROTO = ::T.let(nil, ::T.untyped)
+  HTTP_X_FORWARDED_SCHEME = ::T.let(nil, ::T.untyped)
+  HTTP_X_FORWARDED_SSL = ::T.let(nil, ::T.untyped)
   KEEP_ALIVE = ::T.let(nil, ::T.untyped)
   LINE_END = ::T.let(nil, ::T.untyped)
   LOCALHOST = ::T.let(nil, ::T.untyped)
@@ -13425,6 +13446,9 @@ end
 
 module Puma::MiniSSL
   OPENSSL_LIBRARY_VERSION = ::T.let(nil, ::T.untyped)
+  OPENSSL_NO_SSL3 = ::T.let(nil, ::T.untyped)
+  OPENSSL_NO_TLS1 = ::T.let(nil, ::T.untyped)
+  OPENSSL_NO_TLS1_1 = ::T.let(nil, ::T.untyped)
   OPENSSL_VERSION = ::T.let(nil, ::T.untyped)
   VERIFY_FAIL_IF_NO_PEER_CERT = ::T.let(nil, ::T.untyped)
   VERIFY_NONE = ::T.let(nil, ::T.untyped)
