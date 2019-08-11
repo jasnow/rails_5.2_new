@@ -2296,9 +2296,6 @@ module ActiveRecord::AttributeMethods::PrimaryKey::ClassMethods
   ID_ATTRIBUTE_METHODS = ::T.let(nil, ::T.untyped)
 end
 
-class ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter
-end
-
 module ActiveRecord::Batches
   ORDER_IGNORE_MESSAGE = ::T.let(nil, ::T.untyped)
 end
@@ -2421,9 +2418,6 @@ end
 
 module ActiveRecord::LegacyYamlAdapter
   def self.convert(klass, coder); end
-end
-
-class ActiveRecord::Locking::LockingType
 end
 
 class ActiveRecord::LogSubscriber
@@ -2964,13 +2958,7 @@ ActiveRecord::Type::Helpers = ActiveModel::Type::Helpers
 
 ActiveRecord::Type::Integer = ActiveModel::Type::Integer
 
-class ActiveRecord::Type::Serialized
-end
-
 ActiveRecord::Type::String = ActiveModel::Type::String
-
-class ActiveRecord::Type::Time::Value
-end
 
 module ActiveRecord::VERSION
   MAJOR = ::T.let(nil, ::T.untyped)
@@ -11189,9 +11177,6 @@ end
 module Mail::Parsers
 end
 
-class Mail::PartsList
-end
-
 class Mail::PhraseList
   def initialize(string); end
 
@@ -12399,42 +12384,8 @@ module Parlour
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
-class Parlour::ConflictResolver
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class Parlour::Plugin
-  extend ::T::Private::Abstract::Hooks
-  extend ::T::InterfaceWrapper::Helpers
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class Parlour::RbiGenerator::Options
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
 class Parlour::RbiGenerator::Parameter
   PREFIXES = ::T.let(nil, ::T.untyped)
-end
-
-class Parlour::RbiGenerator::Parameter
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class Parlour::RbiGenerator::RbiObject
-  extend ::T::Private::Abstract::Hooks
-  extend ::T::InterfaceWrapper::Helpers
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class Parlour::RbiGenerator
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
 end
 
 ParseError = Racc::ParseError
@@ -16204,23 +16155,6 @@ class Sorbet::Private::TodoRBI
 end
 
 SorbetRails::ModelPlugins::Base::Parameter = Parlour::RbiGenerator::Parameter
-
-module SorbetRails::ModelPlugins
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class SorbetRails::ModelRbiFormatter
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-module SorbetRails::ModelUtils
-  extend ::T::Private::Abstract::Hooks
-  extend ::T::InterfaceWrapper::Helpers
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
 
 class SortedSet
   def initialize(*args, &block); end
