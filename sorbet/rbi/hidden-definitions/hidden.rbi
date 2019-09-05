@@ -3725,14 +3725,6 @@ end
 class Binding
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
   def clone(); end
-
-  def local_variable_defined?(_); end
-
-  def local_variable_get(_); end
-
-  def local_variable_set(_, _1); end
-
-  def receiver(); end
 end
 
 module Bootsnap
@@ -8256,10 +8248,6 @@ end
 
 class Numeric
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
-  def finite?(); end
-
-  def infinite?(); end
-
   EXABYTE = ::T.let(nil, ::T.untyped)
   GIGABYTE = ::T.let(nil, ::T.untyped)
   KILOBYTE = ::T.let(nil, ::T.untyped)
