@@ -1,0 +1,8 @@
+set -x
+grep -i activestorage::attachment \
+sorbet/rails-rbi/models/active_storage/attachment.rbi \
+|egrep -v "sig " |egrep -i "class|def"
+echo
+grep -i attachment \
+sorbet/rbi/sorbet-typed/lib/activestorage/all/activestorage.rbi \
+|egrep -v "sig |#" 
