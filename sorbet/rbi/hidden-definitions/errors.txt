@@ -1684,7 +1684,6 @@
 # undefined method `shuffle!$1' for class `Array'
 # undefined method `slice$2' for class `Array'
 # undefined method `slice!$2' for class `Array'
-# undefined method `sum$2' for class `Array'
 # undefined method `to_s$1' for class `Array'
 # Did you mean?  to_s
 # wrong constant name []$2
@@ -1717,7 +1716,6 @@
 # wrong constant name shuffle!$1
 # wrong constant name slice$2
 # wrong constant name slice!$2
-# wrong constant name sum$2
 # wrong constant name to_h
 # wrong constant name to_s$1
 # wrong constant name try_convert
@@ -5038,6 +5036,8 @@
 # undefined method `basename$1' for class `Pathname'
 # undefined method `binread$1' for class `Pathname'
 # undefined method `binwrite$1' for class `Pathname'
+# undefined method `children$1' for class `Pathname'
+# undefined method `each_child$1' for class `Pathname'
 # undefined method `each_line$2' for class `Pathname'
 # undefined method `expand_path$1' for class `Pathname'
 # undefined method `find$2' for class `Pathname'
@@ -5053,6 +5053,8 @@
 # wrong constant name basename$1
 # wrong constant name binread$1
 # wrong constant name binwrite$1
+# wrong constant name children$1
+# wrong constant name each_child$1
 # wrong constant name each_line$2
 # wrong constant name empty?
 # wrong constant name expand_path$1
