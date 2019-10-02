@@ -8,13 +8,13 @@
 
  1. Run **gem install rails** if needed.
  2. Run **rails _5.2.3_ new rails_5.2_new.**
- 3. Run **cd rails_5.2_new; echo 'rvm use 2.4.7@ruby2.4-rails5.2 --create' > .rvmrc**
+ 3. Run **cd rails_5.2_new; echo 'rvm use 2.4.9@ruby2.4-rails5.2 --create' > .rvmrc**
  4. Run **git init** to set up Git.
  5. Add .travis.yml file such as:
 ```
 language: ruby
 rvm:
-  - 2.4.7
+  - 2.4.9
 before_install: gem install bundler
 cache: bundler
 ```
