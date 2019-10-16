@@ -8,6 +8,7 @@ gem 'rails', '5.2.3'
 gem 'sqlite3'
 gem 'puma'
 gem 'bootsnap'
+gem 'brakeman'
 group :development do
   gem 'listen'
 end
