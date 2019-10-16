@@ -3779,6 +3779,16 @@ module Bootsnap::LoadPathCache::PathScanner
   REQUIRABLE_EXTENSIONS = ::T.let(nil, ::T.untyped)
 end
 
+module Brakeman
+  CONFIG_FILES = ::T.let(nil, ::T.untyped)
+  Errors_Found_Exit_Code = ::T.let(nil, ::T.untyped)
+  Missing_Checks_Exit_Code = ::T.let(nil, ::T.untyped)
+  No_App_Found_Exit_Code = ::T.let(nil, ::T.untyped)
+  Not_Latest_Version_Exit_Code = ::T.let(nil, ::T.untyped)
+  Version = ::T.let(nil, ::T.untyped)
+  Warnings_Found_Exit_Code = ::T.let(nil, ::T.untyped)
+end
+
 Bundler::Deprecate = Gem::Deprecate
 
 class Bundler::Env
@@ -5102,46 +5112,6 @@ class Etc::Passwd
   def self.each(&blk); end
 
   def self.members(); end
-end
-
-module Etc
-  def self.confstr(_); end
-
-  def self.endgrent(); end
-
-  def self.endpwent(); end
-
-  def self.getgrent(); end
-
-  def self.getgrgid(*_); end
-
-  def self.getgrnam(_); end
-
-  def self.getlogin(); end
-
-  def self.getpwent(); end
-
-  def self.getpwnam(_); end
-
-  def self.getpwuid(*_); end
-
-  def self.group(); end
-
-  def self.nprocessors(); end
-
-  def self.passwd(); end
-
-  def self.setgrent(); end
-
-  def self.setpwent(); end
-
-  def self.sysconf(_); end
-
-  def self.sysconfdir(); end
-
-  def self.systmpdir(); end
-
-  def self.uname(); end
 end
 
 class Exception
@@ -7424,21 +7394,7 @@ class MiniMime::Info
   BINARY_ENCODINGS = ::T.let(nil, ::T.untyped)
 end
 
-module Minitest
-end
-
-MiniTest::Assertions = Minitest::Assertions
-
-MiniTest::Guard = Minitest::Guard
-
-MiniTest::Reportable = Minitest::Reportable
-
-MiniTest::Runnable = Minitest::Runnable
-
-MiniTest::Test = Minitest::Test
-
-module Minitest
-end
+MiniTest = Minitest
 
 module Minitest
   ENCS = ::T.let(nil, ::T.untyped)
@@ -7568,25 +7524,35 @@ end
 
 Net::APOPSession = Net::APOP
 
-Net::HTTP::ProxyMod = Net::HTTP::ProxyDelta
+class Net::HTTPClientError
+end
 
-Net::HTTPClientError::EXCEPTION_TYPE = Net::HTTPServerException
+Net::HTTPClientErrorCode::EXCEPTION_TYPE = Net::HTTPServerException
 
-Net::HTTPClientErrorCode = Net::HTTPClientError
+class Net::HTTPClientError
+end
 
 Net::HTTPFatalErrorCode = Net::HTTPClientError
 
-Net::HTTPInformation::EXCEPTION_TYPE = Net::HTTPError
+class Net::HTTPInformation
+end
 
-Net::HTTPInformationCode = Net::HTTPInformation
+Net::HTTPInformationCode::EXCEPTION_TYPE = Net::HTTPError
+
+class Net::HTTPInformation
+end
 
 Net::HTTPMovedTemporarily = Net::HTTPFound
 
 Net::HTTPMultipleChoice = Net::HTTPMultipleChoices
 
-Net::HTTPRedirection::EXCEPTION_TYPE = Net::HTTPRetriableError
+class Net::HTTPRedirection
+end
 
-Net::HTTPRedirectionCode = Net::HTTPRedirection
+Net::HTTPRedirectionCode::EXCEPTION_TYPE = Net::HTTPRetriableError
+
+class Net::HTTPRedirection
+end
 
 Net::HTTPRequestURITooLarge = Net::HTTPRequestURITooLong
 
@@ -7594,15 +7560,31 @@ Net::HTTPResponceReceiver = Net::HTTPResponse
 
 Net::HTTPRetriableCode = Net::HTTPRedirection
 
-Net::HTTPServerError::EXCEPTION_TYPE = Net::HTTPFatalError
+class Net::HTTPServerError
+end
 
-Net::HTTPServerErrorCode = Net::HTTPServerError
+Net::HTTPServerErrorCode::EXCEPTION_TYPE = Net::HTTPFatalError
 
-Net::HTTPSession = Net::HTTP
+class Net::HTTPServerError
+end
 
-Net::HTTPSuccess::EXCEPTION_TYPE = Net::HTTPError
+class Net::HTTP
+end
 
-Net::HTTPSuccessCode = Net::HTTPSuccess
+Net::HTTPSession::ProxyDelta = Net::HTTP::ProxyDelta
+
+Net::HTTPSession::ProxyMod = Net::HTTP::ProxyDelta
+
+class Net::HTTP
+end
+
+class Net::HTTPSuccess
+end
+
+Net::HTTPSuccessCode::EXCEPTION_TYPE = Net::HTTPError
+
+class Net::HTTPSuccess
+end
 
 Net::HTTPUnknownResponse::EXCEPTION_TYPE = Net::HTTPError
 
@@ -12131,15 +12113,9 @@ end
 
 class String
   include ::JSON::Ext::Generator::GeneratorMethods::String
-  def +@(); end
-
-  def -@(); end
-
   def []=(*_); end
 
   def casecmp?(_); end
-
-  def encode(*_); end
 
   def encode!(*_); end
 
