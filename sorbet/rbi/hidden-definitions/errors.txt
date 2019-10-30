@@ -2535,7 +2535,6 @@
 # wrong constant name wait_writable
 # wrong constant name write_nonblock
 # wrong constant name foreach
-# wrong constant name pipe
 # wrong constant name &
 # wrong constant name <<
 # wrong constant name <=>
