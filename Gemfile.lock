@@ -45,7 +45,7 @@ GEM
     arel (9.0.0)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
-    brakeman (4.7.1)
+    brakeman (4.10.0)
     builder (3.2.3)
     concurrent-ruby (1.1.5)
     crass (1.0.5)
